@@ -1,0 +1,1217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="48" tileheight="48" infinite="0" nextlayerid="15" nextobjectid="426">
+ <properties>
+  <property name="startX" value="49"/>
+  <property name="startY" value="18"/>
+ </properties>
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+  <image source="uf_terrain.png" trans="ff00ff" width="960" height="1824"/>
+  <tile id="115">
+   <animation>
+    <frame tileid="115" duration="300"/>
+    <frame tileid="116" duration="300"/>
+    <frame tileid="117" duration="300"/>
+    <frame tileid="118" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="175">
+   <animation>
+    <frame tileid="175" duration="300"/>
+    <frame tileid="176" duration="300"/>
+    <frame tileid="177" duration="300"/>
+    <frame tileid="178" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="195" duration="300"/>
+    <frame tileid="196" duration="300"/>
+    <frame tileid="197" duration="300"/>
+    <frame tileid="198" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="601">
+   <animation>
+    <frame tileid="601" duration="300"/>
+    <frame tileid="602" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="621">
+   <animation>
+    <frame tileid="621" duration="300"/>
+    <frame tileid="622" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="644">
+   <animation>
+    <frame tileid="644" duration="300"/>
+    <frame tileid="645" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="664">
+   <animation>
+    <frame tileid="664" duration="300"/>
+    <frame tileid="665" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="672">
+   <animation>
+    <frame tileid="672" duration="300"/>
+    <frame tileid="673" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="674">
+   <animation>
+    <frame tileid="674" duration="300"/>
+    <frame tileid="675" duration="300"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="floor" width="158" height="110">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2dTW7cNhhAmVXS9gg+Q9YtkGW2Rc/QVeOu0m7d2JMTNMiqN2gSoIscwUerCIswzXwUf0WK1HvAB/1r6NGbj6RmRCsFAACjclMYypmmHAfnpNS5XO8A9vZOqX19w+MxqeVdzDalwp7kuK75zQlpnbQP9GEv76T1ypqmlMe3n73/lndK2I53fanRxkt1MaY8MeWzz7flFfluTnK8jD1H7D6hOhXv5qOWd6nnso9LAefOQYwbOf6Y4z4u8WGJv5346ExNmH3hkf8CMSuSdzH9AnOc8cv178Ma0jZ4JNa7Pz1xFRFHxJfvQm0027vUgEdKvdOUeFejrdaSI5RhBmp4p/H5NZt3UIca3pW4g3fnJOSdcc/n3R+qzJtU73q4t/WaoXsuoc/cWalVzxpC10had3TnQvcBfZ4pJR/3/JlSL5b4/lnNko5Fzfad1Jew533e2fM9vcv5DPiWfefTvDixb4a9vIvt04auUyvvcur71PrVTE2++w7/mrBVz9rzR6hnUx1z5+3z+LaR98q5W+L9Or2s0ztrvbvO5qjt6xjfQ58Z6Twm3/2Ad8VIvt0J65UwvXGWj0TMZyKl36F5jm/VcPOY6560n+vkZf9iViembbfVt4UypBz3Xlhveyflx1nAsTZs1bOSi/YxF+tYgBTsfoVZdudD+W7Eehb64st3dh5zlw0pdRL1F9hs1a9S3tPUuleLi5BKqO+3l3OtXeWzMQah+2E53uV+x+X7HoK8PAe5XuScXzpXqAwpZcW7ccA76MHe1yzFsVAZ8K49ue956H3v7V2oDDFlDe0D+fBZj/tbZ38PWoN30AO8gx7gHfQA757CeE9tmdmlFPCuDSX5LvfY2PsYPXIu3rWh9JrjHeSwl3cvI4+vUYaa4F0byHdPwbs24N1T8K4Nvb3LPR7vYCbwDnqAd9ADvAMAw9veBYDT8daKVjDeBfTyDvfOTS3vfGNc2Fwi94P5qeWdPWaUNH7URTG2FDxS0zvXOcm1GcfSg3T2at+5Y06544bi3bnZu1/hy3V4d25a9WfdPgXenZvW91GoZ0HDfWPoxeveBRiMo/+v8iPyOiFABu/S2ds76X8A2fdSZgDv0mnl3db43aODd+m09m7r/+2NCt7l4/OqtF1nu/ZSzfkdBd6lE3p+q/SZLurZ/uz1XF4JKc+85oB3/dnzmdBcfM+s1nqW9azeHcnBEbyL3QbfcmVNt+ZbOxlqR+2de7bKVbJ9BlLHMbhS33p0VO80odzi7mOv27MsOj4v8WmJr+v8F09Z4IGRvNOEcpra2FZ6/e37cZJ3X634ZG37p/B1Z2Q07zQx49GE1r9Z43qJ39fp9cZruveA3XPr/Gby3b9rkO/8jOqduyzlOnd/e5t2zXhn3PONwbD13QPtuzxG9M5FX9u/VHz+0xjf3jghITmXmmvx7ykzeGc7JyH1MUy+0znO+OerZ315Du/K8N2zc110549CynU3U7t9p6fGQwnpe1a8K8e9nxKK2bDznibmtyUx3inP8tF5J4Qu/616qFtqcXbvrq2I/U1TSp9aqfG9M87drmEIvQ9beT/Hu5T3/cz1zYh/r+SdaUPfOvvmeKcj1TkTeDc37yL3q5nvflzi5zV+ErbHvN7WPltIv6+Vni+Y6TcZM5CTT1yvflHq/tUyffUwX9y+SymT7/fc0vq7xHNDfXLrWU2Od7mvF5vv7N9ybz1nAH2p6d1Sz/661LH3Opb5+5be+XKdNBYS3vXnaP2Kknxnt+uU8o+BNMszpCNTM9/VuI9SWs9K+Y56di7Oft8Y+oB30IMrZypt8y0D5HLjTKVtvuUjM1JZz4CvrS/N+9YdgRr9GGgH3kEPfNcF72BP8A56gHfQg5jrNIJ3MBYxTuEd1Aan4CjgHbSGdjj0gD4g9ADvoAc4Bz3AOQAAgLn5H6qL69CQDwEA
+  </data>
+ </layer>
+ <layer id="2" name="floor2" width="158" height="110">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3dMQ6CQBBA0Q2ntbSwIhxB4xU8At7Bg1lIgZsFRGUw+F4yickWWPwMhIaUAAAAAAAAAAAAAP5H3Q1MaQszdt6XN9bvrk46ZDl19ltnRBlqTYMMGbqHvqK065rCGeTmPNv1z8e60hxLKO25fN/Bkuw2AAAAAAAAAAAAAAAAAAAAAABgyw4zBpagN9amOQAAAACYZ199dg4AwH+6ek4EAIBV+AY0EXQG8DC1D89VukT8D7arSc+duQfzC07e//NF9hpr2AVd52hf8oZbbyCK7gAAAAAAAAAAAAAAAABgPW03EEl3RGuT7ojVJt0BwNbcAVBtOt6QDwEA
+  </data>
+ </layer>
+ <layer id="3" name="props" width="158" height="110">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3dQU6DQBQA0IZLaeIRNK5wT7ro0ujWC3gNGk6gXoCjOU2tQYNgURhg3ksmU6CLT/L5w3SS6WYDAAAAAH+3y2JHAAAADPXQ8j7/lHX3MEfb7Lxj0nIR2k1ol7EDISnXoV2Fdhs7EJIS8q0+5F3Iv7rvu0v7Xfd5YfGmJIyzRRhn6zDOlrFjGUOVHe9rn7U/V/vssy8nCokOQ+et+cxrzNzj4380560/fYY1OY2xlRxnYh3vdeVH3+q15bwaDazJOTVN/QMAAAAAAFgPaz8AAAAAAAAAAAAAAKSose9w0Tj3hT2HGVszxw57IVZyjonkx3wrYscBAAAAAEty37NXT991AAAAAAAAgCXKrYUCiXhR74DEvM2s7u1mFg/AEI8dtazr2pzdRY7b+MBvLPX5AgBgGPMEAAAAAACAaW2tzwAAAAAT+f7f4jC2vZwjEvWOKZ3yTc0DgHV4B3ZIILGQDwEA
+  </data>
+ </layer>
+ <layer id="5" name="water-edges" width="158" height="110">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3dvQ3CMBAGUJsZYjIEK2QSKiZgpozCaJz5kRACOmKI35OsKElzxafYLs5JCQAAAAAAAPgV+03rCujRUe4AAABeGnM6bHOa7yPu53fvn98BAJ+VnNIQ82cxh7KgyNzFFOu4T2s76zsAAAAAAAAAAAAAAAAAAAAAAACA9Xo8f254M5xLxzeVyOBwG1PkLEZ9dmpdF/2oGZQ5AAAAAAAAAAAAAPhfY25dAb2p/Ti7fLnOrWuhL6P+BwAA6EaJfWc976HYe7Kg+/kP+u8BAAAAAAAAAAAAAAAAYHnl+l/nuXUd9GW49jWfWtdBP+q3borMyR1LecicXnoAWIkzXxqyk5APAQA=
+  </data>
+ </layer>
+ <layer id="7" name="shadows" width="158" height="110">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3c626bMBgGYLpb4WI77YL3r1JVbdJSzwaDDfjwPFIVmoRwevkwdpRlAaBXa+HfEjzmzsO8ZADg/2to7vv3nt/7vDPX9th8S2La9X58dx1bGRpLzvHMrXOl63G0Vq2JacZ1JothnmpcC11POUt7jFaV9D3yh331j/vR9pSOMYxgpG2Z3awZhiNkvx3qFbXljDPd6crlvf/If++vv+9NnV8fb8478pS0Nb9ydmY5lHFef8/ekRxST285PLOOsXlSeQuf72W/cL2S8ySsdWrfPUboh/v5cl8RruPWNmzlKvZay/tgBrFj25tYnQvrHc9LZa3HzIV+y9pjUteQrWvLCJkDgLusiWloQcl3+lrvkwHIdUUdy6mbuXVVbR7HXgYAqGOvpqq5z9K2gbY4xwAA+qc9B+MqGWeqNf6vLwcAACjh/gAAAICrGaOiZ8ZiAQAAAACYlb7v44wnMCJZBgC4l/YWrZHJMfRw/NbgEehD7Pe0XqefOqdjyz36u1/UVfJ7az0djxbWdeT9S1rusax5/Pc+Q/tuHmEOUtOp+XIzKUvEhHmrmROZY8vWPccVy0rVS+07vjjm3EGd6cOM/QE596Yjb/9Rs29/6668v2lFbBvvqls5n61eEHM2B7LDaI7WT7jS3tgUzzjTvqs1Vnn1MmULqEH9AQAAaliDx9hrqf8h11Z/Wjg2ED73+vi0mb4/AwAArdP+BgAYi7YdLdDXD8xCneNuMgcA4/kEetBPupAPAQA=
+  </data>
+ </layer>
+ <layer id="9" name="doors" width="158" height="110">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3d3U3DMBAA4JQFEAuwB0+88YKYi3k6A2IcRqiKkKjURk2TOHZ8qb/vhZ8iUfD5fOe0TtcBW3Wo/QSoqtb4P+0q/WJCMP6Q5tHcoRL1YnsijLl6oT05x3xuDEeIebZvbgzLc9Q0N+/pRdrwXnic5b361DzUYO5DeWq1WIZqqv73rctMsR+Z33PjaOm6LG7b8D0SJ2vXdzXqyVJrqzU7H/9LIjiexWHkmExZv635LJWyfttD2obI+Q5gDc8PtZ/BsBI5Wt6P4S1w3MGWyGnxHHofYQ2n/Qf7EKypn+/mvE7z2s++iF8myJ3vPsQdmZSuy9eu+0u/9h4Aohvb17Hvs03Rx22sz7Hvs00tjFv0ucV9amFuAQBATinXmvR71KDfA+i6vfdZAFzQm1CD3gQA2vGqDwf+eS8VLfgS5wAAAAAAnLFvzB/XyQAAgBR6CSIRj9v3uYExPN1Lxz11WNPpXjruqbOMvXBSOeegrLEartUazzkH+anfSImBpXGjfiMlBsQNKSLtqajvABhz3N3+fOjxVlgrKW1pr9vCHstPA3/j2pb2ui30yrsMZ+ClxK54n84afV1K7OaId2Jzbf42uTeGlPu3lVayB5Z7gan0FdSgrwAAuD/Xrv/3Hxv6GrhkjgAAwHqcKUANzhQAAAAAAACAOn4BzKOCNZAPAQA=
+  </data>
+ </layer>
+ <layer id="4" name="creature" width="158" height="110">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4GNnrareQDwEA
+  </data>
+ </layer>
+ <layer id="6" name="walls" width="158" height="110">
+  <data encoding="base64" compression="gzip">
+   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
+  </data>
+ </layer>
+ <layer id="8" name="lights" width="158" height="110">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3dYW7CIAAGULNjeh9jshvstsY0JmqgQAuDlvf+GJvNRKD0KyC9XIBabj/pY6n3pZ8Hf4E28X0s9b708wBYuC7Tg+syI9EP0oN+EIBa3rOMXLNQDu29Z5lYrnnVQ2w+IfZ6VPLdGF71EJtPiL2m7Jkng632zJMB8D9S92MyArlibSV0PHU/FjqmLRISy5O1cqa82s5ZxlJaUCbtlI6lzESZ1CVX51EmdVlznkeZ0IL+jB70ZwAA5XsCQA2lewLAkZWsAUj9nfWqx9Sj3vauAVhbj6KfPgb1BoymJBPJOAAAAACLLXubGIcBAAAAAAAAAAAAAAAARuO3TOWuiWfBX5Vpkv3XtrOXHQDA8d3fMtyvPMcA7tohACe09jwZ2skp61tkjP0M1p4nwxhmqpda59gZz1XaCZ1j39fknLGQmc5V2nBNBgBmN8u93HOOyx7/n3qOvc2UvUPfdabvXyrVHmu215w+wfwBAEAda1mqRc7a83w4AAAAAOBTye9/tvwvhOSsrbD+AgAAAACAJ/MR9GCeAgAAAPI8AIsg1biQDwEA
+  </data>
+ </layer>
+ <objectgroup id="10" name="portals">
+  <object id="420" name="to forest from mine road" x="2688" y="1344" width="48" height="48">
+   <properties>
+    <property name="dx" value="54"/>
+    <property name="dy" value="28"/>
+   </properties>
+  </object>
+  <object id="419" name="to mine road" x="2592" y="1344" width="48" height="48">
+   <properties>
+    <property name="dx" value="56"/>
+    <property name="dy" value="28"/>
+   </properties>
+  </object>
+  <object id="418" name="to forest from tree" x="2688" y="1248" width="48" height="48">
+   <properties>
+    <property name="dx" value="54"/>
+    <property name="dy" value="26"/>
+   </properties>
+  </object>
+  <object id="417" name="to tree" x="2592" y="1248" width="48" height="48">
+   <properties>
+    <property name="dx" value="56"/>
+    <property name="dy" value="26"/>
+   </properties>
+  </object>
+  <object id="1" name="to dusty road" x="2496" y="960" width="48" height="48">
+   <properties>
+    <property name="dx" value="52"/>
+    <property name="dy" value="18"/>
+   </properties>
+  </object>
+  <object id="414" name="to forest" x="2496" y="864" width="48" height="48">
+   <properties>
+    <property name="dx" value="52"/>
+    <property name="dy" value="20"/>
+   </properties>
+  </object>
+  <object id="415" name="air vent" x="3936" y="96" width="48" height="48">
+   <properties>
+    <property name="dx" value="101"/>
+    <property name="dy" value="4"/>
+   </properties>
+  </object>
+  <object id="2" name="cemetary" x="2544" y="720" width="48" height="48">
+   <properties>
+    <property name="dx" value="52"/>
+    <property name="dy" value="3"/>
+   </properties>
+  </object>
+  <object id="3" name="dusty road" x="2496" y="144" width="48" height="48">
+   <properties>
+    <property name="dx" value="53"/>
+    <property name="dy" value="15"/>
+   </properties>
+  </object>
+  <object id="4" name="crystal cave" x="4848" y="624" width="48" height="48">
+   <properties>
+    <property name="dx" value="98"/>
+    <property name="dy" value="16"/>
+   </properties>
+  </object>
+  <object id="5" name="slide to tree" x="3360" y="96" width="48" height="48">
+   <properties>
+    <property name="dx" value="60"/>
+    <property name="dy" value="23"/>
+   </properties>
+  </object>
+  <object id="10" name="spiral stair" x="5520" y="1392" width="48" height="48">
+   <properties>
+    <property name="dx" value="118"/>
+    <property name="dy" value="22"/>
+   </properties>
+  </object>
+  <object id="11" name="y" x="4800" y="1584" width="48" height="48">
+   <properties>
+    <property name="dx" value="103"/>
+    <property name="dy" value="30"/>
+   </properties>
+  </object>
+  <object id="13" name="mountain" x="4848" y="192" width="48" height="48">
+   <properties>
+    <property name="dx" value="82"/>
+    <property name="dy" value="2"/>
+   </properties>
+  </object>
+  <object id="14" name="old mine road" x="5328" y="3456" width="48" height="48">
+   <properties>
+    <property name="dx" value="74"/>
+    <property name="dy" value="28"/>
+   </properties>
+  </object>
+  <object id="15" name="old mine shaft" x="3552" y="1344" width="48" height="48">
+   <properties>
+    <property name="dx" value="111"/>
+    <property name="dy" value="72"/>
+   </properties>
+  </object>
+  <object id="16" name="maze" x="5760" y="768" width="48" height="48">
+   <properties>
+    <property name="dx" value="116"/>
+    <property name="dy" value="16"/>
+   </properties>
+  </object>
+  <object id="18" name="g" x="5232" y="1680" width="48" height="48">
+   <properties>
+    <property name="dx" value="78"/>
+    <property name="dy" value="41"/>
+   </properties>
+  </object>
+  <object id="19" name="hallway" x="5328" y="1152" width="48" height="48">
+   <properties>
+    <property name="dx" value="131"/>
+    <property name="dy" value="70"/>
+   </properties>
+  </object>
+  <object id="21" name="y" x="5664" y="1056" width="48" height="48">
+   <properties>
+    <property name="dx" value="115"/>
+    <property name="dy" value="29"/>
+   </properties>
+  </object>
+  <object id="22" name="crystal cave" x="4176" y="1392" width="48" height="48">
+   <properties>
+    <property name="dx" value="97"/>
+    <property name="dy" value="22"/>
+   </properties>
+  </object>
+  <object id="23" name="air vent" x="4704" y="768" width="48" height="48">
+   <properties>
+    <property name="dx" value="101"/>
+    <property name="dy" value="13"/>
+   </properties>
+  </object>
+  <object id="24" name="r" x="4656" y="1056" width="48" height="48">
+   <properties>
+    <property name="dx" value="87"/>
+    <property name="dy" value="29"/>
+   </properties>
+  </object>
+  <object id="25" name="crystal cave" x="3312" y="768" width="48" height="48">
+   <properties>
+    <property name="dx" value="91"/>
+    <property name="dy" value="19"/>
+   </properties>
+  </object>
+  <object id="26" name="theives cave" x="4368" y="912" width="48" height="48">
+   <properties>
+    <property name="dx" value="69"/>
+    <property name="dy" value="16"/>
+   </properties>
+  </object>
+  <object id="27" name="mountain" x="3312" y="1296" width="48" height="48">
+   <properties>
+    <property name="dx" value="78"/>
+    <property name="dy" value="10"/>
+   </properties>
+  </object>
+  <object id="28" name="to the mountain" x="4416" y="528" width="48" height="48">
+   <properties>
+    <property name="dx" value="81"/>
+    <property name="dy" value="5"/>
+   </properties>
+  </object>
+  <object id="61" name="b" x="3360" y="2208" width="48" height="48">
+   <properties>
+    <property name="dx" value="67"/>
+    <property name="dy" value="41"/>
+   </properties>
+  </object>
+  <object id="62" name="random" x="2880" y="2064" width="48" height="48">
+   <properties>
+    <property name="random1" value="thieves clearing,58,25"/>
+    <property name="random2" value="astrologers lab,130,80"/>
+    <property name="random3" value="forest,53,27"/>
+    <property name="random4" value="magic tourbillion,72,69"/>
+    <property name="random5" value="ali baba home,45,18"/>
+    <property name="random6" value="gold for the lucky chest,54,81"/>
+   </properties>
+  </object>
+  <object id="63" name="to i" x="2544" y="1968" width="48" height="48">
+   <properties>
+    <property name="dx" value="51"/>
+    <property name="dy" value="41"/>
+   </properties>
+  </object>
+  <object id="68" name="to r room" x="2496" y="1632" width="48" height="48">
+   <properties>
+    <property name="dx" value="84"/>
+    <property name="dy" value="33"/>
+   </properties>
+  </object>
+  <object id="70" name="to maze" x="6288" y="3360" width="48" height="48">
+   <properties>
+    <property name="dx" value="111"/>
+    <property name="dy" value="24"/>
+   </properties>
+  </object>
+  <object id="71" name="slide" x="5136" y="1008" width="48" height="48">
+   <properties>
+    <property name="dx" value="106"/>
+    <property name="dy" value="39"/>
+   </properties>
+  </object>
+  <object id="81" name="random" x="3456" y="3216" width="48" height="48">
+   <properties>
+    <property name="random1" value="thieves clearing,58,25"/>
+    <property name="random2" value="gold for the lucky,51,79"/>
+    <property name="random3" value="home,45,18"/>
+    <property name="random4" value="astrolers lab,130,80"/>
+    <property name="random5" value="minotaur labyrinth,21,75"/>
+   </properties>
+  </object>
+  <object id="87" name="to mine road" x="3744" y="480" width="48" height="48">
+   <properties>
+    <property name="dx" value="69"/>
+    <property name="dy" value="27"/>
+   </properties>
+  </object>
+  <object id="114" name="minotaur maze" x="5088" y="2352" width="48" height="48">
+   <properties>
+    <property name="dx" value="22"/>
+    <property name="dy" value="77"/>
+   </properties>
+  </object>
+  <object id="125" name="back to forest" x="2352" y="3360" width="48" height="48">
+   <properties>
+    <property name="dx" value="53"/>
+    <property name="dy" value="27"/>
+   </properties>
+  </object>
+  <object id="136" name="random" x="2352" y="2496" width="48" height="480">
+   <properties>
+    <property name="random1" value="thieves clearing,58,25"/>
+    <property name="random2" value="gold for the lucky,51,79"/>
+    <property name="random3" value="home,45,18"/>
+    <property name="random4" value="astrolers lab,130,80"/>
+    <property name="random5" value="minotaur labyrinth,21,75"/>
+   </properties>
+  </object>
+  <object id="137" name="random" x="2448" y="2496" width="48" height="480">
+   <properties>
+    <property name="random1" value="thieves clearing,58,25"/>
+    <property name="random2" value="gold for the lucky,51,79"/>
+    <property name="random3" value="home,45,18"/>
+    <property name="random4" value="astrolers lab,130,80"/>
+    <property name="random5" value="minotaur labyrinth,21,75"/>
+   </properties>
+  </object>
+  <object id="138" name="to palace" x="1584" y="768" width="48" height="48">
+   <properties>
+    <property name="dx" value="35"/>
+    <property name="dy" value="16"/>
+   </properties>
+  </object>
+  <object id="140" name="minotaur labyrinth" x="3744" y="2928" width="48" height="48">
+   <properties>
+    <property name="dx" value="23"/>
+    <property name="dy" value="78"/>
+   </properties>
+  </object>
+  <object id="141" name="random" x="3744" y="2496" width="48" height="48">
+   <properties>
+    <property name="random1" value="forest,53,27"/>
+    <property name="random2" value="home,45,18"/>
+   </properties>
+  </object>
+  <object id="142" name="magic tourbillion" x="816" y="3696" width="48" height="48">
+   <properties>
+    <property name="dx" value="72"/>
+    <property name="dy" value="69"/>
+   </properties>
+  </object>
+  <object id="143" name="underground stream" x="912" y="3792" width="48" height="48">
+   <properties>
+    <property name="dx" value="68"/>
+    <property name="dy" value="55"/>
+   </properties>
+  </object>
+  <object id="150" name="back to thieves clearing" x="2448" y="3360" width="48" height="48">
+   <properties>
+    <property name="dx" value="65"/>
+    <property name="dy" value="33"/>
+   </properties>
+  </object>
+  <object id="183" name="to princess cell" x="2400" y="2448" width="48" height="48">
+   <properties>
+    <property name="dx" value="100"/>
+    <property name="dy" value="83"/>
+   </properties>
+  </object>
+  <object id="184" name="to leo" x="2592" y="3936" width="48" height="48">
+   <properties>
+    <property name="dx" value="121"/>
+    <property name="dy" value="94"/>
+   </properties>
+  </object>
+  <object id="196" name="to minotaur playroom" x="672" y="4080" width="48" height="48">
+   <properties>
+    <property name="dx" value="13"/>
+    <property name="dy" value="94"/>
+   </properties>
+  </object>
+  <object id="197" name="to failing wall" x="528" y="3648" width="48" height="48">
+   <properties>
+    <property name="dx" value="3"/>
+    <property name="dy" value="84"/>
+   </properties>
+  </object>
+  <object id="202" name="to minotaur den" x="1008" y="4464" width="48" height="48">
+   <properties>
+    <property name="dx" value="30"/>
+    <property name="dy" value="79"/>
+   </properties>
+  </object>
+  <object id="203" name="to v room" x="384" y="3312" width="48" height="48">
+   <properties>
+    <property name="dx" value="39"/>
+    <property name="dy" value="35"/>
+   </properties>
+  </object>
+  <object id="331" name="WORLD" x="2352" y="864" width="48" height="48"/>
+  <object id="406" name="to gemini room" x="5136" y="3888" width="48" height="48">
+   <properties>
+    <property name="dx" value="110"/>
+    <property name="dy" value="82"/>
+   </properties>
+  </object>
+  <object id="424" name="to gilded hall" x="4800" y="3984" width="48" height="48">
+   <properties>
+    <property name="dx" value="50"/>
+    <property name="dy" value="51"/>
+   </properties>
+  </object>
+  <object id="416" name="to dusty road" x="2496" y="960" width="48" height="48">
+   <properties>
+    <property name="dx" value="52"/>
+    <property name="dy" value="18"/>
+   </properties>
+  </object>
+  <object id="425" name="back to start in min laby" x="768" y="3696" width="48" height="48">
+   <properties>
+    <property name="dx" value="22"/>
+    <property name="dy" value="77"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="11" name="people">
+  <object id="220" name="Large Rat" type="MONSTER" x="5376" y="528" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="WereRat"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="221" name="Small Rat" type="MONSTER" x="5328" y="576" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="WereRat"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="222" name="Small Rat" type="MONSTER" x="5328" y="480" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="WereRat"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="223" name="Cave Bear" type="MONSTER" x="5232" y="288" width="48" height="48">
+   <properties>
+    <property name="icon" value="Bear"/>
+    <property name="monsterID" value="WereBear"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="224" name="Omar" type="MONSTER" x="5424" y="864" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Rogue"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="225" name="Mahmud" type="MONSTER" x="5472" y="1008" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="HighwayMan"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="226" name="Unicorn" type="FRIENDLY" x="4752" y="912" width="48" height="48">
+   <properties>
+    <property name="icon" value="Arctic_Unicorn"/>
+    <property name="monsterID" value="Coyote"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="227" name="Werejackal" type="MONSTER" x="4320" y="336" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Coyote"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="228" name="Blob" type="MONSTER" x="5424" y="1536" width="48" height="48">
+   <properties>
+    <property name="icon" value="Sulphur_Scuttler"/>
+    <property name="monsterID" value="Grave Mist"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="229" name="Dragon" type="MONSTER" x="4704" y="1536" width="48" height="48">
+   <properties>
+    <property name="icon" value="Dragon_Lord"/>
+    <property name="monsterID" value="Wyvern"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="230" name="Enchanted Sword" type="MONSTER" x="4656" y="1584" width="48" height="48">
+   <properties>
+    <property name="icon" value="The_Rage"/>
+    <property name="monsterID" value="Swordsman"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="231" name="Very young Dragon" type="MONSTER" x="4128" y="1584" width="48" height="48">
+   <properties>
+    <property name="icon" value="Titano_Dragon"/>
+    <property name="monsterID" value="Dragon Puppy"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="232" name="Nizim al Mulik" type="MONSTER" x="2976" y="1488" width="48" height="48">
+   <properties>
+    <property name="icon" value="Achad"/>
+    <property name="monsterID" value="Rogue"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="233" name="Salaman" type="MONSTER" x="3120" y="1536" width="48" height="48">
+   <properties>
+    <property name="icon" value="Cobra_Assassin"/>
+    <property name="monsterID" value="highwayman"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="234" name="Alp Arsalan" type="MONSTER" x="2880" y="1536" width="48" height="48">
+   <properties>
+    <property name="icon" value="Cobra_Scout"/>
+    <property name="monsterID" value="Bushwacker"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="235" name="Absal" type="MONSTER" x="2880" y="1488" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Rogue"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="236" name="Abdullah" type="FRIENDLY" x="3216" y="1632" width="48" height="48">
+   <properties>
+    <property name="icon" value="Crypt_Defiler"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="237" name="Succubus" type="MONSTER" x="2016" y="1728" width="48" height="48">
+   <properties>
+    <property name="icon" value="Gorga"/>
+    <property name="monsterID" value="Priestess"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="238" name="Slime" type="MONSTER" x="2352" y="2064" width="48" height="48">
+   <properties>
+    <property name="icon" value="Defiler"/>
+    <property name="monsterID" value="Creeping Crud"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="239" name="Barn Owl" type="FRIENDLY" x="1968" y="2064" width="48" height="48">
+   <properties>
+    <property name="icon" value="Boreal_Owl"/>
+    <property name="monsterID" value="Kobold"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="240" name="Tiger" type="MONSTER" x="2256" y="1152" width="48" height="48">
+   <properties>
+    <property name="icon" value="Tiger"/>
+    <property name="monsterID" value="Capybara"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="242" name="Malik" type="MONSTER" x="2448" y="720" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Orc"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="243" name="Sultan Shahriar" type="FRIENDLY" x="1680" y="768" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Swordsman"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="244" name="Guard" type="FRIENDLY" x="1680" y="672" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Swordsman"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="245" name="Guard" type="FRIENDLY" x="1680" y="864" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Swordsman"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="246" name="Tan Rat" type="MONSTER" x="1200" y="864" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="WereRat"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="247" name="Grey Rat" type="MONSTER" x="1200" y="816" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="WereRat"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="248" name="Enchanted Statue" type="MONSTER" x="1344" y="672" width="48" height="48">
+   <properties>
+    <property name="icon" value="Marid"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="249" name="Minotaur" type="MONSTER" x="1440" y="3696" width="48" height="48">
+   <properties>
+    <property name="icon" value="Bullwark"/>
+    <property name="monsterID" value="Ogre Lord"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="250" name="Minotaur statue" type="MONSTER" x="1200" y="3600" width="48" height="48">
+   <properties>
+    <property name="icon" value="Stonecracker"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="251" name="Stone Statue" type="MONSTER" x="720" y="3744" width="48" height="48">
+   <properties>
+    <property name="icon" value="Gelidrazah_the_Frozen"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="252" name="Stone Statue" type="MONSTER" x="384" y="4176" width="48" height="48">
+   <properties>
+    <property name="icon" value="The_Pale_Worm"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="253" name="Oozing Stenchbeast" type="MONSTER" x="576" y="4080" width="48" height="48">
+   <properties>
+    <property name="icon" value="Defiler"/>
+    <property name="monsterID" value="LifeStealer"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="254" name="Stone Statue" type="MONSTER" x="672" y="4608" width="48" height="48">
+   <properties>
+    <property name="icon" value="The_Old_Whopper"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="255" name="Son of Minotaur" type="MONSTER" x="912" y="4560" width="48" height="48">
+   <properties>
+    <property name="icon" value="Rhindeer"/>
+    <property name="monsterID" value="Ogre"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="256" name="Green Dragon" type="MONSTER" x="2208" y="3744" width="48" height="48">
+   <properties>
+    <property name="icon" value="Dragon"/>
+    <property name="monsterID" value="Wyvern"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="257" name="Mechanized Sword" type="FRIENDLY" x="2592" y="3696" width="48" height="48">
+   <properties>
+    <property name="icon" value="The_Rage"/>
+    <property name="monsterID" value="Murphy's Ghost"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="258" name="Whale" type="FRIENDLY" x="2400" y="3552" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Spirit"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="259" name="Werewolf" type="MONSTER" x="2640" y="3312" width="48" height="48">
+   <properties>
+    <property name="icon" value="Hemming"/>
+    <property name="monsterID" value="WereWolf"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="260" name="Giant Scorpion" type="MONSTER" x="2160" y="3264" width="48" height="48">
+   <properties>
+    <property name="icon" value="Giant_Spider"/>
+    <property name="monsterID" value="Giant Spider"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="261" name="Sewer Rat" type="MONSTER" x="2160" y="3120" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="WereRat"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="262" name="WereRat" type="MONSTER" x="2208" y="3168" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="WereRat"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="263" name="Jungle Rat" type="MONSTER" x="2640" y="3120" width="48" height="48">
+   <properties>
+    <property name="icon" value="Katex_Blood_Tongue"/>
+    <property name="monsterID" value="WereRat"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="264" name="Sword of Damacles" type="FRIENDLY" x="2448" y="3024" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Swordsman"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="265" name="Two Edged Sword" type="FRIENDLY" x="2352" y="3024" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Swordsman"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="266" name="Dragon" type="MONSTER" x="2448" y="2880" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Wyvern"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="267" name="Aries the Ram" type="FRIENDLY" x="6096" y="3120" width="48" height="48">
+   <properties>
+    <property name="icon" value="Doombringer"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="268" name="Pisces" type="FRIENDLY" x="6432" y="3408" width="48" height="48">
+   <properties>
+    <property name="icon" value="Brass_Speckled_Koi"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="269" name="Aquarius" type="FRIENDLY" x="6576" y="3408" width="48" height="48">
+   <properties>
+    <property name="icon" value="Void_Watcher"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="270" name="Taurus" type="FRIENDLY" x="6000" y="3552" width="48" height="48">
+   <properties>
+    <property name="icon" value="Obstinate_Ox"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="272" name="Cancer the Crab" type="MONSTER" x="5520" y="4128" width="48" height="48">
+   <properties>
+    <property name="icon" value="Blood_Crab"/>
+    <property name="monsterID" value="Huge Spider"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="273" name="Leo" type="MONSTER" x="5856" y="4560" width="48" height="48">
+   <properties>
+    <property name="icon" value="Dragonking_Zyrtarch"/>
+    <property name="monsterID" value="Weretiger"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="274" name="Virgo" type="FRIENDLY" x="6048" y="4992" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="275" name="Libra" type="FRIENDLY" x="6288" y="4656" width="48" height="48">
+   <properties>
+    <property name="icon" value="The_Diamond_Blossom"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="276" name="Scorpio" type="MONSTER" x="6528" y="4704" width="48" height="48">
+   <properties>
+    <property name="icon" value="Utua_Stone_Sting"/>
+    <property name="monsterID" value="Giant Spider"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="277" name="Sagittarius" type="FRIENDLY" x="6816" y="4128" width="48" height="48">
+   <properties>
+    <property name="icon" value="Gralvalon"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="278" name="Capricornus" type="FRIENDLY" x="6768" y="3936" width="48" height="48">
+   <properties>
+    <property name="icon" value="Cinnamon_Ibex"/>
+    <property name="monsterID" value="Gargoyle"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="279" name="Coggia Houssain" type="MONSTER" x="7152" y="4128" width="48" height="48">
+   <properties>
+    <property name="icon" value="Nomad_Basic"/>
+    <property name="monsterID" value="Lvl 4 Thief"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="281" name="Morgiana" type="FRIENDLY" x="6144" y="5040" width="48" height="48">
+   <properties>
+    <property name="icon" value="Glooth_Bandit"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="282" name="Hassan Ben Sabbah" type="MONSTER" x="6096" y="4944" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="HighwayMan"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="283" name="Mountain Scorpion" type="MONSTER" x="3888" y="288" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Huge Spider"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="284" name="Big Zombie" type="MONSTER" x="3024" y="240" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Zombie"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="285" name="Small Zombie" type="MONSTER" x="3072" y="288" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Undead Kobold"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="286" name="Witless Zombie" type="MONSTER" x="3120" y="240" width="48" height="48">
+   <properties>
+    <property name="monsterID" value="Zombie"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="287" name="Sky Wanderer" type="FRIENDLY" x="3648" y="2064" width="48" height="48">
+   <properties>
+    <property name="icon" value="Energy_Elemental"/>
+    <property name="monsterID" value="Dragon Puppy"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="288" name="Sun Wanderer" type="FRIENDLY" x="3504" y="2064" width="48" height="48">
+   <properties>
+    <property name="icon" value="Hellfire_Fighter"/>
+    <property name="monsterID" value="Dragon Puppy"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="289" name="Earth Wanderer" type="FRIENDLY" x="3504" y="2160" width="48" height="48">
+   <properties>
+    <property name="icon" value="Massive_Earth_Elemental"/>
+    <property name="monsterID" value="Dragon Puppy"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="404" name="Captain of the Thieves" type="FRIENDLY" x="2016" y="720" width="48" height="48">
+   <properties>
+    <property name="icon" value="Cobra_Assassin"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="72" name="Bollrun" type="INNKEEPER" x="2640" y="2160" width="48" height="48">
+   <properties>
+    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="73" name="Buring" type="MERCHANT_LEG" x="2304" y="1056" width="48" height="48">
+   <properties>
+    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="74" name="Aemar" type="MERCHANT_PMO" x="2112" y="1200" width="48" height="48">
+   <properties>
+    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="75" name="Arnori" type="INNKEEPER" x="3696" y="336" width="48" height="48">
+   <properties>
+    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="76" name="Krabbi" type="MERCHANT_KOD" x="3408" y="1392" width="48" height="48">
+   <properties>
+    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="77" name="Garming" type="MERCHANT_DQ" x="4080" y="1488" width="48" height="48">
+   <properties>
+    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="79" name="Snirm" type="MERCHANT_BS" x="3600" y="3120" width="48" height="48">
+   <properties>
+    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="80" name="Hikar" type="TEMPLE" x="3360" y="3120" width="48" height="48">
+   <properties>
+    <property name="icon" value="Cult_Believer"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="96" name="Almgar" type="TEMPLE" x="7152" y="3936" width="48" height="48">
+   <properties>
+    <property name="icon" value="Cult_Believer"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="116" name="Otrir" type="MERCHANT_PMO" x="5376" y="768" width="48" height="48">
+   <properties>
+    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="121" name="Hangar" type="MERCHANT_DQ" x="3648" y="2736" width="48" height="48">
+   <properties>
+    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="139" name="Hlorgar" type="TEMPLE" x="2640" y="3552" width="48" height="48">
+   <properties>
+    <property name="icon" value="Cult_Believer"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="193" name="Stalf" type="MERCHANT_WER" x="192" y="4224" width="48" height="48">
+   <properties>
+    <property name="icon" value="Stalker"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="407" name="Ghost of Qasim" type="FRIENDLY" x="3072" y="768" width="48" height="48">
+   <properties>
+    <property name="icon" value="Irgix_the_Flimsy"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="422" name="Baba Mustapha" type="FRIENDLY" x="2112" y="576" width="48" height="48">
+   <properties>
+    <property name="icon" value="Mad_Scientist"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="421" name="Princess Buddir Al-Buddoor" type="FRIENDLY" x="4848" y="3888" width="48" height="48">
+   <properties>
+    <property name="icon" value="Nomad_Female"/>
+    <property name="movement" value="FOLLOW_AVATAR"/>
+   </properties>
+  </object>
+  <object id="423" name="Qasim's Wife" type="FRIENDLY" x="2688" y="1056" width="48" height="48">
+   <properties>
+    <property name="icon" value="Goldhanded_Cultist_Bride"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="12" name="messages">
+  <object id="211" name="rune" type="A voice comes from nowhere, the astrologer of the august sultan shahriar bids you welcome." x="6288" y="3888" width="48" height="48"/>
+  <object id="213" name="rune" type="When a-mazed, remember to stay high and do right! - the friendly mage" x="5712" y="4128" width="48" height="48"/>
+  <object id="215" name="rune" type="Take the high road!" x="4656" y="864" width="48" height="48"/>
+  <object id="217" name="rune" type="An oracular rune! A cross marks the spot of a thousand." x="3456" y="336" width="48" height="48"/>
+  <object id="218" name="rune" type="One must 'b' lucky to get the treasure in this room. -a friendly mage" x="2640" y="3792" width="48" height="48"/>
+  <object id="219" name="rune" type="Taking a drink of clear water from the glowing pool gives a feeling of increased strength and grace!" x="3456" y="2640" width="48" height="48">
+   <properties>
+    <property name="heal" value="true"/>
+   </properties>
+  </object>
+  <object id="318" name="rune" type="The rotted timbers of the unused mine shaft give way, only your strong arms hold back the wall from collapse!" x="5568" y="3456" width="48" height="48"/>
+  <object id="408" name="rune" type="An oracular rune reveals, to rescue the princess unaided, attack only the unseen." x="2304" y="768" width="48" height="48"/>
+  <object id="409" name="rune" type="Treasury report - the realm has 100,000 ducates but 90,000 has been stolen by thieves and is hidden in the mountain." x="2064" y="576" width="48" height="48"/>
+  <object id="410" name="rune" type="while the talkative tailor Mustapha repairs your worn suit of clothes, he speaks of tales he has heard. On the gilded pathway, walk the straight and narrow.  The astrologer went to the mountain often. his last words were, look for the pair of ... no one could quite make out his last word." x="2160" y="576" width="48" height="48"/>
+  <object id="411" name="rune" type="the royal physician advises all adventurers to 'take it easy, rest when you can'" x="2256" y="576" width="48" height="48"/>
+  <object id="412" name="rune" type="A primer on anthropology by i. studee al-men  halflings and elves dodge well and are hard to hit.  dwarves and humans generally do more damage with axes and swords than with their daggers, unlike thieves, halflings and elves who enjoy close fighting. strong fighters such as dwarves will be able to hit a foe more oftne if they engage in close hand-to hand combat.  dwarves are strong slow and clumsy.  elves are fast weak and dextrous.  halflings are as fast as humans, they are weak but can take alot of damage." x="2352" y="576" width="48" height="48"/>
+  <object id="413" name="rune" type="here lies the quartered body of Cassim, the rish brother of Ali Baba.  He came to grab all of the gold but when he went to leave, he said, 'open barley!'" x="2736" y="864" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup id="13" name="rooms" visible="0">
+  <object id="335" name="Dusty road" x="2016" y="672">
+   <polygon points="0,0 576,0 576,336 432,336 432,144 -48,144 -48,0"/>
+  </object>
+  <object id="336" name="Old mine road" x="2640" y="1296">
+   <polygon points="0,0 0,144 624,144 624,288 960,288 960,0"/>
+  </object>
+  <object id="338" name="Aries the ram" x="6000" y="2928">
+   <polygon points="0,0 240,0 240,864 96,864 96,480 0,480"/>
+  </object>
+  <object id="339" name="Leo" x="5952" y="4368">
+   <polygon points="0,0 0,48 -192,48 -192,528 48,528 48,480 96,480 96,192 144,192 144,0"/>
+  </object>
+  <object id="340" name="Virgo" x="6048" y="4368">
+   <polygon points="0,0 192,0 192,528 336,528 336,768 -96,768 -96,480 -48,480 -48,288 0,288"/>
+  </object>
+  <object id="341" name="Royal Library" x="1968" y="528">
+   <polygon points="0,0 0,144 480,144 480,0"/>
+  </object>
+  <object id="343" name="Home of Ali Baba" x="2016" y="816">
+   <polygon points="0,0 0,144 480,144 480,0"/>
+  </object>
+  <object id="344" name="Sultan's palace" x="1632" y="528">
+   <polygon points="0,0 0,432 384,432 384,0"/>
+  </object>
+  <object id="345" name="Shahriar treasury" x="1152" y="480">
+   <polygon points="0,0 0,480 480,480 480,0"/>
+  </object>
+  <object id="346" name="Forest" x="2016" y="960">
+   <polygon points="0,0 0,432 672,432 672,0"/>
+  </object>
+  <object id="347" name="View from a tree" x="2640" y="1008">
+   <polygon points="0,0 0,288 336,288 336,0"/>
+  </object>
+  <object id="348" name="Thieves cave" x="2688" y="576">
+   <polygon points="0,0 0,432 672,432 672,0"/>
+  </object>
+  <object id="350" name="Foothills cemetary" x="2496" y="48">
+   <polygon points="0,0 0,336 864,336 864,0"/>
+  </object>
+  <object id="352" name="The mountain" x="3312" y="48">
+   <polygon points="0,0 0,480 672,480 672,0"/>
+  </object>
+  <object id="353" name="roy g. biv" x="4128" y="336">
+   <polygon points="0,0 144,0 144,288 0,288"/>
+  </object>
+  <object id="354" name="Jackal altar" x="4224" y="192">
+   <polygon points="0,0 0,288 624,288 624,0"/>
+  </object>
+  <object id="355" name="Deserted tunnel" x="4368" y="480">
+   <polygon points="0,0 0,144 480,144 480,0"/>
+  </object>
+  <object id="356" name="Air vent" x="4800" y="192">
+   <polygon points="0,0 0,480 144,480 144,0"/>
+  </object>
+  <object id="357" name="Bear cave" x="4896" y="192">
+   <polygon points="0,0 0,240 720,240 720,0"/>
+  </object>
+  <object id="358" name="Rats nest" x="4896" y="432">
+   <polygon points="0,0 0,192 720,192 720,0"/>
+  </object>
+  <object id="359" name="Astrologer's maze" x="4992" y="720">
+   <polygon points="0,0 0,480 672,480 672,0"/>
+  </object>
+  <object id="362" name="Spiral staircase" x="5616" y="768">
+   <polygon points="0,0 0,336 240,336 240,0"/>
+  </object>
+  <object id="363" name="y" x="4896" y="1392">
+   <polygon points="0,0 0,336 768,336 768,0"/>
+  </object>
+  <object id="364" name="r" x="3984" y="1392">
+   <polygon points="0,0 0,288 480,288 480,0"/>
+  </object>
+  <object id="365" name="o" x="4416" y="1392">
+   <polygon points="0,0 0,288 432,288 432,0"/>
+  </object>
+  <object id="366" name="g." x="3360" y="1920">
+   <polygon points="0,0 0,336 768,336 768,0"/>
+  </object>
+  <object id="367" name="b" x="2544" y="1920">
+   <polygon points="0,0 0,336 768,336 768,0"/>
+  </object>
+  <object id="368" name="v" x="1776" y="1584">
+   <polygon points="0,0 0,336 768,336 768,0"/>
+  </object>
+  <object id="369" name="i" x="1776" y="1920">
+   <polygon points="0,0 0,336 768,336 768,0"/>
+  </object>
+  <object id="371" name="Gilded hallway" x="2304" y="2448">
+   <polygon points="0,0 0,576 240,576 240,0"/>
+  </object>
+  <object id="372" name="Guard room" x="2112" y="2976">
+   <polygon points="0,0 0,288 624,288 624,0"/>
+  </object>
+  <object id="373" name="Stinger strewn cell" x="2112" y="3216">
+   <polygon points="0,0 0,240 288,240 288,0"/>
+  </object>
+  <object id="374" name="Long way from home" x="2448" y="3264">
+   <polygon points="0,0 0,192 288,192 288,0"/>
+  </object>
+  <object id="375" name="Save the whales" x="2064" y="3456">
+   <polygon points="0,0 0,192 720,192 720,0"/>
+  </object>
+  <object id="376" name="Dragon lair" x="2064" y="3648">
+   <polygon points="0,0 0,288 384,288 384,0"/>
+  </object>
+  <object id="377" name="Gold for the lucky" x="2400" y="3648">
+   <polygon points="0,0 0,336 384,336 384,0"/>
+  </object>
+  <object id="379" name="Inner staircase" x="1824" y="3504">
+   <polygon points="0,0 0,288 288,288 288,0"/>
+  </object>
+  <object id="380" name="Minotaur's vault" x="1632" y="3792">
+   <polygon points="0,0 0,144 480,144 480,0"/>
+  </object>
+  <object id="381" name="Minotaur's den" x="1296" y="3552">
+   <polygon points="0,0 0,384 384,384 384,0"/>
+  </object>
+  <object id="382" name="Minotaur's maze" x="672" y="3408">
+   <polygon points="0,0 0,432 672,432 672,0"/>
+  </object>
+  <object id="383" name="Deep dark stairway" x="336" y="3312">
+   <polygon points="0,0 0,384 384,384 384,0"/>
+  </object>
+  <object id="384" name="Failing wall" x="48" y="3984">
+   <polygon points="0,0 0,336 672,336 672,0"/>
+  </object>
+  <object id="385" name="Minotaur's playroom" x="576" y="4464">
+   <polygon points="0,0 0,288 576,288 576,0"/>
+  </object>
+  <object id="386" name="Underground stream" x="3168" y="2448">
+   <polygon points="0,0 0,480 720,480 720,0"/>
+  </object>
+  <object id="387" name="Magic tour-billion" x="3264" y="3024">
+   <polygon points="0,0 0,384 480,384 480,0"/>
+  </object>
+  <object id="388" name="Slide" x="5040" y="1824">
+   <polygon points="0,0 0,624 144,624 144,0"/>
+  </object>
+  <object id="389" name="Mine shaft" x="5328" y="3408">
+   <polygon points="0,0 0,96 576,96 576,0"/>
+  </object>
+  <object id="390" name="Hallway" x="6192" y="3360">
+   <polygon points="0,0 0,384 192,384 192,0"/>
+  </object>
+  <object id="391" name="Pisces" x="6336" y="3360">
+   <polygon points="0,0 0,384 192,384 192,0"/>
+  </object>
+  <object id="392" name="Aquarius" x="6480" y="3360">
+   <polygon points="0,0 0,384 240,384 240,0"/>
+  </object>
+  <object id="393" name="Taurus" x="5904" y="3408">
+   <polygon points="0,0 0,336 240,336 240,0"/>
+  </object>
+  <object id="394" name="Astrologer's lab" x="5952" y="3744">
+   <polygon points="0,0 0,672 672,672 672,0"/>
+  </object>
+  <object id="396" name="Cancer" x="5232" y="4032">
+   <polygon points="0,0 0,240 768,240 768,0"/>
+  </object>
+  <object id="397" name="Gemini" x="5232" y="3840">
+   <polygon points="0,0 0,192 768,192 768,0"/>
+  </object>
+  <object id="398" name="Libra" x="6192" y="4368">
+   <polygon points="0,0 0,432 288,432 288,0"/>
+  </object>
+  <object id="399" name="Scorpio" x="6432" y="4368">
+   <polygon points="0,0 0,432 240,432 240,0"/>
+  </object>
+  <object id="400" name="Capricornus" x="6576" y="3840">
+   <polygon points="0,0 0,192 816,192 816,0"/>
+  </object>
+  <object id="401" name="Sagittarius" x="6576" y="4032">
+   <polygon points="0,0 0,240 816,240 816,0"/>
+  </object>
+  <object id="402" name="Thieves clearing" x="2832" y="1440">
+   <polygon points="0,0 0,240 480,240 480,0 288,0 288,-48 144,-48 144,0"/>
+  </object>
+  <object id="403" name="Crystal cave" x="4368" y="768">
+   <polygon points="0,0 0,288 672,288 672,0"/>
+  </object>
+  <object id="405" name="Princess's Cell" x="4704" y="3792">
+   <polygon points="0,0 0,192 480,192 480,0 0,0"/>
+  </object>
+ </objectgroup>
+</map>

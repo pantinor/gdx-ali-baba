@@ -1,0 +1,86 @@
+{
+    "weapons": [
+        {
+            "name": "Iron sword",
+            "baseCost": 100,
+            "power": 8,
+            "strengthRequirement": "weak",
+            "type": "melee"
+        },
+        {
+            "name": "Steel sword",
+            "baseCost": 500,
+            "power": 9,
+            "strengthRequirement": "strong",
+            "type": "melee"
+        },
+        {
+            "name": "Oak Club",
+            "baseCost": 30,
+            "power": 5,
+            "strengthRequirement": "strong",
+            "type": "melee"
+        },
+        {
+            "name": "Steel dagger",
+            "baseCost": 150,
+            "power": 4,
+            "strengthRequirement": "strong",
+            "type": "hand-to-hand"
+        },
+        {
+            "name": "Shiv",
+            "baseCost": 100,
+            "power": 7,
+            "strengthRequirement": "weak",
+            "type": "hand-to-hand"
+        }
+    ],
+    "armor": [
+        {
+            "name": "Plate Armor",
+            "baseCost": 800,
+            "effectiveness": 5,
+            "dexterityDecrease": {
+                "value": 7,
+                "percentage": "22%"
+            }
+        },
+        {
+            "name": "Rithmil plate",
+            "baseCost": 2000,
+            "effectiveness": 5,
+            "dexterityDecrease": {
+                "value": 3,
+                "percentage": "9%"
+            }
+        },
+        {
+            "name": "Chain mail",
+            "baseCost": 400,
+            "effectiveness": 3,
+            "dexterityDecrease": {
+                "value": 5,
+                "percentage": "16%"
+            }
+        },
+        {
+            "name": "Rithmil chain",
+            "baseCost": 1000,
+            "effectiveness": 3,
+            "dexterityDecrease": {
+                "value": 2,
+                "percentage": "6%"
+            }
+        },
+        {
+            "name": "Leather armor",
+            "baseCost": 80,
+            "effectiveness": 1,
+            "dexterityDecrease": {
+                "value": 2,
+                "percentage": "6%"
+            }
+        }
+    ]
+}
