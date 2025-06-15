@@ -1,9 +1,9 @@
 
 import alibaba.AliBaba;
-import alibaba.AllItems;
-import alibaba.Armor;
+import alibaba.objects.AllItems;
+import alibaba.objects.Armor;
 import alibaba.Battle;
-import alibaba.Weapon;
+import alibaba.objects.Weapon;
 import alibaba.Character;
 import java.io.IOException;
 import java.util.List;

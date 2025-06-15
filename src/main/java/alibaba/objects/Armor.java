@@ -1,4 +1,4 @@
-package alibaba;
+package alibaba.objects;
 
 public class Armor {
 

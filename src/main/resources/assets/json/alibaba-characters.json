@@ -42,7 +42,7 @@
         "extraDodge": 0
     },
     {
-        "name": "Abs al",
+        "name": "Absal",
         "creatureType": "thief",
         "strength": 10,
         "constitution": 10,
@@ -1176,7 +1176,7 @@
         "extraDodge": 1
     },
     {
-        "name": "Nizam UI Mulk",
+        "name": "Nizam Ul Mulk",
         "creatureType": "thief",
         "strength": 14,
         "constitution": 14,

@@ -1,5 +1,7 @@
 package alibaba;
 
+import alibaba.objects.Weapon;
+import alibaba.objects.Armor;
 import java.util.Random;
 
 public class Character {

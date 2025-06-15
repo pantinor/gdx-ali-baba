@@ -1,9 +1,9 @@
 package alibaba;
 
+import alibaba.Constants.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -29,7 +29,7 @@ public class StartScreen implements Screen {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                //AliBaba.mainGame.setScreen(scr);
+                AliBaba.mainGame.setScreen(Map.ALIBABA.getScreen());
             }
         });
         play.setBounds(360, AliBaba.SCREEN_HEIGHT - 450, 220, 40);

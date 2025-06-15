@@ -79,7 +79,7 @@
  </layer>
  <layer id="3" name="props" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3dQU6DQBQA0IZLaeIRNK5wT7ro0ujWC3gNGk6gXoCjOU2tQYNgURhg3ksmU6CLT/L5w3SS6WYDAAAAAH+3y2JHAAAADPXQ8j7/lHX3MEfb7Lxj0nIR2k1ol7EDISnXoV2Fdhs7EJIS8q0+5F3Iv7rvu0v7Xfd5YfGmJIyzRRhn6zDOlrFjGUOVHe9rn7U/V/vssy8nCokOQ+et+cxrzNzj4380560/fYY1OY2xlRxnYh3vdeVH3+q15bwaDazJOTVN/QMAAAAAAFgPaz8AAAAAAAAAAAAAAKSose9w0Tj3hT2HGVszxw57IVZyjonkx3wrYscBAAAAAEty37NXT991AAAAAAAAgCXKrYUCiXhR74DEvM2s7u1mFg/AEI8dtazr2pzdRY7b+MBvLPX5AgBgGPMEAAAAAACAaW2tzwAAAAAT+f7f4jC2vZwjEvWOKZ3yTc0DgHV4B3ZIILGQDwEA
+   H4sIAAAAAAAACu3dQU6DQBQA0IZLaeIRNK5wT7ro0ujWC3gNGk6gXoCjOU2tQYNgURhg3ksm0wKL3/Tzh+kk080GAAAAAP5ul8WOAAAAGOqh5Xn+KevuYY622XnvSctFaDehXcYOhKRch3YV2m3sQEhKyLf6kHch/+q+a5f2u+7zwuJNSRhnizDO1mGcLWPHMoYqO36ufdZ+X+2zz76cKCQ6DJ235jOvMXOPj//RnLf+9BrW5DTGVnKciXU815UffavXluNqNLAm59Q09Q8AAAAAAGA9rP0AAAAAAAAAAAAAAJCixr7DRePYF/YcZmzNHDvshVjJOSaSH/OtiB0HAAAAACzJfc9ePX3nAQAAAAAAYA321sWSk/vOgUS8qHdAYt5mVvd2M4sHYIjHjlrWdW7O7iLHbXzgN5Z6fwEAMIx5AgAAAAAAwLS21mcAAACAiXz/b3EYm/20iEW9Y0qnfFPzAGAd3gHEfqUdkA8BAA==
   </data>
  </layer>
  <layer id="5" name="water-edges" width="158" height="110">
@@ -459,553 +459,471 @@
   </object>
  </objectgroup>
  <objectgroup id="11" name="people">
-  <object id="220" name="Large Rat" type="MONSTER" x="5376" y="528" width="48" height="48">
+  <object id="220" name="Black Rat" type="HOSTILE" x="5376" y="528" width="48" height="48">
    <properties>
-    <property name="monsterID" value="WereRat"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="221" name="Small Rat" type="MONSTER" x="5328" y="576" width="48" height="48">
+  <object id="221" name="Gray Rat" type="HOSTILE" x="5328" y="576" width="48" height="48">
    <properties>
-    <property name="monsterID" value="WereRat"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="222" name="Small Rat" type="MONSTER" x="5328" y="480" width="48" height="48">
+  <object id="222" name="Calico Rat" type="HOSTILE" x="5328" y="480" width="48" height="48">
    <properties>
-    <property name="monsterID" value="WereRat"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="223" name="Cave Bear" type="MONSTER" x="5232" y="288" width="48" height="48">
+  <object id="223" name="Cave Bear" type="HOSTILE" x="5232" y="288" width="48" height="48">
    <properties>
-    <property name="icon" value="Bear"/>
-    <property name="monsterID" value="WereBear"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="224" name="Omar" type="MONSTER" x="5424" y="864" width="48" height="48">
+  <object id="224" name="Omar" type="HOSTILE" x="5424" y="864" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Rogue"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="225" name="Mahmud" type="MONSTER" x="5472" y="1008" width="48" height="48">
+  <object id="225" name="Mahmud" type="HOSTILE" x="5472" y="1008" width="48" height="48">
    <properties>
-    <property name="monsterID" value="HighwayMan"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
   <object id="226" name="Unicorn" type="FRIENDLY" x="4752" y="912" width="48" height="48">
    <properties>
-    <property name="icon" value="Arctic_Unicorn"/>
-    <property name="monsterID" value="Coyote"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="227" name="Werejackal" type="MONSTER" x="4320" y="336" width="48" height="48">
+  <object id="227" name="Werejackal" type="HOSTILE" x="4320" y="336" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Coyote"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="228" name="Blob" type="MONSTER" x="5424" y="1536" width="48" height="48">
+  <object id="228" name="The Blob" type="HOSTILE" x="5424" y="1536" width="48" height="48">
    <properties>
-    <property name="icon" value="Sulphur_Scuttler"/>
-    <property name="monsterID" value="Grave Mist"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="229" name="Dragon" type="MONSTER" x="4704" y="1536" width="48" height="48">
+  <object id="229" name="White Dragon" type="HOSTILE" x="4704" y="1536" width="48" height="48">
    <properties>
-    <property name="icon" value="Dragon_Lord"/>
-    <property name="monsterID" value="Wyvern"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="230" name="Enchanted Sword" type="MONSTER" x="4656" y="1584" width="48" height="48">
+  <object id="230" name="Enchanted Sword" type="HOSTILE" x="4656" y="1584" width="48" height="48">
    <properties>
-    <property name="icon" value="The_Rage"/>
-    <property name="monsterID" value="Swordsman"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="231" name="Very young Dragon" type="MONSTER" x="4128" y="1584" width="48" height="48">
+  <object id="231" name="Very Young Dragon" type="HOSTILE" x="4128" y="1584" width="48" height="48">
    <properties>
-    <property name="icon" value="Titano_Dragon"/>
-    <property name="monsterID" value="Dragon Puppy"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="232" name="Nizim al Mulik" type="MONSTER" x="2976" y="1488" width="48" height="48">
+  <object id="232" name="Nizam Ul Mulk" type="HOSTILE" x="2976" y="1488" width="48" height="48">
    <properties>
-    <property name="icon" value="Achad"/>
-    <property name="monsterID" value="Rogue"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="233" name="Salaman" type="MONSTER" x="3120" y="1536" width="48" height="48">
+  <object id="233" name="Salaman" type="HOSTILE" x="3120" y="1536" width="48" height="48">
    <properties>
-    <property name="icon" value="Cobra_Assassin"/>
-    <property name="monsterID" value="highwayman"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="234" name="Alp Arsalan" type="MONSTER" x="2880" y="1536" width="48" height="48">
+  <object id="234" name="Alp Arslan" type="HOSTILE" x="2880" y="1536" width="48" height="48">
    <properties>
-    <property name="icon" value="Cobra_Scout"/>
-    <property name="monsterID" value="Bushwacker"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="235" name="Absal" type="MONSTER" x="2880" y="1488" width="48" height="48">
+  <object id="235" name="Absal" type="HOSTILE" x="2880" y="1488" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Rogue"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="236" name="Abdullah" type="FRIENDLY" x="3216" y="1632" width="48" height="48">
+  <object id="236" name="Abdalla" type="FRIENDLY" x="3216" y="1632" width="48" height="48">
    <properties>
-    <property name="icon" value="Crypt_Defiler"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="237" name="Succubus" type="MONSTER" x="2016" y="1728" width="48" height="48">
+  <object id="237" name="Succubus" type="HOSTILE" x="2016" y="1728" width="48" height="48">
    <properties>
-    <property name="icon" value="Gorga"/>
-    <property name="monsterID" value="Priestess"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="238" name="Slime" type="MONSTER" x="2352" y="2064" width="48" height="48">
+  <object id="238" name="Slime" type="HOSTILE" x="2352" y="2064" width="48" height="48">
    <properties>
-    <property name="icon" value="Defiler"/>
-    <property name="monsterID" value="Creeping Crud"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
   <object id="239" name="Barn Owl" type="FRIENDLY" x="1968" y="2064" width="48" height="48">
    <properties>
-    <property name="icon" value="Boreal_Owl"/>
-    <property name="monsterID" value="Kobold"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="240" name="Tiger" type="MONSTER" x="2256" y="1152" width="48" height="48">
+  <object id="240" name="Tiger" type="HOSTILE" x="2256" y="1152" width="48" height="48">
    <properties>
-    <property name="icon" value="Tiger"/>
-    <property name="monsterID" value="Capybara"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="242" name="Malik" type="MONSTER" x="2448" y="720" width="48" height="48">
+  <object id="242" name="Malik" type="HOSTILE" x="2448" y="720" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Orc"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
   <object id="243" name="Sultan Shahriar" type="FRIENDLY" x="1680" y="768" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Swordsman"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="244" name="Guard" type="FRIENDLY" x="1680" y="672" width="48" height="48">
+  <object id="244" name="Sultans Left Guard" type="FRIENDLY" x="1680" y="672" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Swordsman"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="245" name="Guard" type="FRIENDLY" x="1680" y="864" width="48" height="48">
+  <object id="245" name="Sultans Right Guard" type="FRIENDLY" x="1680" y="864" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Swordsman"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="246" name="Tan Rat" type="MONSTER" x="1200" y="864" width="48" height="48">
+  <object id="246" name="Tan Rat" type="HOSTILE" x="1200" y="864" width="48" height="48">
    <properties>
-    <property name="monsterID" value="WereRat"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="247" name="Grey Rat" type="MONSTER" x="1200" y="816" width="48" height="48">
+  <object id="247" name="Gray Rat" type="HOSTILE" x="1200" y="816" width="48" height="48">
    <properties>
-    <property name="monsterID" value="WereRat"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="248" name="Enchanted Statue" type="MONSTER" x="1344" y="672" width="48" height="48">
+  <object id="248" name="Enchanted Statue" type="HOSTILE" x="1344" y="672" width="48" height="48">
    <properties>
-    <property name="icon" value="Marid"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="249" name="Minotaur" type="MONSTER" x="1440" y="3696" width="48" height="48">
+  <object id="249" name="Minotaur" type="HOSTILE" x="1440" y="3696" width="48" height="48">
    <properties>
-    <property name="icon" value="Bullwark"/>
-    <property name="monsterID" value="Ogre Lord"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="250" name="Minotaur statue" type="MONSTER" x="1200" y="3600" width="48" height="48">
+  <object id="250" name="Statue of Minotaur" type="HOSTILE" x="1200" y="3600" width="48" height="48">
    <properties>
-    <property name="icon" value="Stonecracker"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="251" name="Stone Statue" type="MONSTER" x="720" y="3744" width="48" height="48">
+  <object id="251" name="Enchanted Statue" type="HOSTILE" x="720" y="3744" width="48" height="48">
    <properties>
-    <property name="icon" value="Gelidrazah_the_Frozen"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="252" name="Stone Statue" type="MONSTER" x="384" y="4176" width="48" height="48">
+  <object id="252" name="Enchanted Statue" type="HOSTILE" x="384" y="4176" width="48" height="48">
    <properties>
-    <property name="icon" value="The_Pale_Worm"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="253" name="Oozing Stenchbeast" type="MONSTER" x="576" y="4080" width="48" height="48">
+  <object id="253" name="Oozing Stenchbeast" type="HOSTILE" x="576" y="4080" width="48" height="48">
    <properties>
-    <property name="icon" value="Defiler"/>
-    <property name="monsterID" value="LifeStealer"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="254" name="Stone Statue" type="MONSTER" x="672" y="4608" width="48" height="48">
+  <object id="254" name="Enchanted Statue" type="HOSTILE" x="672" y="4608" width="48" height="48">
    <properties>
-    <property name="icon" value="The_Old_Whopper"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="255" name="Son of Minotaur" type="MONSTER" x="912" y="4560" width="48" height="48">
+  <object id="255" name="Son of Minotaur" type="HOSTILE" x="912" y="4560" width="48" height="48">
    <properties>
-    <property name="icon" value="Rhindeer"/>
-    <property name="monsterID" value="Ogre"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="256" name="Green Dragon" type="MONSTER" x="2208" y="3744" width="48" height="48">
+  <object id="256" name="Green Dragon" type="HOSTILE" x="2208" y="3744" width="48" height="48">
    <properties>
-    <property name="icon" value="Dragon"/>
-    <property name="monsterID" value="Wyvern"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="257" name="Mechanized Sword" type="FRIENDLY" x="2592" y="3696" width="48" height="48">
+  <object id="257" name="Mechanical Sword" type="FRIENDLY" x="2592" y="3696" width="48" height="48">
    <properties>
-    <property name="icon" value="The_Rage"/>
-    <property name="monsterID" value="Murphy's Ghost"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="258" name="Whale" type="FRIENDLY" x="2400" y="3552" width="48" height="48">
+  <object id="259" name="Werewolf" type="HOSTILE" x="2640" y="3312" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Spirit"/>
-    <property name="movement" value="FIXED"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="259" name="Werewolf" type="MONSTER" x="2640" y="3312" width="48" height="48">
+  <object id="260" name="Giant Scorpion" type="HOSTILE" x="2160" y="3264" width="48" height="48">
    <properties>
-    <property name="icon" value="Hemming"/>
-    <property name="monsterID" value="WereWolf"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="260" name="Giant Scorpion" type="MONSTER" x="2160" y="3264" width="48" height="48">
+  <object id="261" name="Sewer Rat" type="HOSTILE" x="2160" y="3120" width="48" height="48">
    <properties>
-    <property name="icon" value="Giant_Spider"/>
-    <property name="monsterID" value="Giant Spider"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="261" name="Sewer Rat" type="MONSTER" x="2160" y="3120" width="48" height="48">
+  <object id="262" name="WereRat" type="HOSTILE" x="2208" y="3168" width="48" height="48">
    <properties>
-    <property name="monsterID" value="WereRat"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="262" name="WereRat" type="MONSTER" x="2208" y="3168" width="48" height="48">
+  <object id="263" name="Jungle Rat" type="HOSTILE" x="2640" y="3120" width="48" height="48">
    <properties>
-    <property name="monsterID" value="WereRat"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="263" name="Jungle Rat" type="MONSTER" x="2640" y="3120" width="48" height="48">
+  <object id="264" name="Sword of Damocles" type="FRIENDLY" x="2448" y="3024" width="48" height="48">
    <properties>
-    <property name="icon" value="Katex_Blood_Tongue"/>
-    <property name="monsterID" value="WereRat"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
-   </properties>
-  </object>
-  <object id="264" name="Sword of Damacles" type="FRIENDLY" x="2448" y="3024" width="48" height="48">
-   <properties>
-    <property name="monsterID" value="Swordsman"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="265" name="Two Edged Sword" type="FRIENDLY" x="2352" y="3024" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Swordsman"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="266" name="Dragon" type="MONSTER" x="2448" y="2880" width="48" height="48">
+  <object id="266" name="Green Dragon" type="HOSTILE" x="2448" y="2880" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Wyvern"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
   <object id="267" name="Aries the Ram" type="FRIENDLY" x="6096" y="3120" width="48" height="48">
    <properties>
-    <property name="icon" value="Doombringer"/>
-    <property name="monsterID" value="Gargoyle"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="268" name="Pisces" type="FRIENDLY" x="6432" y="3408" width="48" height="48">
+  <object id="270" name="Statue of Taurus" type="FRIENDLY" x="6000" y="3552" width="48" height="48">
    <properties>
-    <property name="icon" value="Brass_Speckled_Koi"/>
-    <property name="monsterID" value="Gargoyle"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="269" name="Aquarius" type="FRIENDLY" x="6576" y="3408" width="48" height="48">
+  <object id="272" name="Cancer the Crab" type="HOSTILE" x="5520" y="4128" width="48" height="48">
    <properties>
-    <property name="icon" value="Void_Watcher"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="270" name="Taurus" type="FRIENDLY" x="6000" y="3552" width="48" height="48">
+  <object id="273" name="Leo" type="HOSTILE" x="5856" y="4560" width="48" height="48">
    <properties>
-    <property name="icon" value="Obstinate_Ox"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="272" name="Cancer the Crab" type="MONSTER" x="5520" y="4128" width="48" height="48">
+  <object id="276" name="Scorpius" type="HOSTILE" x="6528" y="4704" width="48" height="48">
    <properties>
-    <property name="icon" value="Blood_Crab"/>
-    <property name="monsterID" value="Huge Spider"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="273" name="Leo" type="MONSTER" x="5856" y="4560" width="48" height="48">
+  <object id="279" name="Cogia Houssain" type="HOSTILE" x="7152" y="4128" width="48" height="48">
    <properties>
-    <property name="icon" value="Dragonking_Zyrtarch"/>
-    <property name="monsterID" value="Weretiger"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
-   </properties>
-  </object>
-  <object id="274" name="Virgo" type="FRIENDLY" x="6048" y="4992" width="48" height="48">
-   <properties>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="275" name="Libra" type="FRIENDLY" x="6288" y="4656" width="48" height="48">
-   <properties>
-    <property name="icon" value="The_Diamond_Blossom"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="276" name="Scorpio" type="MONSTER" x="6528" y="4704" width="48" height="48">
-   <properties>
-    <property name="icon" value="Utua_Stone_Sting"/>
-    <property name="monsterID" value="Giant Spider"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
-   </properties>
-  </object>
-  <object id="277" name="Sagittarius" type="FRIENDLY" x="6816" y="4128" width="48" height="48">
-   <properties>
-    <property name="icon" value="Gralvalon"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="278" name="Capricornus" type="FRIENDLY" x="6768" y="3936" width="48" height="48">
-   <properties>
-    <property name="icon" value="Cinnamon_Ibex"/>
-    <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="279" name="Coggia Houssain" type="MONSTER" x="7152" y="4128" width="48" height="48">
-   <properties>
-    <property name="icon" value="Nomad_Basic"/>
-    <property name="monsterID" value="Lvl 4 Thief"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
   <object id="281" name="Morgiana" type="FRIENDLY" x="6144" y="5040" width="48" height="48">
    <properties>
-    <property name="icon" value="Glooth_Bandit"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="282" name="Hassan Ben Sabbah" type="MONSTER" x="6096" y="4944" width="48" height="48">
+  <object id="282" name="Hasan Ben Sabbah" type="HOSTILE" x="6096" y="4944" width="48" height="48">
    <properties>
-    <property name="monsterID" value="HighwayMan"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="283" name="Mountain Scorpion" type="MONSTER" x="3888" y="288" width="48" height="48">
+  <object id="283" name="Mountain Scorpion" type="HOSTILE" x="3888" y="288" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Huge Spider"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="284" name="Big Zombie" type="MONSTER" x="3024" y="240" width="48" height="48">
+  <object id="284" name="Big Zombie" type="HOSTILE" x="3024" y="240" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Zombie"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="285" name="Small Zombie" type="MONSTER" x="3072" y="288" width="48" height="48">
+  <object id="285" name="Small Zombie" type="HOSTILE" x="3072" y="288" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Undead Kobold"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
-  <object id="286" name="Witless Zombie" type="MONSTER" x="3120" y="240" width="48" height="48">
+  <object id="286" name="Witless Zombie" type="HOSTILE" x="3120" y="240" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Zombie"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="ATTACK"/>
    </properties>
   </object>
   <object id="287" name="Sky Wanderer" type="FRIENDLY" x="3648" y="2064" width="48" height="48">
    <properties>
-    <property name="icon" value="Energy_Elemental"/>
-    <property name="monsterID" value="Dragon Puppy"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="288" name="Sun Wanderer" type="FRIENDLY" x="3504" y="2064" width="48" height="48">
    <properties>
-    <property name="icon" value="Hellfire_Fighter"/>
-    <property name="monsterID" value="Dragon Puppy"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="289" name="Earth Wanderer" type="FRIENDLY" x="3504" y="2160" width="48" height="48">
    <properties>
-    <property name="icon" value="Massive_Earth_Elemental"/>
-    <property name="monsterID" value="Dragon Puppy"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="404" name="Captain of the Thieves" type="FRIENDLY" x="2016" y="720" width="48" height="48">
    <properties>
-    <property name="icon" value="Cobra_Assassin"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="72" name="Bollrun" type="INNKEEPER" x="2640" y="2160" width="48" height="48">
+  <object id="72" name="Bollrun" type="MERCHANT_ARMOR" x="2640" y="2160" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="73" name="Buring" type="MERCHANT_LEG" x="2304" y="1056" width="48" height="48">
+  <object id="73" name="Buring" type="MERCHANT_WEAPON" x="2304" y="1056" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="74" name="Aemar" type="MERCHANT_PMO" x="2112" y="1200" width="48" height="48">
+  <object id="74" name="Aemar" type="MERCHANT_ARMOR" x="2112" y="1200" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="75" name="Arnori" type="INNKEEPER" x="3696" y="336" width="48" height="48">
+  <object id="75" name="Arnori" type="MERCHANT_WEAPON" x="3696" y="336" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="76" name="Krabbi" type="MERCHANT_KOD" x="3408" y="1392" width="48" height="48">
+  <object id="76" name="Krabbi" type="MERCHANT_ARMOR" x="3408" y="1392" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="77" name="Garming" type="MERCHANT_DQ" x="4080" y="1488" width="48" height="48">
+  <object id="77" name="Garming" type="MERCHANT_WEAPON" x="4080" y="1488" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="79" name="Snirm" type="MERCHANT_BS" x="3600" y="3120" width="48" height="48">
+  <object id="79" name="Snirm" type="MERCHANT_ARMOR" x="3600" y="3120" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="80" name="Hikar" type="TEMPLE" x="3360" y="3120" width="48" height="48">
+  <object id="80" name="Hikar" type="MERCHANT_WEAPON" x="3360" y="3120" width="48" height="48">
    <properties>
-    <property name="icon" value="Cult_Believer"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="96" name="Almgar" type="TEMPLE" x="7152" y="3936" width="48" height="48">
+  <object id="96" name="Almgar" type="MERCHANT_ARMOR" x="7152" y="3936" width="48" height="48">
    <properties>
-    <property name="icon" value="Cult_Believer"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="116" name="Otrir" type="MERCHANT_PMO" x="5376" y="768" width="48" height="48">
+  <object id="116" name="Otrir" type="MERCHANT_WEAPON" x="5376" y="768" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="121" name="Hangar" type="MERCHANT_DQ" x="3648" y="2736" width="48" height="48">
+  <object id="121" name="Hangar" type="MERCHANT_ARMOR" x="3648" y="2736" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="139" name="Hlorgar" type="TEMPLE" x="2640" y="3552" width="48" height="48">
+  <object id="139" name="Hlorgar" type="MERCHANT_ARMOR" x="2640" y="3552" width="48" height="48">
    <properties>
-    <property name="icon" value="Cult_Believer"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="193" name="Stalf" type="MERCHANT_WER" x="192" y="4224" width="48" height="48">
+  <object id="193" name="Stalf" type="MERCHANT_ARMOR" x="192" y="4224" width="48" height="48">
    <properties>
-    <property name="icon" value="Stalker"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="407" name="Ghost of Qasim" type="FRIENDLY" x="3072" y="768" width="48" height="48">
    <properties>
-    <property name="icon" value="Irgix_the_Flimsy"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="422" name="Baba Mustapha" type="FRIENDLY" x="2112" y="576" width="48" height="48">
    <properties>
-    <property name="icon" value="Mad_Scientist"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="421" name="Princess Buddir Al-Buddoor" type="FRIENDLY" x="4848" y="3888" width="48" height="48">
    <properties>
-    <property name="icon" value="Nomad_Female"/>
-    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="icon" value="CluckingChicken"/>
+    <property name="movement" value="FOLLOW"/>
    </properties>
   </object>
   <object id="423" name="Qasim's Wife" type="FRIENDLY" x="2688" y="1056" width="48" height="48">
    <properties>
-    <property name="icon" value="Goldhanded_Cultist_Bride"/>
+    <property name="icon" value="CluckingChicken"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
