@@ -1,10 +1,7 @@
-package alibaba;
+package alibaba.objects;
 
 import alibaba.Constants.Map;
-import alibaba.objects.Utils;
-import alibaba.objects.Actor;
-import alibaba.objects.Portal;
-import alibaba.objects.Direction;
+import alibaba.GameScreen;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;

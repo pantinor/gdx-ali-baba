@@ -1,5 +1,6 @@
 package alibaba;
 
+import static alibaba.Constants.TILE_DIM;
 import alibaba.objects.Weapon;
 import alibaba.objects.Armor;
 import alibaba.objects.AllItems;
@@ -9,7 +10,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.utils.Array;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -32,9 +31,8 @@ public class AliBaba extends Game {
 
     public static final int SCREEN_WIDTH = 1024;
     public static final int SCREEN_HEIGHT = 768;
-    public static final int MAP_VIEWPORT_DIM = 624;
+    public static final int MAP_VIEWPORT_DIM = 19 * TILE_DIM;
 
-    public static Texture backGround;
     public static TextureAtlas mapAtlas;
     public static BitmapFont font12;
     public static BitmapFont font14;
@@ -49,8 +47,7 @@ public class AliBaba extends Game {
     public static java.util.List<Character> CHARACTERS;
     public static java.util.List<Weapon> WEAPONS;
     public static java.util.List<Armor> ARMOR;
-    public static TextureAtlas CHAR_ATLAS;
-    public static Texture BACKGROUND;
+    public static TextureRegion[] ICONS = new TextureRegion[30 * 128];
 
     private static final Gson GSON = new GsonBuilder().create();
 
@@ -138,9 +135,13 @@ public class AliBaba extends Game {
         String itemsJsonFilePath = "src/main/resources/assets/json/alibaba-items.json";
 
         try {
-            BACKGROUND = new Texture(Gdx.files.classpath("assets/data/frame.png"));
 
-            CHAR_ATLAS = new TextureAtlas(Gdx.files.classpath("assets/tileset/tileset16.atlas"));
+            TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/32x32.png")), 32, 32);
+            for (int row = 0; row < 30; row++) {
+                for (int col = 0; col < 128; col++) {
+                    ICONS[row * 128 + col] = trs[row][col];
+                }
+            }
 
             CHARACTERS = AliBaba.loadCharactersFromJsonFile(charactersJsonFilePath);
 
@@ -171,22 +172,6 @@ public class AliBaba extends Game {
     public static AllItems loadAllItemsFromJsonFile(String filePath) throws IOException {
         String jsonString = java.nio.file.Files.readString(Paths.get(filePath));
         return GSON.fromJson(jsonString, AllItems.class);
-    }
-
-    public static TextureRegion icon(String n) {
-        TextureRegion cr = CHAR_ATLAS.findRegion(n);
-        if (cr != null) {
-            return cr;
-        }
-        return null;
-    }
-
-    public static Animation animation(String n) {
-        Array<TextureAtlas.AtlasRegion> ca = CHAR_ATLAS.findRegions(n);
-        if (ca != null && ca.size != 0) {
-            return new Animation(.2f, ca, Animation.PlayMode.LOOP);
-        }
-        return null;
     }
 
 }

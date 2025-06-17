@@ -1,8 +1,11 @@
 package alibaba;
 
 import static alibaba.AliBaba.CHARACTERS;
+import static alibaba.AliBaba.SCREEN_HEIGHT;
+import static alibaba.AliBaba.SCREEN_WIDTH;
 import alibaba.Constants.Map;
 import alibaba.Constants.MovementBehavior;
+import static alibaba.Constants.TILE_DIM;
 import alibaba.objects.TmxMapRenderer;
 import alibaba.objects.Actor;
 import alibaba.objects.Portal;
@@ -17,7 +20,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -38,8 +41,7 @@ import java.util.Iterator;
 
 public class GameScreen implements Screen, InputProcessor {
 
-    public static int TILE_DIM = 48;
-
+    private final Texture background;
     private final Stage stage;
     private final TmxMapRenderer renderer;
     private final Batch batch;
@@ -79,16 +81,16 @@ public class GameScreen implements Screen, InputProcessor {
                 .filter(c -> c.getName().equalsIgnoreCase("Ali baba"))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Character not found: Ali baba"));
-
-        Animation anim = AliBaba.animation("NovicePyromancer");
+        
+        TextureRegion avatar = AliBaba.ICONS[406];
 
         renderer.registerCreatureLayer(new CreatureLayer() {
             @Override
             public void render(float time) {
-                renderer.getBatch().draw((TextureRegion) anim.getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM, TILE_DIM, TILE_DIM);
+                renderer.getBatch().draw(avatar, newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM, TILE_DIM, TILE_DIM);
                 for (Actor a : GameScreen.this.map.getBaseMap().actors) {
                     if (renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
-                        renderer.getBatch().draw((TextureRegion) a.getAnimation().getKeyFrame(time, true), a.getX(), a.getY() - TILE_DIM, TILE_DIM, TILE_DIM);
+                        renderer.getBatch().draw(a.getIcon(), a.getX(), a.getY() - TILE_DIM, TILE_DIM, TILE_DIM);
                     }
                 }
             }
@@ -101,6 +103,12 @@ public class GameScreen implements Screen, InputProcessor {
         if (this.map.getRoomIds() != null) {
             currentRoomId = this.map.getRoomIds()[this.map.getStartX()][this.map.getStartY()][0];
         }
+        
+        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        fm.setBounds(64, 64, 19 * TILE_DIM, 19 * TILE_DIM);
+        
+        this.background = fm.build();
 
     }
 
@@ -124,27 +132,29 @@ public class GameScreen implements Screen, InputProcessor {
         if (renderer == null) {
             return;
         }
+        
+        batch.begin();
+        batch.draw(this.background, 0, 0);
+        batch.end();
 
-        camera.position.set(newMapPixelCoords.x + 3 * TILE_DIM + 24 + 8, newMapPixelCoords.y - 1 * TILE_DIM, 0);
+        camera.position.set(newMapPixelCoords.x + TILE_DIM * 5, newMapPixelCoords.y - TILE_DIM, 0);
 
         camera.update();
 
         renderer.setView(camera.combined,
-                camera.position.x - TILE_DIM * 10,
-                camera.position.y - TILE_DIM * 6,
-                AliBaba.MAP_VIEWPORT_DIM,
-                AliBaba.MAP_VIEWPORT_DIM);
+                camera.position.x - TILE_DIM * 14,
+                camera.position.y - TILE_DIM * 10,
+                AliBaba.MAP_VIEWPORT_DIM - 32,
+                AliBaba.MAP_VIEWPORT_DIM - 64);
 
         renderer.render();
 
         batch.begin();
 
-        batch.draw(AliBaba.BACKGROUND, 0, 0);
-        //AliBaba.HUD.render(batch, AliBaba.CTX);
-
-        //Vector3 v = new Vector3();
-        //setCurrentMapCoords(v);
-        //AliBaba.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, AliBaba.SCREEN_HEIGHT - 32);
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        AliBaba.font16.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, AliBaba.SCREEN_HEIGHT - 32);
+        AliBaba.font16.draw(batch, String.format("%s, %s\n", currentMousePos.x, currentMousePos.y), 300, AliBaba.SCREEN_HEIGHT - 32);
         if (this.roomName != null) {
             AliBaba.font16.draw(batch, String.format("%s", this.roomName), 300, AliBaba.SCREEN_HEIGHT - 12);
         }
@@ -171,8 +181,8 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     public void getCurrentMapCoords(Vector3 v) {
-        Vector3 tmp = camera.unproject(new Vector3(TILE_DIM * 7, TILE_DIM * 8, 0), 48, 96, AliBaba.MAP_VIEWPORT_DIM, AliBaba.MAP_VIEWPORT_DIM);
-        v.set(Math.round(tmp.x / TILE_DIM) - 3, ((mapPixelHeight - Math.round(tmp.y) - TILE_DIM) / TILE_DIM) - 0, 0);
+        Vector3 tmp = camera.unproject(new Vector3(TILE_DIM * 8 + 16, TILE_DIM * 12, 0), TILE_DIM * 2, TILE_DIM * 3, AliBaba.MAP_VIEWPORT_DIM, AliBaba.MAP_VIEWPORT_DIM);
+        v.set(Math.round(tmp.x / TILE_DIM), ((mapPixelHeight - Math.round(tmp.y) - TILE_DIM) / TILE_DIM), 0);
     }
 
     @Override
@@ -225,7 +235,7 @@ public class GameScreen implements Screen, InputProcessor {
                             animateText(sb.toString(), Color.GREEN);
                             messagesLayer.getObjects().remove(obj);
                             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
-                            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
+                            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, (int) v.y);
                             if (cell != null) {
                                 cell.setTile(null);
                             }

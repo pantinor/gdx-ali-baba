@@ -1,6 +1,6 @@
 package alibaba.objects;
 
-import static alibaba.GameScreen.TILE_DIM;
+import static alibaba.Constants.TILE_DIM;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;

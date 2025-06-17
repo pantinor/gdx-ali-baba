@@ -1,10 +1,8 @@
 package alibaba.objects;
 
-import alibaba.AliBaba;
 import alibaba.Character;
 import alibaba.Constants.MovementBehavior;
 import alibaba.Constants.Role;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Actor {
@@ -16,13 +14,12 @@ public class Actor {
     private int dir;
 
     private final TextureRegion icon;
-    private final Animation animation;
     private final MovementBehavior movement;
     private final Character character;
     private HealthBar healthbar;
     private final Role role;
 
-    public Actor(Character character, Role role, int wx, int wy, float x, float y, MovementBehavior movement, String icon) {
+    public Actor(Character character, Role role, int wx, int wy, float x, float y, MovementBehavior movement, TextureRegion icon) {
 
         if (icon == null) {
             throw new RuntimeException(character.getName() + " cannot find icon " + icon);
@@ -35,8 +32,7 @@ public class Actor {
         this.y = y;
         this.movement = movement;
         this.character = character;
-        this.icon = AliBaba.icon(icon);
-        this.animation = AliBaba.animation(icon);
+        this.icon = icon;
     }
 
     public Character getCharacter() {
@@ -49,10 +45,6 @@ public class Actor {
 
     public TextureRegion getIcon() {
         return this.icon;
-    }
-
-    public Animation getAnimation() {
-        return this.animation;
     }
 
     public int getWx() {
