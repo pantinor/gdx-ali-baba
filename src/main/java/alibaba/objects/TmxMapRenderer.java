@@ -1,5 +1,6 @@
 package alibaba.objects;
 
+import static alibaba.Constants.TILE_DIM;
 import alibaba.GameScreen;
 import static com.badlogic.gdx.graphics.g2d.Batch.C1;
 import static com.badlogic.gdx.graphics.g2d.Batch.C2;

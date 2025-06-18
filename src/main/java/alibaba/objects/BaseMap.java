@@ -1,7 +1,9 @@
 package alibaba.objects;
 
+import static alibaba.AliBaba.BATTLE;
 import alibaba.Constants.Map;
 import alibaba.GameScreen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
@@ -14,7 +16,6 @@ public class BaseMap {
     private int height;
     private final List<Portal> portals = new ArrayList<>();
     public final List<Actor> actors = new ArrayList<>();
-    private Actor combatActor;
 
     //used to keep the pace of wandering to every 2 moves instead of every move, 
     //otherwise cannot catch up and talk to the character
@@ -67,41 +68,50 @@ public class BaseMap {
         return null;
     }
 
-    public void removeCombatActor() {
-        if (this.combatActor != null) {
-            actors.remove(this.combatActor);
-            this.combatActor = null;
-        }
-    }
-
     public void moveObjects(GameScreen screen, TiledMap tiledMap, int avatarX, int avatarY) {
 
         wanderFlag++;
 
-        for (Actor p : actors) {
+        for (Actor actor : actors) {
 
             Direction dir = null;
+            alibaba.Character enemy = actor.getCharacter();
 
-            switch (p.getMovement()) {
+            switch (actor.getMovement()) {
                 case ATTACK: {
-                    int dist = movementDistance(p.getWx(), p.getWy(), avatarX, avatarY);
-                    if (dist <= 1) {
-                        this.combatActor = p;
+                    int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
 
-                        return;
-                    } else if (dist >= 4) {
+                    if (dist == 0) {
+                        boolean tackled = BATTLE.attemptTackle(screen.logs, enemy, screen.alibaba, 0);
+                        if (!tackled) {
+                            continue;
+                        }
+                    }
+
+                    if (dist <= 1) {
+                        screen.logs.add(enemy.getName() + " attacks " + screen.alibaba.getName());
+                        enemy.setAttacking(true);
+                        double prob1 = BATTLE.calculateStrikeProbability(enemy, screen.alibaba, dist == 0);
+                        if (Utils.RANDOM.nextDouble() < prob1) {
+                            int force = BATTLE.calculateStrikeForce(enemy, dist == 0);
+                            String outcome = BATTLE.applyStrikeEffects(enemy, screen.alibaba, force);
+                            screen.logs.add(outcome, Color.RED);
+                        } else {
+                            screen.logs.add(enemy.getName() + " missed " + screen.alibaba.getName() + ".");
+                        }
+                    } else if (dist >= 6) {
                         //dont move until close enough
                         continue;
                     }
-                    if (Utils.randomBoolean()) {
-                        int mask = getValidMovesMask(tiledMap, p.getWx(), p.getWy(), p, avatarX, avatarY);
-                        dir = getPath(avatarX, avatarY, mask, true, p.getWx(), p.getWy());
+                    if (Utils.percentChance(75)) {
+                        int mask = getValidMovesMask(tiledMap, actor.getWx(), actor.getWy());
+                        dir = getPath(avatarX, avatarY, mask, true, actor.getWx(), actor.getWy());
                     }
                 }
                 break;
                 case FOLLOW: {
-                    int mask = getValidMovesMask(tiledMap, p.getWx(), p.getWy(), p, avatarX, avatarY);
-                    dir = getPath(avatarX, avatarY, mask, true, p.getWx(), p.getWy());
+                    int mask = getValidMovesMask(tiledMap, actor.getWx(), actor.getWy());
+                    dir = getPath(avatarX, avatarY, mask, true, actor.getWx(), actor.getWy());
                 }
                 break;
                 case FIXED:
@@ -110,7 +120,7 @@ public class BaseMap {
                     if (wanderFlag % 2 == 0) {
                         continue;
                     }
-                    dir = Direction.getRandomValidDirection(getValidMovesMask(tiledMap, p.getWx(), p.getWy(), p, avatarX, avatarY));
+                    dir = Direction.getRandomValidDirection(getValidMovesMask(tiledMap, actor.getWx(), actor.getWy()));
                 }
                 default:
                     break;
@@ -123,59 +133,45 @@ public class BaseMap {
 
             switch (dir) {
                 case NORTH:
-                    p.setWy(p.getWy() - 1);
+                    actor.setWy(actor.getWy() - 1);
                     break;
                 case SOUTH:
-                    p.setWy(p.getWy() + 1);
+                    actor.setWy(actor.getWy() + 1);
                     break;
                 case EAST:
-                    p.setWx(p.getWx() + 1);
+                    actor.setWx(actor.getWx() + 1);
                     break;
                 case WEST:
-                    p.setWx(p.getWx() - 1);
+                    actor.setWx(actor.getWx() - 1);
                     break;
             }
 
             Vector3 pixelPos = new Vector3();
-            screen.setMapPixelCoords(pixelPos, p.getWx(), p.getWy() + 1, 0);
-            p.setX(pixelPos.x);
-            p.setY(pixelPos.y);
+            screen.setMapPixelCoords(pixelPos, actor.getWx(), actor.getWy(), 0);
+            actor.setX(pixelPos.x);
+            actor.setY(pixelPos.y);
 
         }
     }
 
-    private int getValidMovesMask(TiledMap tiledMap, int x, int y, Actor cr, int avatarX, int avatarY) {
+    private int getValidMovesMask(TiledMap tiledMap, int x, int y) {
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get("floor");
+        int ty = height - 1 - y;
         int mask = 0;
 
-        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get("floor");
-        TiledMapTileLayer.Cell north = layer.getCell(x, height - 1 - y + 1);
-        TiledMapTileLayer.Cell south = layer.getCell(x, height - 1 - y - 1);
-        TiledMapTileLayer.Cell west = layer.getCell(x - 1, height - 1 - y + 0);
-        TiledMapTileLayer.Cell east = layer.getCell(x + 1, height - 1 - y + 0);
-
-        mask = addToMask(Direction.NORTH, mask, north, x, y - 1, cr, avatarX, avatarY);
-        mask = addToMask(Direction.SOUTH, mask, south, x, y + 1, cr, avatarX, avatarY);
-        mask = addToMask(Direction.WEST, mask, west, x - 1, y, cr, avatarX, avatarY);
-        mask = addToMask(Direction.EAST, mask, east, x + 1, y, cr, avatarX, avatarY);
-
-        return mask;
-    }
-
-    private int addToMask(Direction dir, int mask, TiledMapTileLayer.Cell cell, int x, int y, Actor cr, int avatarX, int avatarY) {
-        if (cell != null) {
-
-            for (Actor c : this.actors) {
-                if (c.getWx() == x && c.getWy() == y) {
-                    return mask;
-                }
-            }
-
-            if (avatarX == x && avatarY == y) {
-                return mask;
-            }
-
-            mask = Direction.addToMask(dir, mask);
+        if (layer.getCell(x, ty + 1) != null) {
+            mask = Direction.addToMask(Direction.NORTH, mask);
         }
+        if (layer.getCell(x, ty - 1) != null) {
+            mask = Direction.addToMask(Direction.SOUTH, mask);
+        }
+        if (layer.getCell(x - 1, ty) != null) {
+            mask = Direction.addToMask(Direction.WEST, mask);
+        }
+        if (layer.getCell(x + 1, ty) != null) {
+            mask = Direction.addToMask(Direction.EAST, mask);
+        }
+
         return mask;
     }
 
@@ -196,11 +192,8 @@ public class BaseMap {
     }
 
     public int movementDistance(int fromX, int fromY, int toX, int toY) {
-        int dirmask = 0;;
         int dist = 0;
-
-        /* get the direction(s) to the coordinates */
-        dirmask = getRelativeDirection(toX, toY, fromX, fromY);
+        int dirmask = getRelativeDirection(toX, toY, fromX, fromY);
 
         while (fromX != toX || fromY != toY) {
 

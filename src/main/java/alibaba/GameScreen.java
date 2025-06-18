@@ -1,5 +1,6 @@
 package alibaba;
 
+import static alibaba.AliBaba.BATTLE;
 import static alibaba.AliBaba.CHARACTERS;
 import static alibaba.AliBaba.SCREEN_HEIGHT;
 import static alibaba.AliBaba.SCREEN_WIDTH;
@@ -10,7 +11,9 @@ import alibaba.objects.TmxMapRenderer;
 import alibaba.objects.Actor;
 import alibaba.objects.Portal;
 import alibaba.objects.Direction;
+import alibaba.objects.LogScrollPane;
 import alibaba.objects.TmxMapRenderer.CreatureLayer;
+import alibaba.objects.Utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
@@ -22,7 +25,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -31,10 +33,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.Iterator;
@@ -48,19 +47,19 @@ public class GameScreen implements Screen, InputProcessor {
     private final Viewport mapViewPort;
     private final Viewport viewport = new ScreenViewport();
     private final Camera camera;
-
-    private Character alibaba;
-
+    public final Character alibaba;
     private final Map map;
+    public final LogScrollPane logs;
+    private final Table logTable;
 
     private float time = 0;
-
     private int currentRoomId = 0;
-    private String roomName = null;
+    private String roomName;
     private int currentDirection;
+
     private final Vector2 currentMousePos = new Vector2();
     private final Vector3 newMapPixelCoords = new Vector3();
-    private int mapPixelHeight;
+    private final int mapPixelHeight;
 
     public GameScreen(Map map) {
 
@@ -69,6 +68,7 @@ public class GameScreen implements Screen, InputProcessor {
         batch = new SpriteBatch();
 
         stage = new Stage(viewport);
+        //this.stage.setDebugAll(true);
 
         camera = new OrthographicCamera(AliBaba.MAP_VIEWPORT_DIM, AliBaba.MAP_VIEWPORT_DIM);
 
@@ -81,7 +81,11 @@ public class GameScreen implements Screen, InputProcessor {
                 .filter(c -> c.getName().equalsIgnoreCase("Ali baba"))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Character not found: Ali baba"));
-        
+
+        this.alibaba.equipMeleeWeapon(AliBaba.getWeapon("Iron sword"));
+        this.alibaba.equipHandToHandWeapon(AliBaba.getWeapon("Shiv"));
+        this.alibaba.equipArmor(AliBaba.getArmor("Leather armor"));
+
         TextureRegion avatar = AliBaba.ICONS[406];
 
         renderer.registerCreatureLayer(new CreatureLayer() {
@@ -89,25 +93,32 @@ public class GameScreen implements Screen, InputProcessor {
             public void render(float time) {
                 renderer.getBatch().draw(avatar, newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM, TILE_DIM, TILE_DIM);
                 for (Actor a : GameScreen.this.map.getBaseMap().actors) {
-                    if (renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
+                    if (renderer.getViewBounds().contains(a.getX(), a.getY()) && renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
                         renderer.getBatch().draw(a.getIcon(), a.getX(), a.getY() - TILE_DIM, TILE_DIM, TILE_DIM);
                     }
                 }
             }
         });
 
-        mapPixelHeight = this.map.getBaseMap().getHeight() * TILE_DIM;
+        this.mapPixelHeight = this.map.getBaseMap().getHeight() * TILE_DIM;
 
         setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY(), 0);
 
         if (this.map.getRoomIds() != null) {
             currentRoomId = this.map.getRoomIds()[this.map.getStartX()][this.map.getStartY()][0];
         }
-        
+
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
 
         fm.setBounds(64, 64, 19 * TILE_DIM, 19 * TILE_DIM);
-        
+
+        this.logTable = new Table(AliBaba.skin);
+        this.logTable.bottom().left();
+        this.logs = new LogScrollPane(AliBaba.skin, logTable, 9 * TILE_DIM);
+
+        fm.setBounds(this.logs, 22 * TILE_DIM, 64, 9 * TILE_DIM, 13 * TILE_DIM);
+        this.stage.addActor(this.logs);
+
         this.background = fm.build();
 
     }
@@ -116,9 +127,6 @@ public class GameScreen implements Screen, InputProcessor {
     public void show() {
         setRoomName();
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
-    }
-
-    public void log(String s) {
     }
 
     @Override
@@ -132,7 +140,7 @@ public class GameScreen implements Screen, InputProcessor {
         if (renderer == null) {
             return;
         }
-        
+
         batch.begin();
         batch.draw(this.background, 0, 0);
         batch.end();
@@ -151,12 +159,21 @@ public class GameScreen implements Screen, InputProcessor {
 
         batch.begin();
 
-        Vector3 v = new Vector3();
-        getCurrentMapCoords(v);
-        AliBaba.font16.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, AliBaba.SCREEN_HEIGHT - 32);
-        AliBaba.font16.draw(batch, String.format("%s, %s\n", currentMousePos.x, currentMousePos.y), 300, AliBaba.SCREEN_HEIGHT - 32);
+        //Vector3 v = new Vector3();
+        //getCurrentMapCoords(v);
+        //AliBaba.font16.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, AliBaba.SCREEN_HEIGHT - 32);
+        //AliBaba.font16.draw(batch, String.format("%s, %s\n", currentMousePos.x, currentMousePos.y), 300, AliBaba.SCREEN_HEIGHT - 32);
         if (this.roomName != null) {
             AliBaba.font16.draw(batch, String.format("%s", this.roomName), 300, AliBaba.SCREEN_HEIGHT - 12);
+        }
+
+        int idx = 0;
+        printCharacter(0, batch, this.alibaba);
+        for (Actor a : this.map.getBaseMap().actors) {
+            if (renderer.getViewBounds().contains(a.getX(), a.getY()) && renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
+                idx++;
+                printCharacter(idx, batch, a.getCharacter());
+            }
         }
 
         batch.end();
@@ -164,6 +181,19 @@ public class GameScreen implements Screen, InputProcessor {
         stage.act();
         stage.draw();
 
+    }
+
+    private void printCharacter(int idx, Batch batch, Character c) {
+        String text = String.format("%s (%d/%d) S:%d D:%d A:%d W:%d H:%d %s %s",
+                c.getName(),
+                c.getConstitution(), c.getMaxConstitution(),
+                c.getStrength(), c.getEffectiveDexterity(),
+                c.getArmor(), c.getMeleeWeaponPower(), c.getHandToHandWeaponPower(),
+                c.isDown() ? "down" : "",
+                c.getGold() == 0 ? "" : c.getGold()
+        );
+
+        AliBaba.font14.draw(batch, text, TILE_DIM * 21 + 16, AliBaba.SCREEN_HEIGHT - 96 - idx * 20);
     }
 
     @Override
@@ -220,41 +250,42 @@ public class GameScreen implements Screen, InputProcessor {
             v.x -= 1;
 
         } else if (keycode == Keys.G) {
-
-            MapLayer messagesLayer = this.map.getTiledMap().getLayers().get("messages");
-            if (messagesLayer != null) {
-                Iterator<MapObject> iter = messagesLayer.getObjects().iterator();
-                while (iter.hasNext()) {
-                    MapObject obj = iter.next();
-                    float mx = obj.getProperties().get("x", Float.class) / TILE_DIM;
-                    float my = obj.getProperties().get("y", Float.class) / TILE_DIM;
-                    if (v.x == mx && this.map.getBaseMap().getHeight() - v.y - 1 == my) {
-                        if ("REWARD".equals(obj.getName())) {
-                            StringBuilder sb = new StringBuilder();
-
-                            animateText(sb.toString(), Color.GREEN);
-                            messagesLayer.getObjects().remove(obj);
-                            TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
-                            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, (int) v.y);
-                            if (cell != null) {
-                                cell.setTile(null);
-                            }
-                            return false;
-                        }
+            TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
+            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
+            if (cell != null && cell.getTile() != null && cell.getTile().getId() == (897 + 1)) { //gold pile tile id
+                this.alibaba.setGold(this.alibaba.getGold() + 300);
+                return false;
+            }
+        } else if (keycode == Keys.A) {
+            this.alibaba.setDefending(false);
+            Iterator<Actor> iter = this.map.getBaseMap().actors.iterator();
+            while (iter.hasNext()) {
+                Actor a = iter.next();
+                int dist = this.map.getBaseMap().movementDistance(a.getWx(), a.getWy(), (int) v.x, (int) v.y);
+                if (dist <= 1) {
+                    logs.add(alibaba.getName() + " attacks " + a.getCharacter().getName());
+                    alibaba.setAttacking(true);
+                    double prob1 = BATTLE.calculateStrikeProbability(alibaba, a.getCharacter(), dist == 0);
+                    if (Utils.RANDOM.nextDouble() < prob1) {
+                        int force = BATTLE.calculateStrikeForce(alibaba, dist == 0);
+                        String outcome = BATTLE.applyStrikeEffects(alibaba, a.getCharacter(), force);
+                        logs.add(outcome, Color.RED);
+                    } else {
+                        logs.add(alibaba.getName() + " missed " + a.getCharacter().getName() + ".");
                     }
+                    if (a.getCharacter().isDead()) {
+                        iter.remove();
+                    }
+                    break;
                 }
             }
 
-            //random treasure chest
-            //TiledMapTileLayer layer = (TiledMapTileLayer) this.tiledMap.getLayers().get("props");
-            //TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.tiledMap.getProperties(). - 1 - (int) v.y);
-            //if (cell != null && cell.getTile() != null && cell.getTile().getId() == (609 + 1)) { //gold pile tile id
-            //    return false;
-            //}
-        } else if (keycode == Keys.T) {
-
-        } else if (keycode == Keys.ESCAPE) {
-
+        } else if (keycode == Keys.D) {
+            this.alibaba.setDefending(true);
+        } else if (keycode == Keys.U) {
+            BATTLE.attemptRetreat(logs, alibaba);
+        } else if (keycode == Keys.R) {
+            this.logs.add(this.alibaba.attemptRest() ? "Rested" : "Nothing happened");
         }
 
         finishTurn((int) v.x, (int) v.y);
@@ -296,7 +327,7 @@ public class GameScreen implements Screen, InputProcessor {
                 float my = obj.getProperties().get("y", Float.class) / TILE_DIM;
                 if (nx == mx && this.map.getBaseMap().getHeight() - 1 - ny == my) {
                     String msg = obj.getProperties().get("type", String.class);
-                    animateText(msg, Color.WHITE);
+                    this.logs.add(msg, Color.GREEN);
                     String heal = obj.getProperties().get("heal", String.class);
                     if (heal != null) {
                         return false;
@@ -333,12 +364,6 @@ public class GameScreen implements Screen, InputProcessor {
         }
 
         return true;
-    }
-
-    public void endCombat(boolean isWon, Object opponent) {
-        if (isWon) {
-            this.map.getBaseMap().removeCombatActor();
-        }
     }
 
     public void finishTurn(int x, int y) {
@@ -427,28 +452,6 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void dispose() {
-    }
-
-    private void animateText(String text, Color color) {
-
-        float sx = 100;
-        float sy = -100;
-        float dx = 100;
-        float dy = 400;
-        float delay = 5;
-
-        log(text);
-
-        Label.LabelStyle ls = new Label.LabelStyle(AliBaba.skin.get("small-ultima", BitmapFont.class), Color.WHITE);
-        Label label = new Label(text, ls);
-        label.setWrap(true);
-        label.setWidth(800);
-        label.setPosition(sx, sy);
-        label.setAlignment(Align.center);
-        label.setColor(color);
-        stage.addActor(label);
-        //Sounds.play(Sound.POSITIVE_EFFECT);
-        label.addAction(sequence(Actions.moveTo(dx, dy, delay), Actions.fadeOut(1f), Actions.removeActor(label)));
     }
 
 }

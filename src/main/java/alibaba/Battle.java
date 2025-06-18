@@ -1,5 +1,6 @@
 package alibaba;
 
+import alibaba.objects.Loggable;
 import java.util.Random;
 
 public class Battle {
@@ -11,7 +12,6 @@ public class Battle {
     private static final double PARTICULARLY_EASY_TO_HIT_MODIFIER = 0.125; // +12.5%
     private static final double EXTREMELY_EASY_TO_HIT_MODIFIER = 0.25; // +25%
     private static final double DOWN_MODIFIER = 0.1875; // +18.75%
-    private static final double RESTING_MODIFIER = 0.09375; // +9.375%
     private static final double DEFENDING_MODIFIER = -0.09375; // -9.375%
     private static final double RUNNING_MODIFIER = -0.03125; // -3.125%
     private static final double STRENGTH_ADVANTAGE_MODIFIER = 0.015625; // 1.5625%
@@ -41,9 +41,6 @@ public class Battle {
         if (victim.isDown()) {
             adjustedChance += DOWN_MODIFIER;
         }
-        if (victim.isResting()) { // In addition to 'down'
-            adjustedChance += RESTING_MODIFIER;
-        }
         if (victim.isDefending()) {
             adjustedChance += DEFENDING_MODIFIER;
         }
@@ -64,7 +61,6 @@ public class Battle {
 
     private int rollDice(int sides, int numRolls) {
         if (sides <= 0 || numRolls <= 0) {
-            System.err.println("Error: Dice must have positive sides and be rolled at least once.");
             return 0;
         }
         int total = 0;
@@ -99,23 +95,20 @@ public class Battle {
             return victim.getName() + " was unhurt by " + attacker.getName() + "'s attack.";
         } else {
             victim.takeDamage(adjustedForce);
-            String statusMessage = victim.getName() + " took " + adjustedForce + " damage. " + victim.getHealthStatus();
+            String statusMessage = victim.getName() + " took " + adjustedForce + " damage and " + victim.getHealthStatus() + ".";
 
             if (victim.getConstitution() < 3 && victim.getConstitution() > 0) {
-                victim.setDown(true); // Drops unconscious
-                statusMessage += " They fell unconscious!";
-            } else if (victim.isDead()) {
-                statusMessage += " They are dead!";
+                victim.setDown(true);
             }
 
             if (victim.getConstitution() < victim.getStrength() && victim.getConstitution() > 0) {
-                statusMessage += " (Can rest to restore health)";
+                statusMessage += victim.getName() + " can rest to restore health.";
             }
             return statusMessage;
         }
     }
 
-    public boolean attemptTackle(Character attacker, Character victim, int otherOpponentsStrength) {
+    public boolean attemptTackle(Loggable logs, Character attacker, Character victim, int otherOpponentsStrength) {
         double chanceOfSuccess = TACKLE_BASE_CHANCE;
 
         int effectiveVictimStrength = victim.isDown() ? 0 : victim.getStrength();
@@ -131,27 +124,27 @@ public class Battle {
             // Tackle successful: both fall down
             attacker.setDown(true);
             victim.setDown(true);
-            System.out.println(attacker.getName() + " successfully tackled " + victim.getName() + "!");
-            System.out.println("Both " + attacker.getName() + " and " + victim.getName() + " fall to the ground in a wrestling free-for-all.");
+            logs.add(attacker.getName() + " successfully tackled " + victim.getName() + "!");
+            logs.add("Both " + attacker.getName() + " and " + victim.getName() + " fall to the ground in a wrestling free-for-all.");
             return true;
         } else {
-            System.out.println(attacker.getName() + " failed to tackle " + victim.getName() + ".");
+            logs.add(attacker.getName() + " failed to tackle " + victim.getName() + ".");
             return false;
         }
     }
 
-    public boolean attemptRetreat(Character character) {
+    public boolean attemptRetreat(Loggable logs, Character character) {
         double roll = random.nextDouble(); // 0.0 to 1.0
         if (roll < 0.5) { // 50% chance
             if (character.isDown()) {
                 character.setDown(false); // Stands up if was down
-                System.out.println(character.getName() + " successfully retreated and stood up!");
+                logs.add(character.getName() + " successfully retreated and stood up!");
             } else {
-                System.out.println(character.getName() + " successfully retreated!");
+                logs.add(character.getName() + " successfully retreated!");
             }
             return true;
         } else {
-            System.out.println(character.getName() + " failed to retreat!");
+            logs.add(character.getName() + " failed to retreat!");
             return false;
         }
     }

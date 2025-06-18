@@ -19,13 +19,13 @@ public class Character {
     private int wmLevel;
     private int hitChance;
     private int extraDodge;
+    private int gold;
 
     private Weapon equippedMeleeWeapon;
     private Weapon equippedHandToHandWeapon;
     private Armor equippedArmor;
 
     private boolean isDown;
-    private boolean isResting;
     private boolean isDefending;
     private boolean isAttacking;
     private boolean isRunning;
@@ -37,7 +37,6 @@ public class Character {
 
     public Character() {
         this.isDown = false;
-        this.isResting = false;
         this.isDefending = false;
         this.isAttacking = false;
         this.isRunning = false;
@@ -72,6 +71,10 @@ public class Character {
         return constitution;
     }
 
+    public int getMaxConstitution() {
+        return maxConstitution;
+    }
+
     public int getMeleeWeaponPower() {
         return equippedMeleeWeapon != null ? equippedMeleeWeapon.getPower() : melee;
     }
@@ -92,6 +95,14 @@ public class Character {
         return Math.max(0, effectiveDex); // Dexterity should not go below 0
     }
 
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
     public int getRunningSpeed() {
         return runningSpeed;
     }
@@ -110,10 +121,6 @@ public class Character {
 
     public boolean isDown() {
         return isDown;
-    }
-
-    public boolean isResting() {
-        return isResting;
     }
 
     public boolean isDefending() {
@@ -143,16 +150,12 @@ public class Character {
     public void equipMeleeWeapon(Weapon weapon) {
         if (weapon != null && weapon.getType().equalsIgnoreCase("melee")) {
             this.equippedMeleeWeapon = weapon;
-        } else {
-            System.err.println("Warning: Attempted to equip non-melee weapon as melee: " + (weapon != null ? weapon.getName() : "null"));
         }
     }
 
     public void equipHandToHandWeapon(Weapon weapon) {
         if (weapon != null && weapon.getType().equalsIgnoreCase("hand-to-hand")) {
             this.equippedHandToHandWeapon = weapon;
-        } else {
-            System.err.println("Warning: Attempted to equip non-hand-to-hand weapon as hand-to-hand: " + (weapon != null ? weapon.getName() : "null"));
         }
     }
 
@@ -162,10 +165,6 @@ public class Character {
 
     public void setDown(boolean down) {
         isDown = down;
-    }
-
-    public void setResting(boolean resting) {
-        isResting = resting;
     }
 
     public void setDefending(boolean defending) {
@@ -193,12 +192,10 @@ public class Character {
             if (roll < 0.5) {
                 if (this.constitution < this.maxConstitution) {
                     this.constitution += 1;
-                    System.out.println(this.getName() + " is rested!");
                     return true;
                 }
             }
         }
-        System.out.println(this.getName() + " failed to rest!");
         return false;
     }
 
@@ -208,19 +205,18 @@ public class Character {
 
     public String getHealthStatus() {
         if (isDead()) {
-            return "Dead.";
+            return "is dead";
         } else if (this.constitution < 3) {
-            return "Unconscious.";
+            return "is unconscious";
         } else if (this.constitution < 8) {
-            return "Feeling rather weak.";
+            return "is feeling rather weak.";
         } else {
-            return "Plenty of fight left.";
+            return "has plenty of fight left.";
         }
     }
 
     public void resetCombatStates() {
         this.isDown = false;
-        this.isResting = false;
         this.isDefending = false;
         this.isAttacking = false;
         this.isRunning = false;

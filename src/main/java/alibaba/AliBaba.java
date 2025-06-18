@@ -44,6 +44,7 @@ public class AliBaba extends Game {
     public static StartScreen startScreen;
     public static Skin skin;
 
+    public static final Battle BATTLE = new Battle();
     public static java.util.List<Character> CHARACTERS;
     public static java.util.List<Weapon> WEAPONS;
     public static java.util.List<Armor> ARMOR;
@@ -172,6 +173,22 @@ public class AliBaba extends Game {
     public static AllItems loadAllItemsFromJsonFile(String filePath) throws IOException {
         String jsonString = java.nio.file.Files.readString(Paths.get(filePath));
         return GSON.fromJson(jsonString, AllItems.class);
+    }
+
+    public static Weapon getWeapon(String name) {
+        Weapon weapon = WEAPONS.stream()
+                .filter(w -> w.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException(name + " not found!"));
+        return weapon;
+    }
+
+    public static Armor getArmor(String name) {
+        Armor armor = ARMOR.stream()
+                .filter(a -> a.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException(name + " not found!"));
+        return armor;
     }
 
 }

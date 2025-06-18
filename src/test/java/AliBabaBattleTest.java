@@ -5,6 +5,8 @@ import alibaba.objects.Armor;
 import alibaba.Battle;
 import alibaba.objects.Weapon;
 import alibaba.Character;
+import alibaba.objects.Loggable;
+import com.badlogic.gdx.graphics.Color;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -12,6 +14,18 @@ import java.util.Random;
 public class AliBabaBattleTest {
 
     public static void main(String[] args) {
+
+        Loggable logs = new Loggable() {
+            @Override
+            public void add(String text) {
+                System.out.println(text);
+            }
+
+            @Override
+            public void add(String text, Color color) {
+                System.out.println(text);
+            }
+        };
 
         Random random = new Random();
 
@@ -135,14 +149,14 @@ public class AliBabaBattleTest {
         System.out.println("\n--- " + aliBaba.getName() + " attempts to tackle " + witlessZombie.getName() + " ---");
         System.out.println("Initial states: " + aliBaba.getName() + " Con: " + aliBaba.getConstitution() + ", " + witlessZombie.getName() + " Con: " + witlessZombie.getConstitution());
 
-        simulator.attemptTackle(aliBaba, witlessZombie, 0); // No other opponents
+        simulator.attemptTackle(logs, aliBaba, witlessZombie, 0); // No other opponents
 
         System.out.println("After tackle attempt: " + aliBaba.getName() + " isDown: " + aliBaba.isDown() + ", " + witlessZombie.getName() + " isDown: " + witlessZombie.isDown());
 
         // --- Example 4: Ali Baba attempts to retreat (if down) ---
         if (aliBaba.isDown()) {
             System.out.println("\n--- " + aliBaba.getName() + " attempts to retreat ---");
-            simulator.attemptRetreat(aliBaba);
+            simulator.attemptRetreat(logs, aliBaba);
             System.out.println("After retreat attempt: " + aliBaba.getName() + " isDown: " + aliBaba.isDown());
         }
 
