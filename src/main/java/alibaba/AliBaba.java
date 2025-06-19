@@ -4,6 +4,7 @@ import static alibaba.Constants.TILE_DIM;
 import alibaba.objects.Weapon;
 import alibaba.objects.Armor;
 import alibaba.objects.AllItems;
+import alibaba.objects.Utils;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -26,6 +27,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 public class AliBaba extends Game {
 
@@ -168,6 +170,13 @@ public class AliBaba extends Game {
             character.initializeDerivedCombatStates();
         }
         return characters;
+    }
+
+    public static Character getRandomWanderingCharacter(int wmLevel) {
+        java.util.List<Character> filtered = CHARACTERS.stream()
+                .filter(c -> c.getWmLevel() == wmLevel)
+                .collect(Collectors.toList());
+        return filtered.get(Utils.RANDOM.nextInt(filtered.size()));
     }
 
     public static AllItems loadAllItemsFromJsonFile(String filePath) throws IOException {

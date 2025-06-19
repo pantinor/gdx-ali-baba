@@ -60,6 +60,33 @@ public class Utils {
         return v;
     }
 
+    public static int getGold() {
+        int roll = RANDOM.nextInt(100) + 1; // Roll between 1 and 100
+
+        if (roll <= 20) {
+            return 100;
+        }
+        if (roll <= 35) {
+            return 200;
+        }
+        if (roll <= 50) {
+            return 300;
+        }
+        if (roll <= 65) {
+            return 500;
+        }
+        if (roll <= 75) {
+            return 1000;
+        }
+        if (roll <= 85) {
+            return 2000;
+        }
+        if (roll <= 95) {
+            return 3000;
+        }
+        return 5000;
+    }
+
     public static Texture fillRectangle(int width, int height, Color color, float alpha) {
         Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGBA8888);
         pix.setColor(color.r, color.g, color.b, alpha);

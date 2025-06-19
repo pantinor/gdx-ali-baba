@@ -6,6 +6,7 @@ import static alibaba.AliBaba.SCREEN_HEIGHT;
 import static alibaba.AliBaba.SCREEN_WIDTH;
 import alibaba.Constants.Map;
 import alibaba.Constants.MovementBehavior;
+import alibaba.Constants.Role;
 import static alibaba.Constants.TILE_DIM;
 import alibaba.objects.TmxMapRenderer;
 import alibaba.objects.Actor;
@@ -33,10 +34,14 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 public class GameScreen implements Screen, InputProcessor {
 
@@ -55,11 +60,14 @@ public class GameScreen implements Screen, InputProcessor {
     private float time = 0;
     private int currentRoomId = 0;
     private String roomName;
+    private int roomLevel;
     private int currentDirection;
 
     private final Vector2 currentMousePos = new Vector2();
     private final Vector3 newMapPixelCoords = new Vector3();
     private final int mapPixelHeight;
+
+    public GameTimer gameTimer = new GameTimer();
 
     public GameScreen(Map map) {
 
@@ -121,6 +129,11 @@ public class GameScreen implements Screen, InputProcessor {
 
         this.background = fm.build();
 
+        SequenceAction seq1 = Actions.action(SequenceAction.class);
+        seq1.addAction(Actions.delay(5f));//5 seconds
+        seq1.addAction(Actions.run(gameTimer));
+        stage.addAction(Actions.forever(seq1));
+
     }
 
     @Override
@@ -162,7 +175,6 @@ public class GameScreen implements Screen, InputProcessor {
         //Vector3 v = new Vector3();
         //getCurrentMapCoords(v);
         //AliBaba.font16.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, AliBaba.SCREEN_HEIGHT - 32);
-        //AliBaba.font16.draw(batch, String.format("%s, %s\n", currentMousePos.x, currentMousePos.y), 300, AliBaba.SCREEN_HEIGHT - 32);
         if (this.roomName != null) {
             AliBaba.font16.draw(batch, String.format("%s", this.roomName), 300, AliBaba.SCREEN_HEIGHT - 12);
         }
@@ -171,8 +183,12 @@ public class GameScreen implements Screen, InputProcessor {
         printCharacter(0, batch, this.alibaba);
         for (Actor a : this.map.getBaseMap().actors) {
             if (renderer.getViewBounds().contains(a.getX(), a.getY()) && renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
-                idx++;
-                printCharacter(idx, batch, a.getCharacter());
+                if (a.getRole() == Constants.Role.MERCHANT_ARMOR || a.getRole() == Constants.Role.MERCHANT_WEAPON) {
+                    //nothing
+                } else {
+                    idx++;
+                    printCharacter(idx, batch, a.getCharacter());
+                }
             }
         }
 
@@ -253,7 +269,10 @@ public class GameScreen implements Screen, InputProcessor {
             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
             TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
             if (cell != null && cell.getTile() != null && cell.getTile().getId() == (897 + 1)) { //gold pile tile id
-                this.alibaba.setGold(this.alibaba.getGold() + 300);
+                int gold = Utils.getGold();
+                logs.add("Found " + gold + " ducats!", Color.YELLOW);
+                this.alibaba.setGold(this.alibaba.getGold() + gold);
+                this.map.setTile(null, "props", (int) v.x, (int) v.y);
                 return false;
             }
         } else if (keycode == Keys.A) {
@@ -262,7 +281,7 @@ public class GameScreen implements Screen, InputProcessor {
             while (iter.hasNext()) {
                 Actor a = iter.next();
                 int dist = this.map.getBaseMap().movementDistance(a.getWx(), a.getWy(), (int) v.x, (int) v.y);
-                if (dist <= 1) {
+                if (dist <= 1 && a.getCharacter() != null) {
                     logs.add(alibaba.getName() + " attacks " + a.getCharacter().getName());
                     alibaba.setAttacking(true);
                     double prob1 = BATTLE.calculateStrikeProbability(alibaba, a.getCharacter(), dist == 0);
@@ -279,10 +298,12 @@ public class GameScreen implements Screen, InputProcessor {
                     break;
                 }
             }
-
+        } else if (keycode == Keys.T) {
+            
         } else if (keycode == Keys.D) {
             this.alibaba.setDefending(true);
-        } else if (keycode == Keys.U) {
+            this.logs.add(this.alibaba.getName() + " is defending.");
+        } else if (keycode == Keys.Z) {
             BATTLE.attemptRetreat(logs, alibaba);
         } else if (keycode == Keys.R) {
             this.logs.add(this.alibaba.attemptRest() ? "Rested" : "Nothing happened");
@@ -377,6 +398,11 @@ public class GameScreen implements Screen, InputProcessor {
             setRoomName();
         }
 
+        if (x == 116 && y == 72) {
+            this.map.setTile(Constants.Tile.BROKEN_WALL, "walls", x, y);
+            this.map.setTile(null, "floor", x, y);
+        }
+
         this.map.getBaseMap().moveObjects(this, this.map.getTiledMap(), x, y);
     }
 
@@ -387,14 +413,84 @@ public class GameScreen implements Screen, InputProcessor {
             while (iter.hasNext()) {
                 MapObject obj = iter.next();
                 int id = obj.getProperties().get("id", Integer.class);
+                int level = Integer.parseInt(obj.getProperties().get("level", String.class));
                 String name = obj.getName();
                 if (id == this.currentRoomId) {
                     this.roomName = name;
+                    this.roomLevel = level;
                     return;
                 }
             }
         }
         this.roomName = null;
+    }
+
+    private class GameTimer implements Runnable {
+
+        public boolean active = true;
+
+        @Override
+        public void run() {
+            if (active) {
+                if (Utils.percentChance(10) && map.getBaseMap().actors.size() <= 100) {
+
+                    Character character = AliBaba.getRandomWanderingCharacter(roomLevel);
+                    TiledMapTileLayer layer = (TiledMapTileLayer) map.getTiledMap().getLayers().get("floor");
+
+                    Vector3 v = new Vector3();
+                    getCurrentMapCoords(v);
+                    int wx = (int) v.x;
+                    int wy = (int) v.y;
+
+                    java.util.List<int[]> candidateCoords = new java.util.ArrayList<>();
+
+                    for (int j = wx - 6; j < wx + 6; j++) {
+                        for (int k = wy - 6; k < wy + 6; k++) {
+                            candidateCoords.add(new int[]{j, k});
+                        }
+                    }
+
+                    Collections.shuffle(candidateCoords);
+
+                    for (int[] coord : candidateCoords) {
+                        int j = coord[0];
+                        int k = coord[1];
+
+                        TiledMapTileLayer.Cell cell = layer.getCell(j, map.getBaseMap().getHeight() - 1 - k);
+                        if (cell != null && renderer.shouldRenderCell(currentRoomId, j, k)) {
+                            Role role = switch (character.getCreatureType()) {
+                                case "unicorn", "dwarf", "elf", "human", "owl", "wanderer", "halfling" ->
+                                    Role.FRIENDLY;
+                                default ->
+                                    Role.HOSTILE;
+                            };
+                            MovementBehavior behavior = (role == Role.FRIENDLY) ? MovementBehavior.WANDER : MovementBehavior.ATTACK;
+                            Actor actor = new Actor(character, role, j, k, j * TILE_DIM, mapPixelHeight - k * TILE_DIM, behavior, findSimilarIcon(character.getCreatureType()));
+                            map.getBaseMap().actors.add(actor);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private TextureRegion findSimilarIcon(String creatureType) {
+
+        java.util.List<Actor> filtered = map.getBaseMap().actors.stream()
+                .filter(a -> a.getCharacter() != null && a.getCharacter().getCreatureType().equals(creatureType))
+                .collect(Collectors.toList());
+
+        if (!filtered.isEmpty()) {
+            Collections.shuffle(filtered);
+            for (Actor a : filtered) {
+                if (a.getCharacter().getCreatureType().equals(creatureType)) {
+                    return a.getIcon();
+                }
+            }
+        }
+
+        return AliBaba.ICONS[1952];//TODO better default selection by creatureType
     }
 
     @Override

@@ -19,6 +19,22 @@ public class Actor {
     private HealthBar healthbar;
     private final Role role;
 
+    public Actor(String name, Role role, int wx, int wy, float x, float y, MovementBehavior movement, TextureRegion icon) {
+
+        if (icon == null) {
+            throw new RuntimeException(name + " cannot find icon " + icon);
+        }
+
+        this.role = role;
+        this.wx = wx;
+        this.wy = wy;
+        this.x = x;
+        this.y = y;
+        this.movement = movement;
+        this.character = null;
+        this.icon = icon;
+    }
+
     public Actor(Character character, Role role, int wx, int wy, float x, float y, MovementBehavior movement, TextureRegion icon) {
 
         if (icon == null) {

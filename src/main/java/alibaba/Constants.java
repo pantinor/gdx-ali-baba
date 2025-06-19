@@ -12,8 +12,10 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -60,6 +62,16 @@ public interface Constants {
         "kicks the proverbial bucket",
         "departs the land of the living",
         "moans OH MA, I THINK ITS MY TIME"};
+
+    public enum Tile {
+        WALL(2980), BROKEN_WALL(2970), CHEST(897);
+        private int id;
+
+        private Tile(int id) {
+            this.id = id;
+        }
+
+    }
 
     public static final FileHandleResolver CLASSPTH_RSLVR = new FileHandleResolver() {
         @Override
@@ -232,13 +244,18 @@ public interface Constants {
                 TextureRegion icon = AliBaba.ICONS[cell.getTile().getId() - 1];
 
                 try {
+                    Actor actor = null;
+                    if (role == Role.MERCHANT_ARMOR || role == Role.MERCHANT_WEAPON) {
+                        actor = new Actor(name, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, icon);
+                    } else {
 
-                    Character character = CHARACTERS.stream()
-                            .filter(c -> c.getName().equalsIgnoreCase(name))
-                            .findFirst()
-                            .orElseThrow(() -> new RuntimeException("Character not found: " + name));
+                        Character character = CHARACTERS.stream()
+                                .filter(c -> c.getName().equalsIgnoreCase(name))
+                                .findFirst()
+                                .orElseThrow(() -> new RuntimeException("Character not found: " + name));
 
-                    Actor actor = new Actor(character, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, icon);
+                        actor = new Actor(character, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, icon);
+                    }
 
                     this.baseMap.actors.add(actor);
                 } catch (Throwable t) {
@@ -273,6 +290,27 @@ public interface Constants {
             }
 
             this.screen = new GameScreen(this);
+        }
+
+        public void setTile(Tile tile, String layerName, int x, int y) {
+            TiledMapTileLayer layer = (TiledMapTileLayer) this.tiledMap.getLayers().get(layerName);
+            if (layer != null) {
+                if (tile == null) {
+                    layer.setCell(x, this.baseMap.getHeight() - 1 - y, null);
+                    return;
+                }
+                TextureRegion icon = AliBaba.ICONS[tile.id];
+                TiledMapTileLayer.Cell cell = layer.getCell(x, this.baseMap.getHeight() - 1 - y);
+                if (cell == null) {
+                    cell = new TiledMapTileLayer.Cell();
+                    TiledMapTile t = new StaticTiledMapTile(icon);
+                    cell.setTile(t);
+                    layer.setCell(x, this.baseMap.getHeight() - 1 - y, cell);
+                } else {
+                    cell.getTile().setTextureRegion(icon);
+                    cell.getTile().setId(tile.id);
+                }
+            }
         }
 
     }
