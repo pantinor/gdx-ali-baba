@@ -1,14 +1,14 @@
 {
     "weapons": [
         {
-            "name": "Iron sword",
+            "name": "Iron Sword",
             "baseCost": 100,
             "power": 8,
             "strengthRequirement": "weak",
             "type": "melee"
         },
         {
-            "name": "Steel sword",
+            "name": "Steel Sword",
             "baseCost": 500,
             "power": 9,
             "strengthRequirement": "strong",
@@ -22,7 +22,7 @@
             "type": "melee"
         },
         {
-            "name": "Steel dagger",
+            "name": "Steel Dagger",
             "baseCost": 150,
             "power": 4,
             "strengthRequirement": "strong",
@@ -47,7 +47,7 @@
             }
         },
         {
-            "name": "Rithmil plate",
+            "name": "Rithmil Plate Armor",
             "baseCost": 2000,
             "effectiveness": 5,
             "dexterityDecrease": {
@@ -56,7 +56,7 @@
             }
         },
         {
-            "name": "Chain mail",
+            "name": "Chain Mail",
             "baseCost": 400,
             "effectiveness": 3,
             "dexterityDecrease": {
@@ -65,7 +65,7 @@
             }
         },
         {
-            "name": "Rithmil chain",
+            "name": "Rithmil Chain Mail",
             "baseCost": 1000,
             "effectiveness": 3,
             "dexterityDecrease": {
@@ -74,7 +74,7 @@
             }
         },
         {
-            "name": "Leather armor",
+            "name": "Leather Armor",
             "baseCost": 80,
             "effectiveness": 1,
             "dexterityDecrease": {

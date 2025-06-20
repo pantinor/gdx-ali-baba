@@ -2,6 +2,7 @@ package alibaba.objects;
 
 import static alibaba.AliBaba.BATTLE;
 import alibaba.Constants.Map;
+import alibaba.Constants.Role;
 import alibaba.GameScreen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -110,11 +111,29 @@ public class BaseMap {
                 }
                 break;
                 case FOLLOW: {
+                    int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
+                    if (dist >= 3) {
+                        continue;
+                    }
                     int mask = getValidMovesMask(tiledMap, actor.getWx(), actor.getWy());
                     dir = getPath(avatarX, avatarY, mask, true, actor.getWx(), actor.getWy());
                 }
                 break;
                 case FIXED:
+                    int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
+                    if (dist > 1 || actor.getRole() == Role.FRIENDLY) {
+                        continue;
+                    }
+                    screen.logs.add(enemy.getName() + " attacks " + screen.alibaba.getName());
+                    enemy.setAttacking(true);
+                    double prob1 = BATTLE.calculateStrikeProbability(enemy, screen.alibaba, dist == 0);
+                    if (Utils.RANDOM.nextDouble() < prob1) {
+                        int force = BATTLE.calculateStrikeForce(enemy, dist == 0);
+                        String outcome = BATTLE.applyStrikeEffects(enemy, screen.alibaba, force);
+                        screen.logs.add(outcome, Color.RED);
+                    } else {
+                        screen.logs.add(enemy.getName() + " missed " + screen.alibaba.getName() + ".");
+                    }
                     break;
                 case WANDER: {
                     if (wanderFlag % 2 == 0) {

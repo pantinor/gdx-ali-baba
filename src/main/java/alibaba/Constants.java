@@ -1,9 +1,15 @@
 package alibaba;
 
+import static alibaba.AliBaba.ARMOR;
 import alibaba.objects.Character;
 import alibaba.objects.BaseMap;
 import static alibaba.AliBaba.CHARACTERS;
+import static alibaba.AliBaba.MERCHANTS;
+import static alibaba.AliBaba.WEAPONS;
 import alibaba.objects.Actor;
+import alibaba.objects.Armor;
+import alibaba.objects.Merchant;
+import alibaba.objects.Weapon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
@@ -259,6 +265,45 @@ public interface Constants {
                 } catch (Throwable t) {
                     System.out.println(t.getMessage());
                 }
+            }
+
+            MapLayer merchantLayer = tiledMap.getLayers().get("merchants");
+
+            for (MapObject obj : merchantLayer.getObjects()) {
+                float x = obj.getProperties().get("x", Float.class);
+                float y = obj.getProperties().get("y", Float.class);
+                int sx = (int) (x / TILE_DIM);
+                int sy = (int) (y / TILE_DIM);
+
+                int level = Integer.parseInt(obj.getProperties().get("level", String.class));
+                String itemList = obj.getProperties().get("items", String.class);
+                String[] itemNames = itemList.split(",");
+
+                List<Object> merchantItems = new ArrayList<>();
+                for (String rawName : itemNames) {
+                    String cleanedName = rawName.trim().toLowerCase();
+
+                    Object matched = WEAPONS.stream()
+                            .filter(w -> w.getName().equalsIgnoreCase(cleanedName))
+                            .findFirst()
+                            .<Object>map(w -> w)
+                            .orElseGet(()
+                                    -> ARMOR.stream()
+                                    .filter(a -> a.getName().equalsIgnoreCase(cleanedName))
+                                    .findFirst()
+                                    .<Object>map(a -> a)
+                                    .orElse(null)
+                            );
+
+                    if (matched != null) {
+                        merchantItems.add(matched);
+                    } else {
+                        System.err.println("Warning: Item not found for merchant: " + cleanedName);
+                    }
+                }
+
+                Merchant merchant = new Merchant(sx, this.baseMap.getHeight() - 1 - sy, level, merchantItems.toArray());
+                MERCHANTS.add(merchant);
             }
 
             MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");

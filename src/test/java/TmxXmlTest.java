@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class TmxXmlTest {
 
-    @Test
+    //@Test
     public void regenerateObjectIds() throws Exception {
         File inputFile = new File("src/main/resources/assets/data/ali-baba.tmx");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

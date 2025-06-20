@@ -5,7 +5,7 @@ import static alibaba.Constants.TILE_DIM;
 import alibaba.objects.Weapon;
 import alibaba.objects.Armor;
 import alibaba.objects.AllItems;
-import alibaba.objects.Utils;
+import alibaba.objects.Merchant;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -28,7 +28,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 public class AliBaba extends Game {
 
@@ -51,6 +51,7 @@ public class AliBaba extends Game {
     public static java.util.List<Character> CHARACTERS;
     public static java.util.List<Weapon> WEAPONS;
     public static java.util.List<Armor> ARMOR;
+    public static final java.util.List<Merchant> MERCHANTS = new ArrayList<>();
     public static TextureRegion[] ICONS = new TextureRegion[30 * 128];
 
     private static final Gson GSON = new GsonBuilder().create();
@@ -173,16 +174,18 @@ public class AliBaba extends Game {
         return characters;
     }
 
-    public static Character getRandomWanderingCharacter(int wmLevel) {
-        java.util.List<Character> filtered = CHARACTERS.stream()
-                .filter(c -> c.getWmLevel() == wmLevel)
-                .collect(Collectors.toList());
-        return filtered.get(Utils.RANDOM.nextInt(filtered.size()));
-    }
-
     public static AllItems loadAllItemsFromJsonFile(String filePath) throws IOException {
         String jsonString = java.nio.file.Files.readString(Paths.get(filePath));
         return GSON.fromJson(jsonString, AllItems.class);
+    }
+
+    public static Merchant getMerchantAt(int x, int y) {
+        for (Merchant merchant : MERCHANTS) {
+            if (merchant.getX() == x && merchant.getY() == y) {
+                return merchant;
+            }
+        }
+        return null;
     }
 
     public static Weapon getWeapon(String name) {

@@ -11,8 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MerchantDialog extends Dialog {
 
@@ -20,15 +18,13 @@ public class MerchantDialog extends Dialog {
     protected static final int HEIGHT = 400;
 
     protected final GameScreen screen;
-    protected final List<Object> sellables;
-    protected final int level;
+    protected final Merchant merchant;
     protected Object selectedItem;
 
-    public MerchantDialog(GameScreen screen, int level, Object... sellables) {
+    public MerchantDialog(GameScreen screen, Merchant merchant) {
         super("", AliBaba.skin.get("dialog", WindowStyle.class));
         this.screen = screen;
-        this.level = level;
-        this.sellables = new ArrayList<>();
+        this.merchant = merchant;
 
         setSkin(AliBaba.skin);
         setWidth(WIDTH);
@@ -50,19 +46,18 @@ public class MerchantDialog extends Dialog {
         Table sellableTable = new Table(AliBaba.skin);
         sellableTable.align(Align.top);
 
-        for (Object sellable : sellables) {
-            this.sellables.add(sellable);
+        for (Object sellable : merchant.getItems()) {
             String name = "";
             int cost = 0;
 
             if (sellable instanceof Weapon) {
                 Weapon w = (Weapon) sellable;
                 name = w.getName();
-                cost = w.getBaseCost() * level;
+                cost = w.getBaseCost() * merchant.getLevel();
             } else if (sellable instanceof Armor) {
                 Armor a = (Armor) sellable;
                 name = a.getName();
-                cost = a.getBaseCost() * level;
+                cost = a.getBaseCost() * merchant.getLevel();
             }
 
             CheckBox checkBox = new CheckBox("", AliBaba.skin, "default-16");
@@ -91,15 +86,15 @@ public class MerchantDialog extends Dialog {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 int selectedIndex = buttonGroup.getCheckedIndex();
-                if (selectedIndex < 0 || selectedIndex >= MerchantDialog.this.sellables.size()) {
+                if (selectedIndex < 0 || selectedIndex >= merchant.getItems().length) {
                     return;
                 }
 
-                selectedItem = MerchantDialog.this.sellables.get(selectedIndex);
+                selectedItem = merchant.getItems()[selectedIndex];
                 int cost;
 
                 if (selectedItem instanceof Weapon weapon) {
-                    cost = weapon.getBaseCost() * level;
+                    cost = weapon.getBaseCost() * merchant.getLevel();
                     if (screen.getAliBaba().getGold() >= cost) {
                         screen.getAliBaba().setGold(screen.getAliBaba().getGold() - cost);
                         if ("melee".equals(weapon.getType())) {
@@ -109,7 +104,7 @@ public class MerchantDialog extends Dialog {
                         }
                     }
                 } else if (selectedItem instanceof Armor armor) {
-                    cost = armor.getBaseCost() * level;
+                    cost = armor.getBaseCost() * merchant.getLevel();
                     if (screen.getAliBaba().getGold() >= cost) {
                         screen.getAliBaba().setGold(screen.getAliBaba().getGold() - cost);
                         screen.getAliBaba().equipArmor(armor);

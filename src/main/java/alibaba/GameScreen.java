@@ -6,7 +6,6 @@ import static alibaba.AliBaba.BATTLE;
 import static alibaba.AliBaba.CHARACTERS;
 import static alibaba.AliBaba.SCREEN_HEIGHT;
 import static alibaba.AliBaba.SCREEN_WIDTH;
-import static alibaba.AliBaba.WEAPONS;
 import alibaba.Constants.Map;
 import alibaba.Constants.MovementBehavior;
 import alibaba.Constants.Role;
@@ -16,7 +15,10 @@ import alibaba.objects.Actor;
 import alibaba.objects.Portal;
 import alibaba.objects.Direction;
 import alibaba.objects.LogScrollPane;
+import alibaba.objects.Merchant;
 import alibaba.objects.MerchantDialog;
+import alibaba.objects.Sound;
+import alibaba.objects.Sounds;
 import alibaba.objects.TmxMapRenderer.CreatureLayer;
 import alibaba.objects.Utils;
 import com.badlogic.gdx.Gdx;
@@ -94,9 +96,9 @@ public class GameScreen implements Screen, InputProcessor {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Character not found: Ali baba"));
 
-        this.alibaba.equipMeleeWeapon(AliBaba.getWeapon("Iron sword"));
+        this.alibaba.equipMeleeWeapon(AliBaba.getWeapon("Iron Sword"));
         this.alibaba.equipHandToHandWeapon(AliBaba.getWeapon("Shiv"));
-        this.alibaba.equipArmor(AliBaba.getArmor("Leather armor"));
+        this.alibaba.equipArmor(AliBaba.getArmor("Leather Armor"));
 
         TextureRegion avatar = AliBaba.ICONS[406];
 
@@ -106,7 +108,7 @@ public class GameScreen implements Screen, InputProcessor {
                 renderer.getBatch().draw(avatar, newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM, TILE_DIM, TILE_DIM);
                 for (Actor a : GameScreen.this.map.getBaseMap().actors) {
                     if (renderer.getViewBounds().contains(a.getX(), a.getY()) && renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
-                        renderer.getBatch().draw(a.getIcon(), a.getX(), a.getY() - TILE_DIM, TILE_DIM, TILE_DIM);
+                        renderer.getBatch().draw(a.getIcon(), a.getX(), a.getY());
                     }
                 }
             }
@@ -139,7 +141,7 @@ public class GameScreen implements Screen, InputProcessor {
         stage.addAction(Actions.forever(seq1));
 
     }
-    
+
     public Character getAliBaba() {
         return this.alibaba;
     }
@@ -288,6 +290,9 @@ public class GameScreen implements Screen, InputProcessor {
             Iterator<Actor> iter = this.map.getBaseMap().actors.iterator();
             while (iter.hasNext()) {
                 Actor a = iter.next();
+                if (a.getRole() == Role.FRIENDLY) {
+                    continue;
+                }
                 int dist = this.map.getBaseMap().movementDistance(a.getWx(), a.getWy(), (int) v.x, (int) v.y);
                 if (dist <= 1 && a.getCharacter() != null) {
                     logs.add(alibaba.getName() + " attacks " + a.getCharacter().getName());
@@ -307,11 +312,14 @@ public class GameScreen implements Screen, InputProcessor {
                 }
             }
         } else if (keycode == Keys.T) {
-            new MerchantDialog(this, this.roomLevel, WEAPONS.get(0), WEAPONS.get(1), WEAPONS.get(2)).show(this.stage);
+            Merchant merchant = AliBaba.getMerchantAt((int) v.x, (int) v.y);
+            if (merchant != null) {
+                new MerchantDialog(this, merchant).show(this.stage);
+            }
         } else if (keycode == Keys.D) {
             this.alibaba.setDefending(true);
             this.logs.add(this.alibaba.getName() + " is defending.");
-        } else if (keycode == Keys.Z) {
+        } else if (keycode == Keys.U) {
             BATTLE.attemptRetreat(logs, alibaba);
         } else if (keycode == Keys.R) {
             this.logs.add(this.alibaba.attemptRest() ? "Rested" : "Nothing happened");
@@ -343,7 +351,7 @@ public class GameScreen implements Screen, InputProcessor {
         TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("floor");
         TiledMapTileLayer.Cell cell = layer.getCell(nx, this.map.getBaseMap().getHeight() - 1 - ny);
         if (cell == null) {
-            //Sounds.play(Sound.BLOCKED);
+            Sounds.play(Sound.BLOCKED);
             return false;
         }
 
@@ -442,7 +450,16 @@ public class GameScreen implements Screen, InputProcessor {
             if (active) {
                 if (Utils.percentChance(10) && map.getBaseMap().actors.size() <= 100) {
 
-                    Character character = AliBaba.getRandomWanderingCharacter(roomLevel);
+                    java.util.List<Character> filtered = CHARACTERS.stream()
+                            .filter(c -> c.getWmLevel() == roomLevel)
+                            .collect(Collectors.toList());
+
+                    if (filtered.isEmpty()) {
+                        return;
+                    }
+
+                    Character character = filtered.get(Utils.RANDOM.nextInt(filtered.size()));
+
                     TiledMapTileLayer layer = (TiledMapTileLayer) map.getTiledMap().getLayers().get("floor");
 
                     Vector3 v = new Vector3();
@@ -475,6 +492,8 @@ public class GameScreen implements Screen, InputProcessor {
                             MovementBehavior behavior = (role == Role.FRIENDLY) ? MovementBehavior.WANDER : MovementBehavior.ATTACK;
                             Actor actor = new Actor(character, role, j, k, j * TILE_DIM, mapPixelHeight - k * TILE_DIM, behavior, findSimilarIcon(character.getCreatureType()));
                             map.getBaseMap().actors.add(actor);
+
+                            CHARACTERS.remove(character);
                             return;
                         }
                     }
