@@ -1,5 +1,6 @@
 package alibaba;
 
+import alibaba.objects.Character;
 import static alibaba.Constants.TILE_DIM;
 import alibaba.objects.Weapon;
 import alibaba.objects.Armor;

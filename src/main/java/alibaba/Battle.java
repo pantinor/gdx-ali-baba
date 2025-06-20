@@ -1,5 +1,6 @@
 package alibaba;
 
+import alibaba.objects.Character;
 import alibaba.objects.Loggable;
 import java.util.Random;
 

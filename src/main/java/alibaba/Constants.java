@@ -1,5 +1,6 @@
 package alibaba;
 
+import alibaba.objects.Character;
 import alibaba.objects.BaseMap;
 import static alibaba.AliBaba.CHARACTERS;
 import alibaba.objects.Actor;
@@ -244,20 +245,17 @@ public interface Constants {
                 TextureRegion icon = AliBaba.ICONS[cell.getTile().getId() - 1];
 
                 try {
-                    Actor actor = null;
-                    if (role == Role.MERCHANT_ARMOR || role == Role.MERCHANT_WEAPON) {
-                        actor = new Actor(name, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, icon);
-                    } else {
+                    Character character = CHARACTERS.stream()
+                            .filter(c -> c.getName().equalsIgnoreCase(name))
+                            .findFirst()
+                            .orElseThrow(() -> new RuntimeException("Character not found: " + name));
 
-                        Character character = CHARACTERS.stream()
-                                .filter(c -> c.getName().equalsIgnoreCase(name))
-                                .findFirst()
-                                .orElseThrow(() -> new RuntimeException("Character not found: " + name));
-
-                        actor = new Actor(character, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, icon);
-                    }
+                    Actor actor = new Actor(character, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, icon);
 
                     this.baseMap.actors.add(actor);
+
+                    CHARACTERS.remove(character);
+
                 } catch (Throwable t) {
                     System.out.println(t.getMessage());
                 }

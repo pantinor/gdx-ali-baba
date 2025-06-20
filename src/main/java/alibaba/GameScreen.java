@@ -1,9 +1,12 @@
 package alibaba;
 
+import alibaba.objects.FrameMaker;
+import alibaba.objects.Character;
 import static alibaba.AliBaba.BATTLE;
 import static alibaba.AliBaba.CHARACTERS;
 import static alibaba.AliBaba.SCREEN_HEIGHT;
 import static alibaba.AliBaba.SCREEN_WIDTH;
+import static alibaba.AliBaba.WEAPONS;
 import alibaba.Constants.Map;
 import alibaba.Constants.MovementBehavior;
 import alibaba.Constants.Role;
@@ -13,6 +16,7 @@ import alibaba.objects.Actor;
 import alibaba.objects.Portal;
 import alibaba.objects.Direction;
 import alibaba.objects.LogScrollPane;
+import alibaba.objects.MerchantDialog;
 import alibaba.objects.TmxMapRenderer.CreatureLayer;
 import alibaba.objects.Utils;
 import com.badlogic.gdx.Gdx;
@@ -75,7 +79,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         batch = new SpriteBatch();
 
-        stage = new Stage(viewport);
+        this.stage = new Stage(viewport);
         //this.stage.setDebugAll(true);
 
         camera = new OrthographicCamera(AliBaba.MAP_VIEWPORT_DIM, AliBaba.MAP_VIEWPORT_DIM);
@@ -134,6 +138,10 @@ public class GameScreen implements Screen, InputProcessor {
         seq1.addAction(Actions.run(gameTimer));
         stage.addAction(Actions.forever(seq1));
 
+    }
+    
+    public Character getAliBaba() {
+        return this.alibaba;
     }
 
     @Override
@@ -299,7 +307,7 @@ public class GameScreen implements Screen, InputProcessor {
                 }
             }
         } else if (keycode == Keys.T) {
-            
+            new MerchantDialog(this, this.roomLevel, WEAPONS.get(0), WEAPONS.get(1), WEAPONS.get(2)).show(this.stage);
         } else if (keycode == Keys.D) {
             this.alibaba.setDefending(true);
             this.logs.add(this.alibaba.getName() + " is defending.");

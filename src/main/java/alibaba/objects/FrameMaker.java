@@ -1,4 +1,4 @@
-package alibaba;
+package alibaba.objects;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;

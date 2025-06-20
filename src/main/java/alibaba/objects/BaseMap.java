@@ -75,7 +75,7 @@ public class BaseMap {
         for (Actor actor : actors) {
 
             Direction dir = null;
-            alibaba.Character enemy = actor.getCharacter();
+            alibaba.objects.Character enemy = actor.getCharacter();
 
             switch (actor.getMovement()) {
                 case ATTACK: {

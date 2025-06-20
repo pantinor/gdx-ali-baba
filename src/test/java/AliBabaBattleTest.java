@@ -4,7 +4,7 @@ import alibaba.objects.AllItems;
 import alibaba.objects.Armor;
 import alibaba.Battle;
 import alibaba.objects.Weapon;
-import alibaba.Character;
+import alibaba.objects.Character;
 import alibaba.objects.Loggable;
 import com.badlogic.gdx.graphics.Color;
 import java.io.IOException;

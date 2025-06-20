@@ -1,4 +1,4 @@
-package alibaba;
+package alibaba.objects;
 
 import alibaba.objects.Weapon;
 import alibaba.objects.Armor;
@@ -73,6 +73,18 @@ public class Character {
 
     public int getMaxConstitution() {
         return maxConstitution;
+    }
+
+    public Weapon getEquippedMeleeWeapon() {
+        return equippedMeleeWeapon;
+    }
+
+    public Weapon getEquippedHandToHandWeapon() {
+        return equippedHandToHandWeapon;
+    }
+
+    public Armor getEquippedArmor() {
+        return equippedArmor;
     }
 
     public int getMeleeWeaponPower() {

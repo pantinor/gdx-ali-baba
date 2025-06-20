@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="431">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="433">
  <properties>
   <property name="startX" value="49"/>
   <property name="startY" value="18"/>
@@ -993,7 +993,6 @@
     <property name="dy" value="35"/>
    </properties>
   </object>
-  <object id="331" name="WORLD" x="1568" y="576" width="32" height="32"/>
   <object id="406" name="to gemini room" x="3424" y="2592" width="32" height="32">
    <properties>
     <property name="dx" value="110"/>
@@ -1025,6 +1024,73 @@
     <property name="random3" value="buddir,99,80"/>
     <property name="random4" value="bear,108,6"/>
     <property name="secretpassage," value="secretpassage,36,73"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="17" name="merchants">
+  <object id="431" name="Stalf" type="MERCHANT_ARMOR" x="128" y="2816" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="432" name="Hlorgar" type="MERCHANT_ARMOR" x="1760" y="2368" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="72" name="Bollrun" type="MERCHANT_ARMOR" x="1760" y="1440" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="73" name="Buring" type="MERCHANT_WEAPON" x="1536" y="704" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="74" name="Aemar" type="MERCHANT_ARMOR" x="1408" y="800" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="75" name="Arnori" type="MERCHANT_WEAPON" x="2464" y="224" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="76" name="Krabbi" type="MERCHANT_ARMOR" x="2272" y="928" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="77" name="Garming" type="MERCHANT_WEAPON" x="2720" y="992" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="79" name="Snirm" type="MERCHANT_ARMOR" x="2400" y="2080" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="80" name="Hikar" type="MERCHANT_WEAPON" x="2240" y="2080" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="96" name="Almgar" type="MERCHANT_ARMOR" x="4736" y="2624" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="116" name="Otrir" type="MERCHANT_WEAPON" x="3584" y="512" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="121" name="Hangar" type="MERCHANT_ARMOR" x="2432" y="1824" width="32" height="32">
+   <properties>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
  </objectgroup>
@@ -1329,71 +1395,6 @@
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="72" name="Bollrun" type="MERCHANT_ARMOR" x="1760" y="1440" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="73" name="Buring" type="MERCHANT_WEAPON" x="1536" y="704" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="74" name="Aemar" type="MERCHANT_ARMOR" x="1408" y="800" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="75" name="Arnori" type="MERCHANT_WEAPON" x="2464" y="224" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="76" name="Krabbi" type="MERCHANT_ARMOR" x="2272" y="928" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="77" name="Garming" type="MERCHANT_WEAPON" x="2720" y="992" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="79" name="Snirm" type="MERCHANT_ARMOR" x="2400" y="2080" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="80" name="Hikar" type="MERCHANT_WEAPON" x="2240" y="2080" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="96" name="Almgar" type="MERCHANT_ARMOR" x="4736" y="2624" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="116" name="Otrir" type="MERCHANT_WEAPON" x="3584" y="512" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="121" name="Hangar" type="MERCHANT_ARMOR" x="2432" y="1824" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="139" name="Hlorgar" type="MERCHANT_ARMOR" x="1760" y="2368" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="193" name="Stalf" type="MERCHANT_ARMOR" x="128" y="2816" width="32" height="32">
-   <properties>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="421" name="Princess Buddir" type="FRIENDLY" x="3232" y="2592" width="32" height="32">
    <properties>
     <property name="movement" value="FOLLOW"/>
@@ -1421,7 +1422,7 @@
   <object id="429" name="rune" type="Open sesame! You may now pass through the wall above you." x="1856" y="736" width="32" height="32"/>
   <object id="430" name="rune" type="The illusion vanishes before your eyes!" x="1600" y="1792" width="32" height="32"/>
  </objectgroup>
- <objectgroup id="13" name="rooms" visible="0">
+ <objectgroup id="13" name="rooms">
   <object id="335" name="Dusty road" x="1344" y="448">
    <properties>
     <property name="level" value="1"/>
@@ -1436,19 +1437,19 @@
   </object>
   <object id="338" name="Aries the ram" x="4000" y="1952">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 160,0 160,576 64,576 64,352 0,352"/>
   </object>
   <object id="339" name="Leo" x="3968" y="2912">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,32 -128,32 -128,352 64,352 64,224 96,224 96,192 96,128 96,0"/>
   </object>
   <object id="340" name="Virgo" x="4032" y="2912">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 128,0 128,352 224,352 224,544 -64,544 -64,320 -32,320 -32,192 0,192"/>
   </object>
@@ -1556,85 +1557,85 @@
   </object>
   <object id="363" name="y" x="3264" y="928">
    <properties>
-    <property name="level" value="2"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,256 512,256 512,0"/>
   </object>
   <object id="364" name="r" x="2656" y="928">
    <properties>
-    <property name="level" value="2"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,224 320,224 320,0"/>
   </object>
   <object id="365" name="o" x="2944" y="928">
    <properties>
-    <property name="level" value="2"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,224 288,224 288,0"/>
   </object>
   <object id="366" name="g." x="2240" y="1280">
    <properties>
-    <property name="level" value="2"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,256 512,256 512,0"/>
   </object>
   <object id="367" name="b" x="1696" y="1280">
    <properties>
-    <property name="level" value="2"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,256 512,256 512,0"/>
   </object>
   <object id="368" name="v" x="1184" y="1056">
    <properties>
-    <property name="level" value="2"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,256 512,256 512,0"/>
   </object>
   <object id="369" name="i" x="1184" y="1280">
    <properties>
-    <property name="level" value="2"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,256 512,256 512,0"/>
   </object>
   <object id="371" name="Gilded hallway" x="1536" y="1632">
    <properties>
-    <property name="level" value="4"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,384 160,384 160,0"/>
   </object>
   <object id="372" name="Guard room" x="1408" y="1984">
    <properties>
-    <property name="level" value="4"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,192 416,192 416,0"/>
   </object>
   <object id="373" name="Stinger strewn cell" x="1408" y="2144">
    <properties>
-    <property name="level" value="4"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,192 192,192 192,0"/>
   </object>
   <object id="374" name="Long way from home" x="1632" y="2176">
    <properties>
-    <property name="level" value="4"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,160 192,160 192,0"/>
   </object>
   <object id="375" name="Save the whales" x="1376" y="2304">
    <properties>
-    <property name="level" value="4"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,160 480,160 480,0"/>
   </object>
   <object id="376" name="Dragon lair" x="1376" y="2432">
    <properties>
-    <property name="level" value="4"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,224 256,224 256,0"/>
   </object>
   <object id="377" name="Gold for the lucky" x="1600" y="2432">
    <properties>
-    <property name="level" value="4"/>
+    <property name="level" value="3"/>
    </properties>
    <polygon points="0,0 0,224 256,224 256,0"/>
   </object>
@@ -1682,13 +1683,13 @@
   </object>
   <object id="386" name="Underground stream" x="2112" y="1632">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="4"/>
    </properties>
    <polygon points="0,32 0,352 480,352 480,32"/>
   </object>
   <object id="387" name="Magic tour-billion" x="2176" y="2016">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="4"/>
    </properties>
    <polygon points="0,0 0,288 320,288 320,0"/>
   </object>
@@ -1712,61 +1713,61 @@
   </object>
   <object id="391" name="Pisces" x="4224" y="2240">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,288 128,288 128,0"/>
   </object>
   <object id="392" name="Aquarius" x="4320" y="2240">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,288 160,288 160,0"/>
   </object>
   <object id="393" name="Taurus" x="3936" y="2272">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,256 160,256 160,0"/>
   </object>
   <object id="394" name="Astrologer's lab" x="3968" y="2496">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,448 448,448 448,0"/>
   </object>
   <object id="396" name="Cancer" x="3488" y="2688">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,192 512,192 512,0"/>
   </object>
   <object id="397" name="Gemini" x="3488" y="2560">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,160 512,160 512,0"/>
   </object>
   <object id="398" name="Libra" x="4128" y="2912">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,320 192,320 192,0"/>
   </object>
   <object id="399" name="Scorpio" x="4288" y="2912">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,320 160,320 160,0"/>
   </object>
   <object id="400" name="Capricornus" x="4384" y="2560">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,160 544,160 544,0"/>
   </object>
   <object id="401" name="Sagittarius" x="4384" y="2688">
    <properties>
-    <property name="level" value="3"/>
+    <property name="level" value="2"/>
    </properties>
    <polygon points="0,0 0,192 544,192 544,0"/>
   </object>
