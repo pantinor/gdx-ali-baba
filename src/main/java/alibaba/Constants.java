@@ -7,9 +7,7 @@ import static alibaba.AliBaba.CHARACTERS;
 import static alibaba.AliBaba.MERCHANTS;
 import static alibaba.AliBaba.WEAPONS;
 import alibaba.objects.Actor;
-import alibaba.objects.Armor;
 import alibaba.objects.Merchant;
-import alibaba.objects.Weapon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
@@ -70,12 +68,60 @@ public interface Constants {
         "departs the land of the living",
         "moans OH MA, I THINK ITS MY TIME"};
 
-    public enum Tile {
-        WALL(2980), BROKEN_WALL(2970), CHEST(897);
-        private int id;
+    public enum Icon {
+        WALL("wall", 2980),
+        BROKEN_WALL("broken wall", 2970),
+        CHEST("chest", 897),
+        HUMAN("human", 395),
+        THIEF("thief", 423),
+        RAM("ram", 2242),
+        OWL("owl", 2247),
+        SWORD("sword", 1346),
+        ZOMBIE("zombie", 2716),
+        BEAR("bear", 2465),
+        RAT("rat", 3275),
+        GREASY("greasy", 2436),
+        CRAB("crab", 2253),
+        ELF("elf", 463),
+        HALFLING("halfling", 564),
+        THIEF_LEADER("thief leader", 405),
+        WANDERER("wanderer", 2192),
+        DWARF("dwarf", 429),
+        BULL("bull", 2246),
+        LION("lion", 2096),
+        DRAGON("dragon", 2752),
+        SCORPION("scorpion", 2377),
+        STATUE("statue", 2245),
+        UNICORN("unicorn", 2185),
+        SUCCUBUS("succubus", 2244),
+        TIGER("tiger", 2091),
+        JACKAL("jackal", 2112),
+        WOLF("wolf", 2004),
+        UNKNOWN("unknown", 1952);
 
-        private Tile(int id) {
-            this.id = id;
+        private final String name;
+        private final int iconId;
+
+        Icon(String name, int iconId) {
+            this.name = name;
+            this.iconId = iconId;
+        }
+
+        public int getId() {
+            return iconId;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public static Icon fromString(String name) {
+            for (Icon type : values()) {
+                if (type.name.equalsIgnoreCase(name)) {
+                    return type;
+                }
+            }
+            return UNKNOWN;
         }
 
     }
@@ -335,14 +381,14 @@ public interface Constants {
             this.screen = new GameScreen(this);
         }
 
-        public void setTile(Tile tile, String layerName, int x, int y) {
+        public void setTile(Icon tile, String layerName, int x, int y) {
             TiledMapTileLayer layer = (TiledMapTileLayer) this.tiledMap.getLayers().get(layerName);
             if (layer != null) {
                 if (tile == null) {
                     layer.setCell(x, this.baseMap.getHeight() - 1 - y, null);
                     return;
                 }
-                TextureRegion icon = AliBaba.ICONS[tile.id];
+                TextureRegion icon = AliBaba.ICONS[tile.getId()];
                 TiledMapTileLayer.Cell cell = layer.getCell(x, this.baseMap.getHeight() - 1 - y);
                 if (cell == null) {
                     cell = new TiledMapTileLayer.Cell();
@@ -351,7 +397,7 @@ public interface Constants {
                     layer.setCell(x, this.baseMap.getHeight() - 1 - y, cell);
                 } else {
                     cell.getTile().setTextureRegion(icon);
-                    cell.getTile().setId(tile.id);
+                    cell.getTile().setId(tile.getId());
                 }
             }
         }

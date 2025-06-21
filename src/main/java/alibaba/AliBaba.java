@@ -5,12 +5,17 @@ import static alibaba.Constants.TILE_DIM;
 import alibaba.objects.Weapon;
 import alibaba.objects.Armor;
 import alibaba.objects.AllItems;
+import alibaba.objects.Loggable;
 import alibaba.objects.Merchant;
+import alibaba.objects.Sound;
+import alibaba.objects.Sounds;
+import alibaba.objects.Utils;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -202,6 +207,22 @@ public class AliBaba extends Game {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(name + " not found!"));
         return armor;
+    }
+
+    public static boolean battle(Loggable logs, Character attacker, Character defender, boolean isSameSpace) {
+        logs.add(attacker.getName() + " attacks " + defender.getName());
+        attacker.setAttacking(true);
+        double prob1 = BATTLE.calculateStrikeProbability(attacker, defender, isSameSpace);
+        if (Utils.RANDOM.nextDouble() < prob1) {
+            int force = BATTLE.calculateStrikeForce(attacker, isSameSpace);
+            String outcome = BATTLE.applyStrikeEffects(attacker, defender, force);
+            logs.add(outcome, Color.RED);
+            Sounds.play(Sound.PC_STRUCK);
+        } else {
+            logs.add(attacker.getName() + " missed " + defender.getName() + ".");
+            Sounds.play(Sound.EVADE);
+        }
+        return defender.isDead();
     }
 
 }

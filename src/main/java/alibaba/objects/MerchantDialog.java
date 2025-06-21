@@ -102,12 +102,16 @@ public class MerchantDialog extends Dialog {
                         } else {
                             screen.getAliBaba().equipHandToHandWeapon(weapon);
                         }
+                    } else {
+                        Sounds.play(Sound.ERROR);
                     }
                 } else if (selectedItem instanceof Armor armor) {
                     cost = armor.getBaseCost() * merchant.getLevel();
                     if (screen.getAliBaba().getGold() >= cost) {
                         screen.getAliBaba().setGold(screen.getAliBaba().getGold() - cost);
                         screen.getAliBaba().equipArmor(armor);
+                    } else {
+                        Sounds.play(Sound.ERROR);
                     }
                 }
             }

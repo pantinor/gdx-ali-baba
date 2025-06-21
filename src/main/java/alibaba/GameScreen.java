@@ -6,6 +6,7 @@ import static alibaba.AliBaba.BATTLE;
 import static alibaba.AliBaba.CHARACTERS;
 import static alibaba.AliBaba.SCREEN_HEIGHT;
 import static alibaba.AliBaba.SCREEN_WIDTH;
+import alibaba.Constants.Icon;
 import alibaba.Constants.Map;
 import alibaba.Constants.MovementBehavior;
 import alibaba.Constants.Role;
@@ -73,7 +74,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final Vector3 newMapPixelCoords = new Vector3();
     private final int mapPixelHeight;
 
-    public GameTimer gameTimer = new GameTimer();
+    private GameTimer gameTimer = new GameTimer();
 
     public GameScreen(Map map) {
 
@@ -152,6 +153,8 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
 
+    //private final ShapeRenderer gridRenderer = new ShapeRenderer();
+
     @Override
     public void render(float delta) {
 
@@ -168,23 +171,23 @@ public class GameScreen implements Screen, InputProcessor {
         batch.draw(this.background, 0, 0);
         batch.end();
 
-        camera.position.set(newMapPixelCoords.x + TILE_DIM * 5, newMapPixelCoords.y - TILE_DIM, 0);
+        camera.position.set(newMapPixelCoords.x + TILE_DIM * 5, newMapPixelCoords.y, 0);
 
         camera.update();
 
         renderer.setView(camera.combined,
                 camera.position.x - TILE_DIM * 14,
                 camera.position.y - TILE_DIM * 10,
-                AliBaba.MAP_VIEWPORT_DIM - 32,
-                AliBaba.MAP_VIEWPORT_DIM - 64);
+                AliBaba.MAP_VIEWPORT_DIM,
+                AliBaba.MAP_VIEWPORT_DIM);
 
         renderer.render();
 
         batch.begin();
 
-        //Vector3 v = new Vector3();
-        //getCurrentMapCoords(v);
-        //AliBaba.font16.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, AliBaba.SCREEN_HEIGHT - 32);
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        AliBaba.font16.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, AliBaba.SCREEN_HEIGHT - 32);
         if (this.roomName != null) {
             AliBaba.font16.draw(batch, String.format("%s", this.roomName), 300, AliBaba.SCREEN_HEIGHT - 12);
         }
@@ -204,19 +207,39 @@ public class GameScreen implements Screen, InputProcessor {
 
         batch.end();
 
+        /*
+        gridRenderer.setProjectionMatrix(camera.combined);
+        gridRenderer.begin(ShapeRenderer.ShapeType.Line);
+        gridRenderer.setColor(Color.YELLOW);
+
+        float viewX = camera.position.x- TILE_DIM * 14;
+        float viewY = camera.position.y- TILE_DIM * 10;
+        float viewWidth = AliBaba.MAP_VIEWPORT_DIM;
+        float viewHeight = AliBaba.MAP_VIEWPORT_DIM;
+
+        for (float x = viewX - (viewX % 32); x < viewX + viewWidth; x += 32) {
+            gridRenderer.line(x, viewY, x, viewY + viewHeight);
+        }
+
+        for (float y = viewY - (viewY % 32); y < viewY + viewHeight; y += 32) {
+            gridRenderer.line(viewX, y, viewX + viewWidth, y);
+        }
+
+        gridRenderer.end();
+        */
+        
         stage.act();
         stage.draw();
 
     }
 
     private void printCharacter(int idx, Batch batch, Character c) {
-        String text = String.format("%s (%d/%d) S:%d D:%d A:%d W:%d H:%d %s %s",
+        String text = String.format("%s (%d/%d) S:%d D:%d A:%d W:%d H:%d %s",
                 c.getName(),
                 c.getConstitution(), c.getMaxConstitution(),
                 c.getStrength(), c.getEffectiveDexterity(),
                 c.getArmor(), c.getMeleeWeaponPower(), c.getHandToHandWeaponPower(),
-                c.isDown() ? "down" : "",
-                c.getGold() == 0 ? "" : c.getGold()
+                c.isDown() ? "D" : ""
         );
 
         AliBaba.font14.draw(batch, text, TILE_DIM * 21 + 16, AliBaba.SCREEN_HEIGHT - 96 - idx * 20);
@@ -237,8 +260,16 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     public void getCurrentMapCoords(Vector3 v) {
-        Vector3 tmp = camera.unproject(new Vector3(TILE_DIM * 8 + 16, TILE_DIM * 12, 0), TILE_DIM * 2, TILE_DIM * 3, AliBaba.MAP_VIEWPORT_DIM, AliBaba.MAP_VIEWPORT_DIM);
-        v.set(Math.round(tmp.x / TILE_DIM), ((mapPixelHeight - Math.round(tmp.y) - TILE_DIM) / TILE_DIM), 0);
+        
+        Vector3 tmp = camera.unproject(
+                new Vector3(TILE_DIM * 8 + 16, TILE_DIM * 12 + 16, 0), 
+                TILE_DIM * 2, 
+                TILE_DIM * 3, 
+                AliBaba.MAP_VIEWPORT_DIM, 
+                AliBaba.MAP_VIEWPORT_DIM);
+        
+        v.set(Math.round(tmp.x / TILE_DIM), 
+                ((mapPixelHeight - Math.round(tmp.y) - TILE_DIM) / TILE_DIM), 0);
     }
 
     @Override
@@ -295,17 +326,7 @@ public class GameScreen implements Screen, InputProcessor {
                 }
                 int dist = this.map.getBaseMap().movementDistance(a.getWx(), a.getWy(), (int) v.x, (int) v.y);
                 if (dist <= 1 && a.getCharacter() != null) {
-                    logs.add(alibaba.getName() + " attacks " + a.getCharacter().getName());
-                    alibaba.setAttacking(true);
-                    double prob1 = BATTLE.calculateStrikeProbability(alibaba, a.getCharacter(), dist == 0);
-                    if (Utils.RANDOM.nextDouble() < prob1) {
-                        int force = BATTLE.calculateStrikeForce(alibaba, dist == 0);
-                        String outcome = BATTLE.applyStrikeEffects(alibaba, a.getCharacter(), force);
-                        logs.add(outcome, Color.RED);
-                    } else {
-                        logs.add(alibaba.getName() + " missed " + a.getCharacter().getName() + ".");
-                    }
-                    if (a.getCharacter().isDead()) {
+                    if (AliBaba.battle(logs, alibaba, a.getCharacter(), dist == 0)) {
                         iter.remove();
                     }
                     break;
@@ -331,6 +352,11 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     private boolean preMove(Vector3 current, Direction dir) {
+
+        if (this.alibaba.isDown()) {
+            Sounds.play(Sound.ERROR);
+            return false;
+        }
 
         int nx = (int) current.x;
         int ny = (int) current.y;
@@ -415,7 +441,7 @@ public class GameScreen implements Screen, InputProcessor {
         }
 
         if (x == 116 && y == 72) {
-            this.map.setTile(Constants.Tile.BROKEN_WALL, "walls", x, y);
+            this.map.setTile(Constants.Icon.BROKEN_WALL, "walls", x, y);
             this.map.setTile(null, "floor", x, y);
         }
 
@@ -490,7 +516,8 @@ public class GameScreen implements Screen, InputProcessor {
                                     Role.HOSTILE;
                             };
                             MovementBehavior behavior = (role == Role.FRIENDLY) ? MovementBehavior.WANDER : MovementBehavior.ATTACK;
-                            Actor actor = new Actor(character, role, j, k, j * TILE_DIM, mapPixelHeight - k * TILE_DIM, behavior, findSimilarIcon(character.getCreatureType()));
+                            TextureRegion icon = AliBaba.ICONS[Icon.fromString(character.getCreatureType()).getId()];
+                            Actor actor = new Actor(character, role, j, k + 1, j * TILE_DIM, mapPixelHeight - k * TILE_DIM, behavior, icon);
                             map.getBaseMap().actors.add(actor);
 
                             CHARACTERS.remove(character);
@@ -500,24 +527,6 @@ public class GameScreen implements Screen, InputProcessor {
                 }
             }
         }
-    }
-
-    private TextureRegion findSimilarIcon(String creatureType) {
-
-        java.util.List<Actor> filtered = map.getBaseMap().actors.stream()
-                .filter(a -> a.getCharacter() != null && a.getCharacter().getCreatureType().equals(creatureType))
-                .collect(Collectors.toList());
-
-        if (!filtered.isEmpty()) {
-            Collections.shuffle(filtered);
-            for (Actor a : filtered) {
-                if (a.getCharacter().getCreatureType().equals(creatureType)) {
-                    return a.getIcon();
-                }
-            }
-        }
-
-        return AliBaba.ICONS[1952];//TODO better default selection by creatureType
     }
 
     @Override

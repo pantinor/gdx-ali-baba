@@ -1,10 +1,10 @@
 package alibaba.objects;
 
+import alibaba.AliBaba;
 import static alibaba.AliBaba.BATTLE;
 import alibaba.Constants.Map;
 import alibaba.Constants.Role;
 import alibaba.GameScreen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
@@ -90,24 +90,22 @@ public class BaseMap {
                     }
 
                     if (dist <= 1) {
-                        screen.logs.add(enemy.getName() + " attacks " + screen.alibaba.getName());
-                        enemy.setAttacking(true);
-                        double prob1 = BATTLE.calculateStrikeProbability(enemy, screen.alibaba, dist == 0);
-                        if (Utils.RANDOM.nextDouble() < prob1) {
-                            int force = BATTLE.calculateStrikeForce(enemy, dist == 0);
-                            String outcome = BATTLE.applyStrikeEffects(enemy, screen.alibaba, force);
-                            screen.logs.add(outcome, Color.RED);
-                        } else {
-                            screen.logs.add(enemy.getName() + " missed " + screen.alibaba.getName() + ".");
+                        if (AliBaba.battle(screen.logs, enemy, screen.alibaba, dist == 0)) {
+                            //TODO move alibaba back home and reset
                         }
-                    } else if (dist >= 6) {
-                        //dont move until close enough
-                        continue;
+                    } else if (dist >= 5) {
+                        if (wanderFlag % 2 == 0) {
+                            continue;
+                        } else {
+                            dir = Direction.getRandomValidDirection(getValidMovesMask(tiledMap, actor.getWx(), actor.getWy()));
+                        }
+                    } else {
+                        if (Utils.percentChance(75)) {
+                            int mask = getValidMovesMask(tiledMap, actor.getWx(), actor.getWy());
+                            dir = getPath(avatarX, avatarY, mask, true, actor.getWx(), actor.getWy());
+                        }
                     }
-                    if (Utils.percentChance(75)) {
-                        int mask = getValidMovesMask(tiledMap, actor.getWx(), actor.getWy());
-                        dir = getPath(avatarX, avatarY, mask, true, actor.getWx(), actor.getWy());
-                    }
+
                 }
                 break;
                 case FOLLOW: {
@@ -124,15 +122,8 @@ public class BaseMap {
                     if (dist > 1 || actor.getRole() == Role.FRIENDLY) {
                         continue;
                     }
-                    screen.logs.add(enemy.getName() + " attacks " + screen.alibaba.getName());
-                    enemy.setAttacking(true);
-                    double prob1 = BATTLE.calculateStrikeProbability(enemy, screen.alibaba, dist == 0);
-                    if (Utils.RANDOM.nextDouble() < prob1) {
-                        int force = BATTLE.calculateStrikeForce(enemy, dist == 0);
-                        String outcome = BATTLE.applyStrikeEffects(enemy, screen.alibaba, force);
-                        screen.logs.add(outcome, Color.RED);
-                    } else {
-                        screen.logs.add(enemy.getName() + " missed " + screen.alibaba.getName() + ".");
+                    if (AliBaba.battle(screen.logs, enemy, screen.alibaba, dist == 0)) {
+                        //TODO move alibaba back home and reset
                     }
                     break;
                 case WANDER: {
@@ -166,7 +157,7 @@ public class BaseMap {
             }
 
             Vector3 pixelPos = new Vector3();
-            screen.setMapPixelCoords(pixelPos, actor.getWx(), actor.getWy(), 0);
+            screen.setMapPixelCoords(pixelPos, actor.getWx(), actor.getWy() + 1, 0);
             actor.setX(pixelPos.x);
             actor.setY(pixelPos.y);
 
