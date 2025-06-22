@@ -1,14 +1,20 @@
 package alibaba.objects;
 
-import alibaba.AliBaba;
 import static alibaba.AliBaba.BATTLE;
 import alibaba.Constants.Map;
+import alibaba.Constants.MovementBehavior;
 import alibaba.Constants.Role;
 import alibaba.GameScreen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class BaseMap {
@@ -17,6 +23,10 @@ public class BaseMap {
     private int height;
     private final List<Portal> portals = new ArrayList<>();
     public final List<Actor> actors = new ArrayList<>();
+
+    public final List<Actor> dead = new ArrayList<>();
+    public final List<Actor> shuffled = new ArrayList<>();
+    public final List<Actor> alreadyAttacked = new ArrayList<>();
 
     //used to keep the pace of wandering to every 2 moves instead of every move, 
     //otherwise cannot catch up and talk to the character
@@ -75,25 +85,27 @@ public class BaseMap {
 
         for (Actor actor : actors) {
 
+            if (!screen.getRenderer().getViewBounds().contains(actor.getX(), actor.getY())
+                    || !screen.getRenderer().shouldRenderCell(screen.getCurrentRoomId(), actor.getWx(), actor.getWy())) {
+                continue;
+            }
+
+            if (actor.getCharacter().attemptGetUp()) {
+                screen.logs.add(actor.getCharacter().getName() + " struggles back to consciousness!", Color.YELLOW);
+            }
+
             Direction dir = null;
-            alibaba.objects.Character enemy = actor.getCharacter();
 
             switch (actor.getMovement()) {
                 case ATTACK: {
                     int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
-
                     if (dist == 0) {
-                        boolean tackled = BATTLE.attemptTackle(screen.logs, enemy, screen.alibaba, 0);
+                        boolean tackled = BATTLE.attemptTackle(screen.logs, actor.getCharacter(), screen.alibaba);
                         if (!tackled) {
                             continue;
                         }
                     }
-
-                    if (dist <= 1) {
-                        if (AliBaba.battle(screen.logs, enemy, screen.alibaba, dist == 0)) {
-                            //TODO move alibaba back home and reset
-                        }
-                    } else if (dist >= 5) {
+                    if (dist >= 5) {
                         if (wanderFlag % 2 == 0) {
                             continue;
                         } else {
@@ -105,7 +117,6 @@ public class BaseMap {
                             dir = getPath(avatarX, avatarY, mask, true, actor.getWx(), actor.getWy());
                         }
                     }
-
                 }
                 break;
                 case FOLLOW: {
@@ -117,15 +128,6 @@ public class BaseMap {
                     dir = getPath(avatarX, avatarY, mask, true, actor.getWx(), actor.getWy());
                 }
                 break;
-                case FIXED:
-                    int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
-                    if (dist > 1 || actor.getRole() == Role.FRIENDLY) {
-                        continue;
-                    }
-                    if (AliBaba.battle(screen.logs, enemy, screen.alibaba, dist == 0)) {
-                        //TODO move alibaba back home and reset
-                    }
-                    break;
                 case WANDER: {
                     if (wanderFlag % 2 == 0) {
                         continue;
@@ -134,7 +136,6 @@ public class BaseMap {
                 }
                 default:
                     break;
-
             }
 
             if (dir == null) {
@@ -157,11 +158,101 @@ public class BaseMap {
             }
 
             Vector3 pixelPos = new Vector3();
-            screen.setMapPixelCoords(pixelPos, actor.getWx(), actor.getWy() + 1, 0);
+            screen.setMapPixelCoords(pixelPos, actor.getWx(), actor.getWy() + 1);
             actor.setX(pixelPos.x);
             actor.setY(pixelPos.y);
+        }
+    }
+
+    public void combat(GameScreen screen, TiledMap tiledMap, int avatarX, int avatarY) {
+
+        alreadyAttacked.clear();
+        shuffled.clear();
+        dead.clear();
+
+        shuffled.addAll(actors);
+        Collections.shuffle(shuffled);
+
+        int size = shuffled.size();
+        for (int i = 0; i < size; i++) {
+            Actor attacker = shuffled.get(i);
+
+            if (!screen.getRenderer().getViewBounds().contains(attacker.getX(), attacker.getY())
+                    || !screen.getRenderer().shouldRenderCell(screen.getCurrentRoomId(), attacker.getWx(), attacker.getWy())) {
+                continue;
+            }
+
+            if (movementDistance(attacker.getWx(), attacker.getWy(), avatarX, avatarY) >= 6) {
+                continue;
+            }
+
+            boolean attackerIsFriendly = isFriendlyFollower(attacker);
+            boolean attackerIsHostile = isHostileAttacker(attacker);
+
+            for (int j = i + 1; j < size; j++) {
+                Actor defender = shuffled.get(j);
+
+                if (dead.contains(defender)) {
+                    continue;
+                }
+
+                boolean defenderIsFriendly = isFriendlyFollower(defender);
+                boolean defenderIsHostile = isHostileAttacker(defender);
+
+                boolean shouldBattle = (attackerIsFriendly && defenderIsHostile) || (defenderIsFriendly && attackerIsHostile);
+                if (shouldBattle) {
+                    int dist = movementDistance(attacker.getWx(), attacker.getWy(), defender.getWx(), defender.getWy());
+                    if (dist <= 1) {
+                        this.alreadyAttacked.add(attacker);
+                        boolean defenderDied = BATTLE.battle(screen.logs, attacker.getCharacter(), defender.getCharacter(), dist == 0);
+                        if (defenderDied) {
+                            dead.add(defender);
+                        }
+                    }
+                }
+            }
+        }
+
+        actors.removeAll(dead);
+        shuffled.removeAll(dead);
+
+        for (Actor actor : shuffled) {
+
+            alibaba.objects.Character attacker = actor.getCharacter();
+
+            switch (actor.getMovement()) {
+                case ATTACK: {
+                    int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
+                    if (!this.alreadyAttacked.contains(actor) && dist <= 1) {
+                        if (BATTLE.battle(screen.logs, attacker, screen.alibaba, dist == 0)) {
+                            //screen.resetAliBaba();
+                        }
+                    }
+                }
+                break;
+                case FIXED:
+                    int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
+                    if (dist > 1 || actor.getRole() == Role.FRIENDLY && this.alreadyAttacked.contains(actor)) {
+                        continue;
+                    }
+                    if (BATTLE.battle(screen.logs, attacker, screen.alibaba, dist == 0)) {
+                        //screen.resetAliBaba();
+                    }
+                    break;
+                default:
+                    break;
+
+            }
 
         }
+    }
+
+    private boolean isFriendlyFollower(Actor actor) {
+        return actor.getMovement() == MovementBehavior.FOLLOW && actor.getRole() == Role.FRIENDLY;
+    }
+
+    private boolean isHostileAttacker(Actor actor) {
+        return actor.getMovement() == MovementBehavior.ATTACK && actor.getRole() == Role.HOSTILE;
     }
 
     private int getValidMovesMask(TiledMap tiledMap, int x, int y) {
@@ -253,5 +344,25 @@ public class BaseMap {
 
         /* return the result */
         return dirmask;
+    }
+
+    public int getActorsInRoom(TiledMap tiledMap, int roomId) {
+        MapLayer roomsLayer = tiledMap.getLayers().get("rooms");
+        Iterator<MapObject> iter = roomsLayer.getObjects().iterator();
+        int count = 0;
+        while (iter.hasNext()) {
+            MapObject obj = iter.next();
+            int id = obj.getProperties().get("id", Integer.class);
+            if (id != roomId) {
+                continue;
+            }
+            PolygonMapObject rmo = (PolygonMapObject) obj;
+            for (Actor actor : actors) {
+                if (rmo.getPolygon().contains(actor.getX(), actor.getY())) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }

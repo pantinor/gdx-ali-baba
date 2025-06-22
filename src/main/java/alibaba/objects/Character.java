@@ -1,7 +1,5 @@
 package alibaba.objects;
 
-import alibaba.objects.Weapon;
-import alibaba.objects.Armor;
 import java.util.Random;
 
 public class Character {
@@ -211,6 +209,14 @@ public class Character {
         return false;
     }
 
+    public boolean attemptGetUp() {
+        if (isDown() && RANDOM.nextDouble() < 0.5) {
+            setDown(false);
+            return true;
+        }
+        return false;
+    }
+
     public boolean isDead() {
         return this.constitution <= 0;
     }
@@ -227,11 +233,12 @@ public class Character {
         }
     }
 
-    public void resetCombatStates() {
+    public void reset() {
         this.isDown = false;
         this.isDefending = false;
         this.isAttacking = false;
         this.isRunning = false;
+        this.constitution = this.maxConstitution;
     }
 
 }

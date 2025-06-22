@@ -1,7 +1,12 @@
 package alibaba;
 
+import static alibaba.AliBaba.BATTLE;
 import alibaba.objects.Character;
 import alibaba.objects.Loggable;
+import alibaba.objects.Sound;
+import alibaba.objects.Sounds;
+import alibaba.objects.Utils;
+import com.badlogic.gdx.graphics.Color;
 import java.util.Random;
 
 public class Battle {
@@ -25,7 +30,46 @@ public class Battle {
     private static final double MIN_TACKLE_CHANCE = 0.125; // 12.5%
     private static final double MAX_TACKLE_CHANCE = 0.875; // 87.5% (100% - 12.5% failure)
 
-    public double calculateStrikeProbability(Character attacker, Character victim, boolean isSameSpace) {
+    private static final String[] HITMSGS = new String[]{
+        "whacks",
+        "smites",
+        "jabs",
+        "pokes",
+        "wallops",
+        "bashes",
+        "pounds",
+        "smashes",
+        "lambasts",
+        "whomps",
+        "smacks",
+        "clouts",};
+
+    private static final String[] DEATHMSGS = new String[]{
+        "shuffles off this mortal coil",
+        "turns his toes up to the daises",
+        "pays an obolus to Charon",
+        "kicks the proverbial bucket",
+        "departs the land of the living",
+        "moans OH MA, I THINK ITS MY TIME"};
+
+    public static boolean battle(Loggable logs, Character attacker, Character defender, boolean isSameSpace) {
+        attacker.setAttacking(true);
+        double prob1 = BATTLE.calculateStrikeProbability(attacker, defender, isSameSpace);
+        if (Utils.RANDOM.nextDouble() < prob1) {
+            int force = BATTLE.calculateStrikeForce(attacker, isSameSpace);
+            String outcome = BATTLE.applyStrikeEffects(attacker, defender, force);
+            logs.add(outcome, Color.RED);
+            Sounds.play(Sound.PC_STRUCK);
+        } else {
+            Sounds.play(Sound.EVADE);
+        }
+        if (defender.isDead()) {
+            logs.add(defender.getName() + " " + DEATHMSGS[random.nextInt(DEATHMSGS.length)] + ".");
+        }
+        return defender.isDead();
+    }
+
+    private double calculateStrikeProbability(Character attacker, Character victim, boolean isSameSpace) {
 
         double baseChance = victim.getEffectiveDexterity() * BASE_CHANCE_PER_DEX;
         double adjustedChance = baseChance;
@@ -66,12 +110,12 @@ public class Battle {
         }
         int total = 0;
         for (int i = 0; i < numRolls; i++) {
-            total += random.nextInt(sides) + 1; // random.nextInt(sides) gives 0 to sides-1, so add 1
+            total += random.nextInt(sides) + 1;
         }
         return total;
     }
 
-    public int calculateStrikeForce(Character attacker, boolean isSameSpace) {
+    private int calculateStrikeForce(Character attacker, boolean isSameSpace) {
         int weaponPower;
         if (isSameSpace) {
             weaponPower = attacker.getHandToHandWeaponPower();
@@ -79,41 +123,34 @@ public class Battle {
             weaponPower = attacker.getMeleeWeaponPower();
         }
 
-        // Force is calculated as if two dice with 'weaponPower' sides were rolled,
-        // summed, and then 1 was subtracted. (2D_weaponPower - 1)
         int dieRollsSum = rollDice(weaponPower, 2);
         int strikeForce = dieRollsSum - 1;
 
-        // Ensure strike force is at least 1, as 2D1-1 would be 1
         return Math.max(1, strikeForce);
     }
 
-    public String applyStrikeEffects(Character attacker, Character victim, int strikeForce) {
-
+    private String applyStrikeEffects(Character attacker, Character victim, int strikeForce) {
         int adjustedForce = strikeForce - victim.getArmor();
-
         if (adjustedForce <= 0) {
-            return victim.getName() + " was unhurt by " + attacker.getName() + "'s attack.";
+            return victim.getName() + " is unhurt.";
         } else {
             victim.takeDamage(adjustedForce);
-            String statusMessage = victim.getName() + " took " + adjustedForce + " damage and " + victim.getHealthStatus() + ".";
-
+            String statusMessage = attacker.getName() + " " + HITMSGS[random.nextInt(HITMSGS.length)] + " " + victim.getName();
             if (victim.getConstitution() < 3 && victim.getConstitution() > 0) {
                 victim.setDown(true);
-            }
-
-            if (victim.getConstitution() < victim.getStrength() && victim.getConstitution() > 0) {
-                statusMessage += victim.getName() + " can rest to restore health.";
+                statusMessage += " who is knocked unconscious and falls to the ground!";
+            } else {
+                statusMessage += "!";
             }
             return statusMessage;
         }
     }
 
-    public boolean attemptTackle(Loggable logs, Character attacker, Character victim, int otherOpponentsStrength) {
+    public boolean attemptTackle(Loggable logs, Character attacker, Character victim) {
         double chanceOfSuccess = TACKLE_BASE_CHANCE;
 
         int effectiveVictimStrength = victim.isDown() ? 0 : victim.getStrength();
-        double strengthModifier = (attacker.getStrength() - (effectiveVictimStrength + otherOpponentsStrength)) * TACKLE_STRENGTH_MODIFIER;
+        double strengthModifier = (attacker.getStrength() - effectiveVictimStrength) * TACKLE_STRENGTH_MODIFIER;
         chanceOfSuccess += strengthModifier;
 
         chanceOfSuccess = Math.max(MIN_TACKLE_CHANCE, chanceOfSuccess);
@@ -130,22 +167,6 @@ public class Battle {
             return true;
         } else {
             logs.add(attacker.getName() + " failed to tackle " + victim.getName() + ".");
-            return false;
-        }
-    }
-
-    public boolean attemptRetreat(Loggable logs, Character character) {
-        double roll = random.nextDouble(); // 0.0 to 1.0
-        if (roll < 0.5) { // 50% chance
-            if (character.isDown()) {
-                character.setDown(false); // Stands up if was down
-                logs.add(character.getName() + " successfully retreated and stood up!");
-            } else {
-                logs.add(character.getName() + " successfully retreated!");
-            }
-            return true;
-        } else {
-            logs.add(character.getName() + " failed to retreat!");
             return false;
         }
     }

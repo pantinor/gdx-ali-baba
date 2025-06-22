@@ -1,7 +1,9 @@
 package alibaba.objects;
 
 public enum Sound {
-
+    SNAKE_CHARMER_1("snake-charmer-1.ogg", false, 0.3f),
+    SNAKE_CHARMER_2("snake-charmer-2.ogg", false, 0.3f),
+    SNAKE_CHARMER_3("snake-charmer-3.ogg", false, 0.3f),
     BLOCKED("blocked.ogg", false, 0.3f),
     FLEE("flee.ogg", false, 0.3f),
     ERROR("error.ogg", false, 0.3f),

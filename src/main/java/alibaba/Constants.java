@@ -46,27 +46,6 @@ public interface Constants {
         MERCHANT_WEAPON,
         INNKEEPER;
     }
-    public static final String[] HITMSGS = new String[]{
-        "whacks",
-        "smites",
-        "jabs",
-        "pokes",
-        "wallops",
-        "bashes",
-        "pounds",
-        "smashes",
-        "lambasts",
-        "whomps",
-        "smacks",
-        "clouts",};
-
-    public static final String[] DEATHMSGS = new String[]{
-        "shuffles off this mortal coil",
-        "turns his toes up to the daises",
-        "pays an obolus to Charon",
-        "kicks the proverbial bucket",
-        "departs the land of the living",
-        "moans OH MA, I THINK ITS MY TIME"};
 
     public enum Icon {
         WALL("wall", 2980),
@@ -75,7 +54,7 @@ public interface Constants {
         HUMAN("human", 395),
         THIEF("thief", 423),
         RAM("ram", 2242),
-        OWL("owl", 2247),
+        OWL("owl", 2257),
         SWORD("sword", 1346),
         ZOMBIE("zombie", 2716),
         BEAR("bear", 2465),
@@ -87,14 +66,14 @@ public interface Constants {
         THIEF_LEADER("thief leader", 405),
         WANDERER("wanderer", 2192),
         DWARF("dwarf", 429),
-        BULL("bull", 2246),
-        LION("lion", 2096),
+        BULL("bull", 2459),
+        LION("lion", 2258),
         DRAGON("dragon", 2752),
         SCORPION("scorpion", 2377),
         STATUE("statue", 2245),
-        UNICORN("unicorn", 2185),
-        SUCCUBUS("succubus", 2244),
-        TIGER("tiger", 2091),
+        UNICORN("unicorn", 2255),
+        SUCCUBUS("succubus", 2259),
+        TIGER("tiger", 2256),
         JACKAL("jackal", 2112),
         WOLF("wolf", 2004),
         UNKNOWN("unknown", 1952);
@@ -305,8 +284,6 @@ public interface Constants {
                     Actor actor = new Actor(character, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, icon);
 
                     this.baseMap.actors.add(actor);
-
-                    CHARACTERS.remove(character);
 
                 } catch (Throwable t) {
                     System.out.println(t.getMessage());

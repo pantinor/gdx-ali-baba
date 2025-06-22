@@ -5,17 +5,14 @@ import static alibaba.Constants.TILE_DIM;
 import alibaba.objects.Weapon;
 import alibaba.objects.Armor;
 import alibaba.objects.AllItems;
-import alibaba.objects.Loggable;
 import alibaba.objects.Merchant;
+import alibaba.objects.MusicManager;
 import alibaba.objects.Sound;
-import alibaba.objects.Sounds;
-import alibaba.objects.Utils;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -32,8 +29,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
+import org.apache.commons.io.IOUtils;
 
 public class AliBaba extends Game {
 
@@ -51,6 +48,8 @@ public class AliBaba extends Game {
     public static AliBaba mainGame;
     public static StartScreen startScreen;
     public static Skin skin;
+    
+    public static MusicManager MUSIC_MANAGER;
 
     public static final Battle BATTLE = new Battle();
     public static java.util.List<Character> CHARACTERS;
@@ -74,45 +73,39 @@ public class AliBaba extends Game {
     @Override
     public void create() {
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/sansblack.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/sansblack.ttf"));
         parameter.size = 12;
         font12 = generator.generateFont(parameter);
-
         parameter.size = 14;
         font14 = generator.generateFont(parameter);
-
         parameter.size = 16;
         font16 = generator.generateFont(parameter);
-
         parameter.size = 18;
         font18 = generator.generateFont(parameter);
-
         parameter.size = 24;
         font24 = generator.generateFont(parameter);
-
         parameter.size = 72;
         font72 = generator.generateFont(parameter);
-
         generator.dispose();
 
-        generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/ultima.ttf"));
-        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
-        parameter.size = 24;
-        BitmapFont smallUltimaFont = generator.generateFont(parameter);
-
+        generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/aladdin.ttf"));
+        parameter.size = 84;
+        BitmapFont smallAladdinFont = generator.generateFont(parameter);
+        parameter.size = 128;
+        BitmapFont largeAladdinFont = generator.generateFont(parameter);
         generator.dispose();
 
-        skin = new Skin(Gdx.files.classpath("assets/skin/uiskin.json"));
+        skin = new Skin(Gdx.files.classpath("assets/skin/uiskin.skin"));
         skin.remove("default-font", BitmapFont.class);
         skin.add("font12", font12, BitmapFont.class);
         skin.add("font14", font14, BitmapFont.class);
         skin.add("font16", font16, BitmapFont.class);
         skin.add("font24", font24, BitmapFont.class);
         skin.add("font72", font72, BitmapFont.class);
-        skin.add("small-ultima", smallUltimaFont, BitmapFont.class);
+        skin.add("small-aladdin", smallAladdinFont, BitmapFont.class);
+        skin.add("large-aladdin", largeAladdinFont, BitmapFont.class);
 
         skin.get("default-12", Label.LabelStyle.class).font = font12;
         skin.get("default-12", TextButton.TextButtonStyle.class).font = font12;
@@ -141,9 +134,6 @@ public class AliBaba extends Game {
         skin.get("default-16", List.ListStyle.class).font = font16;
         skin.get("default-16", TextField.TextFieldStyle.class).font = font16;
 
-        String charactersJsonFilePath = "src/main/resources/assets/json/alibaba-characters.json";
-        String itemsJsonFilePath = "src/main/resources/assets/json/alibaba-items.json";
-
         try {
 
             TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/32x32.png")), 32, 32);
@@ -153,15 +143,21 @@ public class AliBaba extends Game {
                 }
             }
 
-            CHARACTERS = AliBaba.loadCharactersFromJsonFile(charactersJsonFilePath);
+            CHARACTERS = AliBaba.loadCharactersFromJsonFile("/assets/json/alibaba-characters.json");
 
-            AllItems allItems = AliBaba.loadAllItemsFromJsonFile(itemsJsonFilePath);
+            AllItems allItems = AliBaba.loadAllItemsFromJsonFile("/assets/json/alibaba-items.json");
             WEAPONS = allItems.getWeapons();
             ARMOR = allItems.getArmor();
 
             mainGame = this;
             startScreen = new StartScreen();
             setScreen(startScreen);
+
+            MUSIC_MANAGER = new MusicManager();
+            MUSIC_MANAGER.setVolume(0.75f);
+
+            MUSIC_MANAGER.setPlaylist(Sound.SNAKE_CHARMER_1, Sound.SNAKE_CHARMER_2, Sound.SNAKE_CHARMER_3);
+            MUSIC_MANAGER.startJukebox();
 
         } catch (Throwable e) {
             e.printStackTrace();
@@ -170,7 +166,7 @@ public class AliBaba extends Game {
     }
 
     public static java.util.List<Character> loadCharactersFromJsonFile(String filePath) throws IOException {
-        String jsonString = java.nio.file.Files.readString(Paths.get(filePath));
+        String jsonString = IOUtils.toString(AliBaba.class.getResourceAsStream(filePath));
         java.util.List<Character> characters = GSON.fromJson(jsonString, new TypeToken<java.util.List<Character>>() {
         }.getType());
         for (Character character : characters) {
@@ -180,7 +176,7 @@ public class AliBaba extends Game {
     }
 
     public static AllItems loadAllItemsFromJsonFile(String filePath) throws IOException {
-        String jsonString = java.nio.file.Files.readString(Paths.get(filePath));
+        String jsonString = IOUtils.toString(AliBaba.class.getResourceAsStream(filePath));
         return GSON.fromJson(jsonString, AllItems.class);
     }
 
@@ -207,22 +203,6 @@ public class AliBaba extends Game {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(name + " not found!"));
         return armor;
-    }
-
-    public static boolean battle(Loggable logs, Character attacker, Character defender, boolean isSameSpace) {
-        logs.add(attacker.getName() + " attacks " + defender.getName());
-        attacker.setAttacking(true);
-        double prob1 = BATTLE.calculateStrikeProbability(attacker, defender, isSameSpace);
-        if (Utils.RANDOM.nextDouble() < prob1) {
-            int force = BATTLE.calculateStrikeForce(attacker, isSameSpace);
-            String outcome = BATTLE.applyStrikeEffects(attacker, defender, force);
-            logs.add(outcome, Color.RED);
-            Sounds.play(Sound.PC_STRUCK);
-        } else {
-            logs.add(attacker.getName() + " missed " + defender.getName() + ".");
-            Sounds.play(Sound.EVADE);
-        }
-        return defender.isDead();
     }
 
 }

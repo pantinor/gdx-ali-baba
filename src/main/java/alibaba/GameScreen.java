@@ -117,7 +117,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         this.mapPixelHeight = this.map.getBaseMap().getHeight() * TILE_DIM;
 
-        setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY(), 0);
+        setMapPixelCoords(this.map.getStartX(), this.map.getStartY());
 
         if (this.map.getRoomIds() != null) {
             currentRoomId = this.map.getRoomIds()[this.map.getStartX()][this.map.getStartY()][0];
@@ -147,6 +147,18 @@ public class GameScreen implements Screen, InputProcessor {
         return this.alibaba;
     }
 
+    public TmxMapRenderer getRenderer() {
+        return this.renderer;
+    }
+
+    public int getCurrentRoomId() {
+        return this.currentRoomId;
+    }
+
+    public Map getMap() {
+        return this.map;
+    }
+
     @Override
     public void show() {
         setRoomName();
@@ -154,7 +166,6 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     //private final ShapeRenderer gridRenderer = new ShapeRenderer();
-
     @Override
     public void render(float delta) {
 
@@ -178,16 +189,16 @@ public class GameScreen implements Screen, InputProcessor {
         renderer.setView(camera.combined,
                 camera.position.x - TILE_DIM * 14,
                 camera.position.y - TILE_DIM * 10,
-                AliBaba.MAP_VIEWPORT_DIM,
-                AliBaba.MAP_VIEWPORT_DIM);
+                AliBaba.MAP_VIEWPORT_DIM - 32,
+                AliBaba.MAP_VIEWPORT_DIM - 64);
 
         renderer.render();
 
         batch.begin();
 
-        Vector3 v = new Vector3();
-        getCurrentMapCoords(v);
-        AliBaba.font16.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, AliBaba.SCREEN_HEIGHT - 32);
+        //Vector3 v = new Vector3();
+        //getCurrentMapCoords(v);
+        //AliBaba.font16.draw(batch, String.format("%s, %s   currentRoomId: %d\n", v.x, v.y, this.currentRoomId), 200, AliBaba.SCREEN_HEIGHT - 32);
         if (this.roomName != null) {
             AliBaba.font16.draw(batch, String.format("%s", this.roomName), 300, AliBaba.SCREEN_HEIGHT - 12);
         }
@@ -226,8 +237,7 @@ public class GameScreen implements Screen, InputProcessor {
         }
 
         gridRenderer.end();
-        */
-        
+         */
         stage.act();
         stage.draw();
 
@@ -255,25 +265,41 @@ public class GameScreen implements Screen, InputProcessor {
         return this.currentRoomId;
     }
 
-    public void setMapPixelCoords(Vector3 v, int x, int y, int z) {
+    public void resetAliBaba() {
+        setMapPixelCoords(this.map.getStartX(), this.map.getStartY());
+        this.alibaba.reset();
+        this.currentRoomId = 149;
+        setRoomName();
+    }
+
+    public void setMapPixelCoords(int x, int y) {
+        setMapPixelCoords(this.newMapPixelCoords, x, y);
+    }
+
+    public void setMapPixelCoords(Vector3 v, int x, int y) {
         v.set(x * TILE_DIM, mapPixelHeight - y * TILE_DIM, 0);
     }
 
     public void getCurrentMapCoords(Vector3 v) {
-        
+
         Vector3 tmp = camera.unproject(
-                new Vector3(TILE_DIM * 8 + 16, TILE_DIM * 12 + 16, 0), 
-                TILE_DIM * 2, 
-                TILE_DIM * 3, 
-                AliBaba.MAP_VIEWPORT_DIM, 
+                new Vector3(TILE_DIM * 8 + 16, TILE_DIM * 12 + 16, 0),
+                TILE_DIM * 2,
+                TILE_DIM * 3,
+                AliBaba.MAP_VIEWPORT_DIM,
                 AliBaba.MAP_VIEWPORT_DIM);
-        
-        v.set(Math.round(tmp.x / TILE_DIM), 
+
+        v.set(Math.round(tmp.x / TILE_DIM),
                 ((mapPixelHeight - Math.round(tmp.y) - TILE_DIM) / TILE_DIM), 0);
     }
 
     @Override
     public boolean keyUp(int keycode) {
+
+        if (alibaba.attemptGetUp()) {
+            logs.add(alibaba.getName() + " struggles back to consciousness!", Color.YELLOW);
+        }
+
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
 
@@ -325,8 +351,8 @@ public class GameScreen implements Screen, InputProcessor {
                     continue;
                 }
                 int dist = this.map.getBaseMap().movementDistance(a.getWx(), a.getWy(), (int) v.x, (int) v.y);
-                if (dist <= 1 && a.getCharacter() != null) {
-                    if (AliBaba.battle(logs, alibaba, a.getCharacter(), dist == 0)) {
+                if (dist <= 1) {
+                    if (BATTLE.battle(logs, alibaba, a.getCharacter(), dist == 0)) {
                         iter.remove();
                     }
                     break;
@@ -340,10 +366,14 @@ public class GameScreen implements Screen, InputProcessor {
         } else if (keycode == Keys.D) {
             this.alibaba.setDefending(true);
             this.logs.add(this.alibaba.getName() + " is defending.");
-        } else if (keycode == Keys.U) {
-            BATTLE.attemptRetreat(logs, alibaba);
         } else if (keycode == Keys.R) {
             this.logs.add(this.alibaba.attemptRest() ? "Rested" : "Nothing happened");
+        } else if (keycode == Keys.V) {
+            if (AliBaba.MUSIC_MANAGER.isPlaying()) {
+                AliBaba.MUSIC_MANAGER.pause();
+            } else {
+                AliBaba.MUSIC_MANAGER.resume();
+            }
         }
 
         finishTurn((int) v.x, (int) v.y);
@@ -393,7 +423,7 @@ public class GameScreen implements Screen, InputProcessor {
                     this.logs.add(msg, Color.GREEN);
                     String heal = obj.getProperties().get("heal", String.class);
                     if (heal != null) {
-                        return false;
+                        this.alibaba.reset();
                     }
 
                 }
@@ -408,7 +438,7 @@ public class GameScreen implements Screen, InputProcessor {
                 currentRoomId = this.map.getRoomIds()[(int) dv.x][(int) dv.y][0];
                 setRoomName();
             }
-            setMapPixelCoords(newMapPixelCoords, (int) dv.x, (int) dv.y, 0);
+            setMapPixelCoords((int) dv.x, (int) dv.y);
 
             for (Actor act : this.map.getBaseMap().actors) {//so follower can follow thru portal
                 if (act.getMovement() == MovementBehavior.FOLLOW) {
@@ -417,13 +447,25 @@ public class GameScreen implements Screen, InputProcessor {
                         act.setWx((int) dv.x);
                         act.setWy((int) dv.y);
                         Vector3 pixelPos = new Vector3();
-                        setMapPixelCoords(pixelPos, act.getWx(), act.getWy(), 0);
+                        setMapPixelCoords(pixelPos, act.getWx(), act.getWy());
                         act.setX(pixelPos.x);
                         act.setY(pixelPos.y);
                     }
                 }
             }
             return false;
+        }
+
+        for (Actor actor : this.map.getBaseMap().actors) {
+            if (renderer.getViewBounds().contains(actor.getX(), actor.getY()) && renderer.shouldRenderCell(currentRoomId, actor.getWx(), actor.getWy())) {
+                int dist = this.map.getBaseMap().movementDistance(actor.getWx(), actor.getWy(), (int) nx, (int) ny);
+                if (dist == 0) {
+                    boolean tackled = BATTLE.attemptTackle(logs, alibaba, actor.getCharacter());
+                    if (!tackled) {
+                        return false;
+                    }
+                }
+            }
         }
 
         return true;
@@ -435,7 +477,7 @@ public class GameScreen implements Screen, InputProcessor {
             return;
         }
 
-        if (this.map.getRoomIds() != null && this.map.getRoomIds()[x][y][1] == 0) {
+        if (this.map.getRoomIds()[x][y][1] == 0) {
             this.currentRoomId = this.map.getRoomIds()[x][y][0];
             setRoomName();
         }
@@ -446,6 +488,7 @@ public class GameScreen implements Screen, InputProcessor {
         }
 
         this.map.getBaseMap().moveObjects(this, this.map.getTiledMap(), x, y);
+        this.map.getBaseMap().combat(this, this.map.getTiledMap(), x, y);
     }
 
     private void setRoomName() {
@@ -474,7 +517,11 @@ public class GameScreen implements Screen, InputProcessor {
         @Override
         public void run() {
             if (active) {
-                if (Utils.percentChance(10) && map.getBaseMap().actors.size() <= 100) {
+                if (Utils.percentChance(10) && map.getBaseMap().actors.size() <= 65) {
+
+                    if (map.getBaseMap().getActorsInRoom(map.getTiledMap(), currentRoomId) > 1) {
+                        return;
+                    }
 
                     java.util.List<Character> filtered = CHARACTERS.stream()
                             .filter(c -> c.getWmLevel() == roomLevel)
@@ -520,7 +567,6 @@ public class GameScreen implements Screen, InputProcessor {
                             Actor actor = new Actor(character, role, j, k + 1, j * TILE_DIM, mapPixelHeight - k * TILE_DIM, behavior, icon);
                             map.getBaseMap().actors.add(actor);
 
-                            CHARACTERS.remove(character);
                             return;
                         }
                     }
