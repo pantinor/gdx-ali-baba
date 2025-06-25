@@ -48,7 +48,7 @@ public class AliBaba extends Game {
     public static AliBaba mainGame;
     public static StartScreen startScreen;
     public static Skin skin;
-    
+
     public static MusicManager MUSIC_MANAGER;
 
     public static final Battle BATTLE = new Battle();
@@ -91,6 +91,8 @@ public class AliBaba extends Game {
         generator.dispose();
 
         generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/aladdin.ttf"));
+        parameter.size = 48;
+        BitmapFont smallerAladdinFont = generator.generateFont(parameter);
         parameter.size = 84;
         BitmapFont smallAladdinFont = generator.generateFont(parameter);
         parameter.size = 128;
@@ -104,6 +106,7 @@ public class AliBaba extends Game {
         skin.add("font16", font16, BitmapFont.class);
         skin.add("font24", font24, BitmapFont.class);
         skin.add("font72", font72, BitmapFont.class);
+        skin.add("smaller-aladdin", smallerAladdinFont, BitmapFont.class);
         skin.add("small-aladdin", smallAladdinFont, BitmapFont.class);
         skin.add("large-aladdin", largeAladdinFont, BitmapFont.class);
 

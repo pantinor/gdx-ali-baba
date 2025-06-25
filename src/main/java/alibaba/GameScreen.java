@@ -33,6 +33,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -42,8 +43,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.Collections;
@@ -74,7 +78,8 @@ public class GameScreen implements Screen, InputProcessor {
     private final Vector3 newMapPixelCoords = new Vector3();
     private final int mapPixelHeight;
 
-    private GameTimer gameTimer = new GameTimer();
+    private SpawnTimer spawnTimer = new SpawnTimer();
+    private TurnTimer turnTimer = new TurnTimer();
 
     public GameScreen(Map map) {
 
@@ -89,7 +94,6 @@ public class GameScreen implements Screen, InputProcessor {
 
         mapViewPort = new ScreenViewport(camera);
 
-        //addButtons(this.map);
         renderer = new TmxMapRenderer(this, this.map.getTiledMap(), this.map.getRoomIds(), 1f);
 
         this.alibaba = CHARACTERS.stream()
@@ -138,8 +142,13 @@ public class GameScreen implements Screen, InputProcessor {
 
         SequenceAction seq1 = Actions.action(SequenceAction.class);
         seq1.addAction(Actions.delay(5f));//5 seconds
-        seq1.addAction(Actions.run(gameTimer));
+        seq1.addAction(Actions.run(spawnTimer));
         stage.addAction(Actions.forever(seq1));
+
+        SequenceAction seq2 = Actions.action(SequenceAction.class);
+        seq2.addAction(Actions.delay(15f));//15 seconds
+        seq2.addAction(Actions.run(turnTimer));
+        stage.addAction(Actions.forever(seq2));
 
     }
 
@@ -207,12 +216,8 @@ public class GameScreen implements Screen, InputProcessor {
         printCharacter(0, batch, this.alibaba);
         for (Actor a : this.map.getBaseMap().actors) {
             if (renderer.getViewBounds().contains(a.getX(), a.getY()) && renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
-                if (a.getRole() == Constants.Role.MERCHANT_ARMOR || a.getRole() == Constants.Role.MERCHANT_WEAPON) {
-                    //nothing
-                } else {
-                    idx++;
-                    printCharacter(idx, batch, a.getCharacter());
-                }
+                idx++;
+                printCharacter(idx, batch, a.getCharacter());
             }
         }
 
@@ -270,6 +275,7 @@ public class GameScreen implements Screen, InputProcessor {
         this.alibaba.reset();
         this.currentRoomId = 149;
         setRoomName();
+        animateText("I grieve over your untimely demise.  With my limitless power I have reincarnated Ali Baba so you may try again.", Color.MAGENTA);
     }
 
     public void setMapPixelCoords(int x, int y) {
@@ -420,14 +426,17 @@ public class GameScreen implements Screen, InputProcessor {
                 float my = obj.getProperties().get("y", Float.class) / TILE_DIM;
                 if (nx == mx && this.map.getBaseMap().getHeight() - 1 - ny == my) {
                     String msg = obj.getProperties().get("type", String.class);
-                    this.logs.add(msg, Color.GREEN);
-                    String heal = obj.getProperties().get("heal", String.class);
-                    if (heal != null) {
+                    if (obj.getProperties().get("heal", String.class) != null) {
+                        this.logs.add(msg, Color.GREEN);
                         this.alibaba.reset();
+                    } else if (obj.getProperties().get("condition", String.class) != null) {
+                        if (this.map.getBaseMap().isBuddirFollowing((int) nx, (int) ny)) {
+                            this.logs.add(msg, Color.GREEN);
+                        }
+                    } else {
+                        this.logs.add(msg, Color.GREEN);
                     }
-
                 }
-
             }
         }
 
@@ -510,7 +519,7 @@ public class GameScreen implements Screen, InputProcessor {
         this.roomName = null;
     }
 
-    private class GameTimer implements Runnable {
+    private class SpawnTimer implements Runnable {
 
         public boolean active = true;
 
@@ -575,6 +584,21 @@ public class GameScreen implements Screen, InputProcessor {
         }
     }
 
+    private class TurnTimer implements Runnable {
+
+        public boolean active = true;
+
+        @Override
+        public void run() {
+            if (active) {
+                int x = (int) newMapPixelCoords.x;
+                int y = (int) newMapPixelCoords.y;
+                map.getBaseMap().moveObjects(GameScreen.this, map.getTiledMap(), x, y);
+                map.getBaseMap().combat(GameScreen.this, map.getTiledMap(), x, y);
+            }
+        }
+    }
+
     @Override
     public void hide() {
     }
@@ -630,6 +654,28 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void dispose() {
+    }
+
+    private void animateText(String text, Color color) {
+
+        float sx = 100;
+        float sy = -100;
+        float dx = 100;
+        float dy = 600;
+        float delay = 5;
+
+        logs.add(text, color);
+
+        Label.LabelStyle ls = new Label.LabelStyle(AliBaba.skin.get("smaller-aladdin", BitmapFont.class), color);
+        Label label = new Label(text, ls);
+        label.setWrap(true);
+        label.setWidth(800);
+        label.setPosition(sx, sy);
+        label.setAlignment(Align.center);
+        label.setColor(color);
+        stage.addActor(label);
+        Sounds.play(Sound.FLEE);
+        label.addAction(sequence(Actions.moveTo(dx, dy, delay), Actions.fadeOut(1f), Actions.removeActor(label)));
     }
 
 }

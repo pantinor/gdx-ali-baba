@@ -31,7 +31,6 @@ public interface Constants {
     public static int TILE_DIM = 32;
 
     public enum MovementBehavior {
-
         FIXED,
         WANDER,
         FOLLOW,
@@ -39,12 +38,8 @@ public interface Constants {
     }
 
     public enum Role {
-        NONE,
         FRIENDLY,
-        HOSTILE,
-        MERCHANT_ARMOR,
-        MERCHANT_WEAPON,
-        INNKEEPER;
+        HOSTILE
     }
 
     public enum Icon {

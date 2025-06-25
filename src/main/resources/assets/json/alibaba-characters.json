@@ -135,7 +135,7 @@
         "armor": 2,
         "dexterity": 11,
         "runningSpeed": 6,
-        "wmLevel": 0,
+        "wmLevel": 1,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -177,7 +177,7 @@
         "armor": 0,
         "dexterity": 8,
         "runningSpeed": 9,
-        "wmLevel": 0,
+        "wmLevel": 1,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -233,7 +233,7 @@
         "armor": 0,
         "dexterity": 15,
         "runningSpeed": 12,
-        "wmLevel": 0,
+        "wmLevel": 1,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -345,7 +345,7 @@
         "armor": 0,
         "dexterity": 14,
         "runningSpeed": 6,
-        "wmLevel": 0,
+        "wmLevel": 1,
         "hitChance": 0,
         "extraDodge": 1
     },
@@ -420,7 +420,7 @@
         "extraDodge": 1
     },
     {
-        "name": "Cod ad ad",
+        "name": "Codadad",
         "creatureType": "thief",
         "strength": 12,
         "constitution": 12,
@@ -504,7 +504,7 @@
         "extraDodge": 0
     },
     {
-        "name": "Doub an",
+        "name": "Douban",
         "creatureType": "thief",
         "strength": 15,
         "constitution": 15,
@@ -667,7 +667,7 @@
         "armor": 0,
         "dexterity": 9,
         "runningSpeed": 6,
-        "wmLevel": 0,
+        "wmLevel": 1,
         "hitChance": 0,
         "extraDodge": 1
     },
@@ -863,7 +863,7 @@
         "armor": 0,
         "dexterity": 13,
         "runningSpeed": 7,
-        "wmLevel": 0,
+        "wmLevel": 2,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -891,7 +891,7 @@
         "armor": 0,
         "dexterity": 8,
         "runningSpeed": 5,
-        "wmLevel": 2,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -905,7 +905,7 @@
         "armor": 0,
         "dexterity": 17,
         "runningSpeed": 8,
-        "wmLevel": 3,
+        "wmLevel": 2,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -947,7 +947,7 @@
         "armor": 0,
         "dexterity": 19,
         "runningSpeed": 8,
-        "wmLevel": 2,
+        "wmLevel": 3,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -1003,7 +1003,7 @@
         "armor": 1,
         "dexterity": 15,
         "runningSpeed": 10,
-        "wmLevel": 2,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -1031,7 +1031,7 @@
         "armor": 0,
         "dexterity": 15,
         "runningSpeed": 9,
-        "wmLevel": 3,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -1059,7 +1059,7 @@
         "armor": 0,
         "dexterity": 17,
         "runningSpeed": 7,
-        "wmLevel": 2,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -1101,7 +1101,7 @@
         "armor": 0,
         "dexterity": 19,
         "runningSpeed": 8,
-        "wmLevel": 3,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 1
     },
@@ -1115,7 +1115,7 @@
         "armor": 3,
         "dexterity": 15,
         "runningSpeed": 9,
-        "wmLevel": 3,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -1185,7 +1185,7 @@
         "armor": 1,
         "dexterity": 15,
         "runningSpeed": 6,
-        "wmLevel": 2,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -1199,7 +1199,7 @@
         "armor": 2,
         "dexterity": 14,
         "runningSpeed": 5,
-        "wmLevel": 3,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -1465,7 +1465,7 @@
         "armor": 3,
         "dexterity": 18,
         "runningSpeed": 3,
-        "wmLevel": 3,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -1479,7 +1479,7 @@
         "armor": 2,
         "dexterity": 13,
         "runningSpeed": 9,
-        "wmLevel": 3,
+        "wmLevel": 0,
         "hitChance": 0,
         "extraDodge": 0
     },
@@ -1745,7 +1745,7 @@
         "armor": 1,
         "dexterity": 13,
         "runningSpeed": 6,
-        "wmLevel": 0,
+        "wmLevel": 3,
         "hitChance": 0,
         "extraDodge": 0
     },

@@ -25,7 +25,6 @@ public class BaseMap {
     public final List<Actor> actors = new ArrayList<>();
 
     public final List<Actor> dead = new ArrayList<>();
-    public final List<Actor> shuffled = new ArrayList<>();
     public final List<Actor> alreadyAttacked = new ArrayList<>();
 
     //used to keep the pace of wandering to every 2 moves instead of every move, 
@@ -167,39 +166,27 @@ public class BaseMap {
     public void combat(GameScreen screen, TiledMap tiledMap, int avatarX, int avatarY) {
 
         alreadyAttacked.clear();
-        shuffled.clear();
         dead.clear();
 
-        shuffled.addAll(actors);
-        Collections.shuffle(shuffled);
+        Collections.shuffle(actors);
 
-        int size = shuffled.size();
+        int size = actors.size();
         for (int i = 0; i < size; i++) {
-            Actor attacker = shuffled.get(i);
+            Actor attacker = actors.get(i);
 
             if (!screen.getRenderer().getViewBounds().contains(attacker.getX(), attacker.getY())
                     || !screen.getRenderer().shouldRenderCell(screen.getCurrentRoomId(), attacker.getWx(), attacker.getWy())) {
                 continue;
             }
 
-            if (movementDistance(attacker.getWx(), attacker.getWy(), avatarX, avatarY) >= 6) {
-                continue;
-            }
-
-            boolean attackerIsFriendly = isFriendlyFollower(attacker);
-            boolean attackerIsHostile = isHostileAttacker(attacker);
-
             for (int j = i + 1; j < size; j++) {
-                Actor defender = shuffled.get(j);
+                Actor defender = actors.get(j);
 
                 if (dead.contains(defender)) {
                     continue;
                 }
 
-                boolean defenderIsFriendly = isFriendlyFollower(defender);
-                boolean defenderIsHostile = isHostileAttacker(defender);
-
-                boolean shouldBattle = (attackerIsFriendly && defenderIsHostile) || (defenderIsFriendly && attackerIsHostile);
+                boolean shouldBattle = (isDifferentRole(attacker, defender) || isDifferentHostileType(attacker, defender));
                 if (shouldBattle) {
                     int dist = movementDistance(attacker.getWx(), attacker.getWy(), defender.getWx(), defender.getWy());
                     if (dist <= 1) {
@@ -214,45 +201,39 @@ public class BaseMap {
         }
 
         actors.removeAll(dead);
-        shuffled.removeAll(dead);
 
-        for (Actor actor : shuffled) {
+        for (Actor actor : actors) {
 
             alibaba.objects.Character attacker = actor.getCharacter();
 
+            if (this.alreadyAttacked.contains(actor) || actor.getRole() == Role.FRIENDLY) {
+                continue;
+            }
+
+            int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
+
             switch (actor.getMovement()) {
-                case ATTACK: {
-                    int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
-                    if (!this.alreadyAttacked.contains(actor) && dist <= 1) {
-                        if (BATTLE.battle(screen.logs, attacker, screen.alibaba, dist == 0)) {
-                            //screen.resetAliBaba();
-                        }
-                    }
-                }
-                break;
+                case ATTACK:
                 case FIXED:
-                    int dist = movementDistance(actor.getWx(), actor.getWy(), avatarX, avatarY);
-                    if (dist > 1 || actor.getRole() == Role.FRIENDLY && this.alreadyAttacked.contains(actor)) {
-                        continue;
-                    }
-                    if (BATTLE.battle(screen.logs, attacker, screen.alibaba, dist == 0)) {
-                        //screen.resetAliBaba();
+                    if (dist <= 1 && BATTLE.battle(screen.logs, attacker, screen.alibaba, dist == 0)) {
+                        screen.resetAliBaba();
                     }
                     break;
                 default:
                     break;
 
             }
-
         }
     }
 
-    private boolean isFriendlyFollower(Actor actor) {
-        return actor.getMovement() == MovementBehavior.FOLLOW && actor.getRole() == Role.FRIENDLY;
+    private boolean isDifferentHostileType(Actor actor1, Actor actor2) {
+        return (actor1.getMovement() == MovementBehavior.ATTACK && actor2.getMovement() == MovementBehavior.ATTACK)
+                && (actor1.getRole() == Role.HOSTILE && actor2.getRole() == Role.HOSTILE)
+                && (!actor1.getCharacter().getCreatureType().equals(actor2.getCharacter().getCreatureType()));
     }
 
-    private boolean isHostileAttacker(Actor actor) {
-        return actor.getMovement() == MovementBehavior.ATTACK && actor.getRole() == Role.HOSTILE;
+    private boolean isDifferentRole(Actor actor1, Actor actor2) {
+        return actor1.getRole() != actor2.getRole();
     }
 
     private int getValidMovesMask(TiledMap tiledMap, int x, int y) {
@@ -364,5 +345,14 @@ public class BaseMap {
             }
         }
         return count;
+    }
+
+    public boolean isBuddirFollowing(int avatarX, int avatarY) {
+        Actor buddir = actors.stream()
+                .filter(a -> a.getCharacter().getName().equalsIgnoreCase("Princess Buddir"))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Character not found: Princess Buddir"));
+        int dist = movementDistance(buddir.getWx(), buddir.getWy(), avatarX, avatarY);
+        return dist <= 2;
     }
 }

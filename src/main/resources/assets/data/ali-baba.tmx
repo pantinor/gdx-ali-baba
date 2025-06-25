@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="433">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="439">
  <properties>
   <property name="startX" value="49"/>
   <property name="startY" value="18"/>
@@ -652,7 +652,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3297,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2252,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1686,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1413,8 +1413,19 @@
     <property name="movement" value="FOLLOW"/>
    </properties>
   </object>
+  <object id="438" name="Cave rat" type="HOSTILE" x="1568" y="2336" width="32" height="32">
+   <properties>
+    <property name="movement" value="ATTACK"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="12" name="messages">
+  <object id="434" name="rune" type="The words of Coggia Hussain echo softly in the room, by the beard of Allah I swear I left her in the Gemini room, she vanished, vanished, vanished!&#10;" x="4768" y="2720" width="32" height="32"/>
+  <object id="433" name="rune" type="Taking a drink of clear water from the glowing pool gives a feeling of increased strength and grace!" x="4384" y="2304" width="32" height="32">
+   <properties>
+    <property name="heal" value="true"/>
+   </properties>
+  </object>
   <object id="128" name="rune" type="A voice comes from nowhere, the astrologer of the august sultan shahriar bids you welcome." x="4192" y="2592" width="32" height="32"/>
   <object id="129" name="rune" type="When a-mazed, remember to stay high and do right! - the friendly mage" x="3808" y="2752" width="32" height="32"/>
   <object id="130" name="rune" type="Take the high road!" x="3104" y="576" width="32" height="32"/>
@@ -1429,11 +1440,22 @@
   <object id="135" name="rune" type="An oracular rune reveals, to rescue the princess unaided, attack only the unseen." x="1536" y="512" width="32" height="32"/>
   <object id="136" name="rune" type="Treasury report - the realm has 100,000 ducates but 90,000 has been stolen by thieves and is hidden in the mountain." x="1376" y="384" width="32" height="32"/>
   <object id="137" name="rune" type="while the talkative tailor Mustapha repairs your worn suit of clothes, he speaks of tales he has heard. On the gilded pathway, walk the straight and narrow.  The astrologer went to the mountain often. his last words were, look for the pair of ... no one could quite make out his last word." x="1440" y="384" width="32" height="32"/>
-  <object id="138" name="rune" type="the royal physician advises all adventurers to 'take it easy, rest when you can'" x="1504" y="384" width="32" height="32"/>
+  <object id="138" name="rune" type="The royal physician advises all adventurers to 'take it easy, rest when you can'" x="1504" y="384" width="32" height="32"/>
   <object id="139" name="rune" type="A primer on anthropology by i. studee al-men  halflings and elves dodge well and are hard to hit.  dwarves and humans generally do more damage with axes and swords than with their daggers, unlike thieves, halflings and elves who enjoy close fighting. strong fighters such as dwarves will be able to hit a foe more oftne if they engage in close hand-to hand combat.  dwarves are strong slow and clumsy.  elves are fast weak and dextrous.  halflings are as fast as humans, they are weak but can take alot of damage." x="1568" y="384" width="32" height="32"/>
   <object id="140" name="rune" type="here lies the quartered body of Cassim, the rish brother of Ali Baba.  He came to grab all of the gold but when he went to leave, he said, 'open barley!'" x="1824" y="576" width="32" height="32"/>
   <object id="141" name="rune" type="Open sesame! You may now pass through the wall above you." x="1856" y="736" width="32" height="32"/>
   <object id="142" name="rune" type="The illusion vanishes before your eyes!" x="1600" y="1792" width="32" height="32"/>
+  <object id="435" name="rune" type="Flanked by his guards, the sultan to your left says, Rescue Princess Buddir and hide her in the home of Ali Baba. My enemies will think of looking for her there.&#10;" x="1152" y="448" width="32" height="32"/>
+  <object id="436" name="rune" type="The sultan rushes over to your side, his face is a complex mixture of joy, relief and anger. Allah be praised! my daughter is rescued! quickly take her to the home of Ali Baba. she is not safe here. The sultan scrurries back to his throne.&#10;" x="1152" y="512" width="32" height="32">
+   <properties>
+    <property name="condition" value="princess"/>
+   </properties>
+  </object>
+  <object id="437" name="rune" type="Congratulations you escorted the princess to your home, but there are enemies here you must overcome!&#10;" x="1440" y="576" width="32" height="32">
+   <properties>
+    <property name="condition" value="princess"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="13" name="rooms" visible="0">
   <object id="143" name="Dusty road" x="1344" y="448">
