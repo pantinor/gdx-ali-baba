@@ -351,7 +351,10 @@ public class BaseMap {
         Actor buddir = actors.stream()
                 .filter(a -> a.getCharacter().getName().equalsIgnoreCase("Princess Buddir"))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Character not found: Princess Buddir"));
+                .orElse(null);
+        if (buddir == null) {
+            return false;
+        }
         int dist = movementDistance(buddir.getWx(), buddir.getWy(), avatarX, avatarY);
         return dist <= 2;
     }

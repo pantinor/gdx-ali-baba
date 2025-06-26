@@ -14,7 +14,7 @@ public class MusicManager {
     private int currentIndex = 0;
 
     private Music currentMusic;
-    private float volume = 0.001f;
+    private float volume = 0.25f;
 
     public void setPlaylist(Sound... music) {
         stop(); // stop existing

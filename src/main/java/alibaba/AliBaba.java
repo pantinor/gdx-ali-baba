@@ -157,7 +157,6 @@ public class AliBaba extends Game {
             setScreen(startScreen);
 
             MUSIC_MANAGER = new MusicManager();
-            MUSIC_MANAGER.setVolume(0.75f);
 
             MUSIC_MANAGER.setPlaylist(Sound.SNAKE_CHARMER_1, Sound.SNAKE_CHARMER_2, Sound.SNAKE_CHARMER_3);
             MUSIC_MANAGER.startJukebox();
