@@ -100,6 +100,19 @@ public interface Constants {
 
     }
 
+    public static final String HELP_KEYS = """
+              MOVE LEFT - LEFT ARROW
+              MOVE RIGHT - RIGHT ARROW
+              MOVE UP - UP ARROW
+              MOVE DOWN - DOWN ARROW
+              GET - G
+              TALK - T
+              ATTACK - A
+              DEFEND - D
+              REST - R
+              MUSIC ON/OFF - V
+              PASS TURN - ANY OTHER KEYS""";
+
     public static final FileHandleResolver CLASSPTH_RSLVR = new FileHandleResolver() {
         @Override
         public FileHandle resolve(String fileName) {

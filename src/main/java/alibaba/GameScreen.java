@@ -380,6 +380,8 @@ public class GameScreen implements Screen, InputProcessor {
             } else {
                 AliBaba.MUSIC_MANAGER.resume();
             }
+        } else if (keycode == Keys.ESCAPE) {
+            this.animateText(Constants.HELP_KEYS, Color.YELLOW, "font16");
         }
 
         finishTurn((int) v.x, (int) v.y);
@@ -657,6 +659,10 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     private void animateText(String text, Color color) {
+        animateText(text, color, "smaller-aladdin");
+    }
+
+    private void animateText(String text, Color color, String font) {
 
         float sx = 100;
         float sy = -100;
@@ -666,7 +672,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         logs.add(text, color);
 
-        Label.LabelStyle ls = new Label.LabelStyle(AliBaba.skin.get("smaller-aladdin", BitmapFont.class), color);
+        Label.LabelStyle ls = new Label.LabelStyle(AliBaba.skin.get(font, BitmapFont.class), color);
         Label label = new Label(text, ls);
         label.setWrap(true);
         label.setWidth(800);
